@@ -668,14 +668,13 @@ button {
   filter: brightness(1.04);
 }
 
-/* Мягкая киновиньетка на превью, чтобы центральная кнопка Play светилась и «просила нажать» */
+/* Лёгкая нижняя тень только под кнопкой Play — лицо Марины остаётся светлым и полностью открытым */
 .hero-portrait-photo::after {
   content: "";
   position: absolute;
-  inset: 0;
-  background:
-    radial-gradient(circle at 50% 52%, rgba(19, 40, 71, 0.14) 0%, rgba(19, 40, 71, 0.42) 100%),
-    linear-gradient(to top, rgba(19, 40, 71, 0.55) 0%, rgba(19, 40, 71, 0) 45%);
+  inset: auto 0 0 0;
+  height: 46%;
+  background: linear-gradient(to top, rgba(15, 31, 56, 0.62) 0%, rgba(15, 31, 56, 0) 100%);
   pointer-events: none;
 }
 
@@ -707,60 +706,49 @@ button {
   background: var(--sun);
 }
 
-/* Центральная выразительная кнопка Play поверх 16:9 кадра */
+/* Заметная кнопка Play в левой нижней части кадра — полностью открывает лицо спикера */
 .hero-center-play {
   position: absolute;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
+  left: 1.15rem;
+  bottom: 1.1rem;
   z-index: 3;
-  width: 4.5rem;
-  height: 4.5rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.7rem;
+  padding: 0.45rem 1.2rem 0.45rem 0.5rem;
+  border-radius: 99px;
+  background: rgba(15, 31, 56, 0.88);
+  border: 1.5px solid rgba(230, 191, 90, 0.75);
+  color: #fff;
+  font-size: 0.9rem;
+  font-weight: 600;
+  white-space: nowrap;
+  box-shadow: 0 0 0 5px rgba(230, 191, 90, 0.2), 0 14px 28px -6px rgba(10, 22, 44, 0.62);
+  transition: transform 0.26s var(--ease), background-color 0.24s var(--ease), box-shadow 0.26s var(--ease);
+}
+
+.hero-video-card:hover .hero-center-play {
+  transform: scale(1.04);
+  background: var(--navy-deep);
+  box-shadow: 0 0 0 8px rgba(230, 191, 90, 0.3), 0 18px 34px -6px rgba(10, 22, 44, 0.72);
+}
+
+.hero-play-disc {
+  width: 2.65rem;
+  height: 2.65rem;
+  flex: none;
   border-radius: 50%;
   background: var(--sun);
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  box-shadow:
-    0 0 0 10px rgba(230, 191, 90, 0.28),
-    0 0 0 20px rgba(255, 255, 255, 0.1),
-    0 16px 34px -6px rgba(10, 22, 44, 0.65);
-  transition: transform 0.26s var(--ease), background-color 0.24s var(--ease), box-shadow 0.26s var(--ease);
 }
 
-.hero-video-card:hover .hero-center-play {
-  transform: translate(-50%, -50%) scale(1.08);
-  background: var(--sun-hover);
-  box-shadow:
-    0 0 0 14px rgba(230, 191, 90, 0.36),
-    0 0 0 26px rgba(255, 255, 255, 0.14),
-    0 20px 40px -6px rgba(10, 22, 44, 0.72);
-}
-
-.hero-center-play svg {
-  width: 1.65rem;
-  height: 1.65rem;
-  margin-left: 4px;
+.hero-play-disc svg {
+  width: 1.12rem;
+  height: 1.12rem;
+  margin-left: 2px;
   display: block;
-}
-
-/* Прогресс-линия плеера в самом низу 16:9 кадра — мгновенный рефлекс «это видео!» */
-.hero-video-scrubber {
-  position: absolute;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  z-index: 3;
-  height: 3.5px;
-  background: rgba(255, 255, 255, 0.26);
-}
-
-.hero-video-scrubber::before {
-  content: "";
-  display: block;
-  width: 24%;
-  height: 100%;
-  background: var(--sun);
 }
 
 .hero-video-caption {
@@ -788,23 +776,14 @@ button {
   margin-top: 0.14rem;
 }
 
-.hero-video-cta-tag {
+.hero-video-arrow {
+  color: var(--navy);
   flex: none;
-  display: inline-flex;
-  align-items: center;
-  gap: 0.35rem;
-  padding: 0.42rem 0.8rem;
-  border-radius: 6px;
-  background: var(--navy);
-  color: #fff;
-  font-size: 0.8rem;
-  font-weight: 600;
-  white-space: nowrap;
-  transition: background-color 0.22s var(--ease);
+  transition: transform 0.22s var(--ease);
 }
 
-.hero-video-card:hover .hero-video-cta-tag {
-  background: var(--navy-deep);
+.hero-video-card:hover .hero-video-arrow {
+  transform: translateX(3px);
 }
 
 @media (max-width: 57.99rem) {
@@ -841,14 +820,21 @@ button {
     font-size: 0.73rem;
     line-height: 1.28;
   }
-  /* Горизонтальный 16:9 плеер и на мобильном — сразу считывается видео! */
+  /* Горизонтальный 16:9 плеер на мобильном: кнопка Play слева снизу, лицо открыто */
   .hero-center-play {
-    width: 3.75rem;
-    height: 3.75rem;
+    left: 0.85rem;
+    bottom: 0.85rem;
+    padding: 0.35rem 0.95rem 0.35rem 0.4rem;
+    font-size: 0.82rem;
+    gap: 0.55rem;
   }
-  .hero-center-play svg {
-    width: 1.35rem;
-    height: 1.35rem;
+  .hero-play-disc {
+    width: 2.2rem;
+    height: 2.2rem;
+  }
+  .hero-play-disc svg {
+    width: 0.95rem;
+    height: 0.95rem;
   }
   .hero-video-caption {
     padding: 0.8rem 1rem;
@@ -858,9 +844,6 @@ button {
   }
   .hero-video-text > span {
     font-size: 0.78rem;
-  }
-  .hero-video-cta-tag {
-    display: none;
   }
 }
 
