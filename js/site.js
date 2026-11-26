@@ -317,26 +317,62 @@
     closeModal(demoModal);
   });
 
-  /* ---------- Видео Марины (постер + надёжный YouTube embed с фолбэком) ---------- */
+  /* ---------- Видео Марины (постер сразу + проверка доступности YouTube без чёрного экрана) ---------- */
   document.querySelectorAll("[data-open-video]").forEach((btn) => {
     btn.addEventListener("click", () => {
       if (SITE_CONFIG.welcomeVideoYouTubeId && videoStage) {
         const id = encodeURIComponent(SITE_CONFIG.welcomeVideoYouTubeId);
         const ytLink = `https://youtu.be/${id}`;
-        const fallbackHtml = `
+        const canEmbed = window.location.protocol === "http:" || window.location.protocol === "https:";
+        const initialStatus = canEmbed
+          ? "Загружаем плеер YouTube… Если YouTube недоступен в вашей сети, откройте видео напрямую:"
+          : "Приветственное видео Марины Шультайс размещено на YouTube:";
+
+        videoStage.innerHTML = `
           <div class="video-stage-fallback">
             <img src="img/strasbourg-golden.jpg" alt="О моей РаЗУМной школе — Марина Шультайс">
             <div class="video-stage-fallback-overlay">
-              <p>Если встроенный плеер YouTube не открылся в вашем браузере, посмотрите видео напрямую:</p>
-              <a class="btn btn-sun" href="${ytLink}" target="_blank" rel="noopener noreferrer">Открыть видео на YouTube →</a>
+              <p id="video-fallback-note">${initialStatus}</p>
+              <a class="btn btn-sun" href="${ytLink}" target="_blank" rel="noopener noreferrer">Смотреть видео на YouTube →</a>
             </div>
           </div>
         `;
-        const canEmbed = window.location.protocol === "http:" || window.location.protocol === "https:";
-        const iframeHtml = canEmbed
-          ? `<iframe src="https://www.youtube.com/embed/${id}?rel=0&modestbranding=1" title="О моей РаЗУМной школе — Марина Шультайс" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>`
-          : "";
-        videoStage.innerHTML = fallbackHtml + iframeHtml;
+        openModal(videoModal);
+
+        if (canEmbed) {
+          let settled = false;
+          const noteEl = document.getElementById("video-fallback-note");
+          const probe = new Image();
+          const timer = setTimeout(() => {
+            if (settled) return;
+            settled = true;
+            if (noteEl) noteEl.textContent = "Встроенный плеер YouTube сейчас недоступен или работает слишком медленно — откройте видео напрямую:";
+          }, 2400);
+
+          probe.onload = () => {
+            if (settled || !videoModal || videoModal.hidden) return;
+            settled = true;
+            clearTimeout(timer);
+            const iframe = document.createElement("iframe");
+            iframe.src = `https://www.youtube.com/embed/${id}?rel=0&modestbranding=1`;
+            iframe.title = "О моей РаЗУМной школе — Марина Шультайс";
+            iframe.allow = "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share";
+            iframe.referrerPolicy = "strict-origin-when-cross-origin";
+            iframe.allowFullscreen = true;
+            iframe.addEventListener("load", () => iframe.classList.add("is-loaded"));
+            videoStage.appendChild(iframe);
+          };
+
+          probe.onerror = () => {
+            if (settled) return;
+            settled = true;
+            clearTimeout(timer);
+            if (noteEl) noteEl.textContent = "Встроенный плеер YouTube сейчас недоступен в вашей сети — видео можно открыть напрямую на YouTube:";
+          };
+
+          probe.src = `https://i.ytimg.com/vi/${id}/default.jpg?t=${Date.now()}`;
+        }
+        return;
       } else if (SITE_CONFIG.welcomeVideoMp4Path && videoStage) {
         videoStage.innerHTML = `<video src="${SITE_CONFIG.welcomeVideoMp4Path}" controls autoplay playsinline></video>`;
       }
@@ -539,8 +575,8 @@
         return;
       }
       e.preventDefault();
-      if (demoTitle) demoTitle.textContent = "Запись в Telegram";
-      if (demoDesc) demoDesc.textContent = "После подключения ника Марины эта кнопка сразу откроет чат в Telegram с готовым текстом обращения:";
+      if (demoTitle) demoTitle.textContent = "Запись на знакомство в Telegram";
+      if (demoDesc) demoDesc.textContent = "Скопируйте готовый текст обращения и отправьте Марине в Telegram — она отвечает лично и предложит удобное время для бесплатной 30-минутной встречи в Zoom:";
       if (demoMsg) { demoMsg.hidden = false; demoMsg.textContent = currentMsg; }
       if (demoCopy) demoCopy.hidden = false;
       if (demoFeedback) demoFeedback.textContent = "";
@@ -563,7 +599,7 @@
       }
       e.preventDefault();
       if (demoTitle) demoTitle.textContent = "Telegram-канал «РаЗУМной школы»";
-      if (demoDesc) demoDesc.textContent = "Сюда подключится прямая ссылка на Telegram-канал Марины с заметками, видео и анонсами новых наборов.";
+      if (demoDesc) demoDesc.textContent = "В канале Марина делится наблюдениями о французском языке, короткими видеоразборами и датами новых 10-недельных циклов. Прямая ссылка на канал появится здесь перед официальным запуском.";
       if (demoMsg) demoMsg.hidden = true;
       if (demoCopy) demoCopy.hidden = true;
       if (demoFeedback) demoFeedback.textContent = "";
