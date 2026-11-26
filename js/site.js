@@ -14,7 +14,7 @@
     /* Прямая ссылка на Telegram-канал, например: "https://t.me/razumnaya_shkola" */
     telegramChannelUrl: "",
     /* Видео-приветствие: укажите YouTube ID ИЛИ путь к локальному MP4 (например "video/welcome.mp4") */
-    welcomeVideoYouTubeId: "",
+    welcomeVideoYouTubeId: "y_lfsGmHdeQ",
     welcomeVideoMp4Path: ""
   };
 
