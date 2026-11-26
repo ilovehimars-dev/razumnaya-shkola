@@ -1,24 +1,21 @@
 /* ==========================================================================
-   «РаЗУМная школа» — единый конфиг и интерактивность всех 5 страниц
+   «РаЗУМная школа» — единый конфиг и интерактивность всех страниц
    ========================================================================== */
 
 (() => {
   "use strict";
 
-  /* ------------------------------------------------------------------------
-     ЕДИНЫЙ КОНФИГ: подставьте контакты и видео Марины — обновятся все 5 страниц
-     ------------------------------------------------------------------------ */
   const SITE_CONFIG = {
     /* Ник Марины в Telegram без @, например: "marina_schultheiss" */
     telegramHandle: "",
     /* Прямая ссылка на Telegram-канал, например: "https://t.me/razumnaya_shkola" */
     telegramChannelUrl: "",
-    /* Видео-приветствие: укажите YouTube ID ИЛИ путь к локальному MP4 (например "video/welcome.mp4") */
+    /* Приветственное видео: YouTube ID или локальный MP4 */
     welcomeVideoYouTubeId: "y_lfsGmHdeQ",
     welcomeVideoMp4Path: ""
   };
 
-  /* 7 принципов обучения (полные вычитанные тексты Марины Шультайс) */
+  /* 7 принципов обучения (полные вычитанные тексты Марины + практический ориентир) */
   const PRINCIPLES = [
     {
       roman: "I",
@@ -26,7 +23,8 @@
       fr: "Liberté",
       paragraphs: [
         "Онлайн-обучение в Zoom сегодня возможно практически из любой точки мира — достаточно спокойного места, ноутбука или планшета и искреннего желания погрузиться в язык."
-      ]
+      ],
+      practice: "Учёба подстраивается под вашу географию и жизнь: к занятиям в Zoom подключаются ученики из Франции, Европы и других стран — без дороги и привязки к одному городу."
     },
     {
       roman: "II",
@@ -34,7 +32,8 @@
       fr: "Attention",
       paragraphs: [
         "Прежде чем записать вас в группу, я предложу небольшое тестирование-знакомство (30 минут, бесплатно): вместе мы определим ваши сильные и слабые стороны и подберём подходящую группу."
-      ]
+      ],
+      practice: "В группах собираются люди близкого уровня и настроя — вы не чувствуете себя «отстающим» и не скучаете от слишком простого материала."
     },
     {
       roman: "III",
@@ -43,7 +42,8 @@
       paragraphs: [
         "Сложные темы объясняются простыми словами — через образы, ассоциации и живые примеры. Всё должно быть понятно.",
         "Спрашивать — не стыдно! Не знать — нормально! Ошибки — это условие роста…"
-      ]
+      ],
+      practice: "На уроке можно остановить объяснение и задать любой вопрос — здесь нет школьной строгости, а непонятное правило разбирается до полной ясности."
     },
     {
       roman: "IV",
@@ -51,8 +51,9 @@
       fr: "Légèreté",
       paragraphs: [
         "<strong>Осознанность.</strong> Я обучаю не только языку, но и наблюдательности, самоконтролю. Уроки становятся путешествием внутрь себя: мы познаём язык через себя, а себя — через процесс освоения иностранного языка.",
-        "<strong>Лёгкость.</strong> Мы занимаемся без перегрузок и без давления. Материал подаётся в логичной и простой форме. Занимаемся вместе, но у каждого свой темп — сравниваем себя только с собой! Никакой гонки: только поддержка, мягкий ритм и повторяемость."
-      ]
+        "<strong>Лёгкость.</strong> Мы занимаемся без перегрузок и без давления. Материал подаётся в логичной и простой форме. У каждого свой темп — сравниваем себя только с собой!"
+      ],
+      practice: "Мягкий ритм и регулярная повторяемость дают устойчивый результат без выгорания и ночной зубрёжки."
     },
     {
       roman: "V",
@@ -60,8 +61,9 @@
       fr: "Rencontre",
       paragraphs: [
         "Французский — это не только про знания, но и про радость общения, поддержку и вдохновение. Именно поэтому занятия в группе — настоящее приключение!",
-        "На занятиях вы не просто слушаете преподавателя — вы разговариваете с другими участниками, с языком и с собой. В группе возникает особая энергия: она вдохновляет, согревает и помогает расти…"
-      ]
+        "На занятиях вы не просто слушаете преподавателя — вы разговариваете с другими участниками, с языком и с собой. В группе возникает особая энергия, которая вдохновляет и помогает расти…"
+      ],
+      practice: "Вы слышите живую речь разных людей, учитесь не бояться говорить вслух и обретаете тёплый круг единомышленников."
     },
     {
       roman: "VI",
@@ -70,16 +72,47 @@
       paragraphs: [
         "Все учебные пособия и дидактические материалы высылаются ученику или ученице по электронной почте и/или на телефон. Во время каждого занятия ведётся видеозапись, которая размещается на YouTube в закрытом доступе для участников группы.",
         "Доступ к видеозаписям безлимитный. Повторение — ключ к знанию: все уроки остаются с вами навсегда. И если вы не можете присутствовать на уроке — это не проблема…"
-      ]
+      ],
+      practice: "Командировка, отпуск или плотный рабочий день не ломают обучение — пропущенный урок спокойно смотрится в записи."
     },
     {
       roman: "VII",
       title: "Самобытность и эстетичность",
       fr: "Beauté",
       paragraphs: [
-        "<strong>Самобытность.</strong> Мы все разные, и в этом наша сила. У каждого свой путь к знаниям. Я учу учиться и помогаю каждому, оставаясь собой, начать мыслить на французском — соединяя разум с чувствами, знания с вдохновением, структуру с импровизацией. Мы учимся видеть суть, чувствовать слово, доверять себе.",
-        "<strong>Эстетичность.</strong> Учиться должно быть приятно и интересно — это и есть основа эффективности обучения. Красота звучания и визуальное вдохновение помогают учиться с удовольствием. Учиться должно быть уютно…"
-      ]
+        "<strong>Самобытность.</strong> Мы все разные, и в этом наша сила. У каждого свой путь к знаниям. Я помогаю каждому, оставаясь собой, начать мыслить на французском — видеть суть, чувствовать слово, доверять себе.",
+        "<strong>Эстетичность.</strong> Учиться должно быть приятно и интересно — это основа эффективности. Красота звучания и визуальное вдохновение помогают учиться с удовольствием. Учиться должно быть уютно…"
+      ],
+      practice: "Тексты, поэзия, живые примеры и интонация превращают занятие в час, которого действительно ждёшь."
+    }
+  ];
+
+  /* Авторская книжная закладка «Слово и оттенок» */
+  const NUANCES = [
+    {
+      phrase: "Avoir le déclic",
+      lit: "дословно: «почувствовать щелчок»",
+      note: "Тот самый момент в изучении языка, когда разрозненные правила вдруг складываются в ясную картину — и фраза рождается легко."
+    },
+    {
+      phrase: "Tête-à-tête",
+      lit: "дословно: «голова к голове», наедине",
+      note: "Во французском это не про сухой деловой формат, а про доверительный разговор двух людей, где всё внимание — смыслу."
+    },
+    {
+      phrase: "Prendre le temps",
+      lit: "дословно: «взять себе время»",
+      note: "Не «потратить время», а позволить себе не спешить. Именно в таком спокойном ритме французский усваивается глубже всего."
+    },
+    {
+      phrase: "Un coup de cœur",
+      lit: "дословно: «удар сердца»",
+      note: "Искреннее увлечение с первого взгляда — книгой, мелодией, городом или тем, как звучит чужой, но уже родной язык."
+    },
+    {
+      phrase: "L’esprit de l’escalier",
+      lit: "дословно: «остроумие на лестнице»",
+      note: "Точная фраза, которая приходит в голову, когда уже спускаешься по лестнице. Живые диалоги на уроках помогают находить её вовремя."
     }
   ];
 
@@ -128,12 +161,35 @@
     revealEls.forEach((el) => el.classList.add("is-visible"));
   }
 
+  /* ---------- Авторская закладка «Слово и оттенок» ---------- */
+  const nuanceBtn = document.getElementById("nuance-next-btn");
+  const nuancePhrase = document.getElementById("nuance-phrase");
+  const nuanceLit = document.getElementById("nuance-lit");
+  const nuanceNote = document.getElementById("nuance-note");
+  const nuanceCounter = document.getElementById("nuance-counter");
+  let nuanceIdx = 0;
+
+  const renderNuance = (i) => {
+    nuanceIdx = (i + NUANCES.length) % NUANCES.length;
+    const n = NUANCES[nuanceIdx];
+    if (nuancePhrase) nuancePhrase.textContent = n.phrase;
+    if (nuanceLit) nuanceLit.textContent = n.lit;
+    if (nuanceNote) nuanceNote.textContent = n.note;
+    if (nuanceCounter) nuanceCounter.textContent = `${nuanceIdx + 1} / ${NUANCES.length}`;
+  };
+
+  if (nuanceBtn) {
+    nuanceBtn.addEventListener("click", () => renderNuance(nuanceIdx + 1));
+    renderNuance(0);
+  }
+
   /* ---------- Интерактивный каталог 7 принципов (Главная) ---------- */
   const folioTabs = Array.from(document.querySelectorAll(".folio-tab"));
   const folioRoman = document.getElementById("folio-big-roman");
   const folioEpigraph = document.getElementById("folio-epigraph");
   const folioTitle = document.getElementById("folio-stage-title");
   const folioBody = document.getElementById("folio-stage-body");
+  const folioPractice = document.getElementById("folio-practice-text");
   const folioPrev = document.getElementById("folio-prev");
   const folioNext = document.getElementById("folio-next");
   let activePrinciple = 0;
@@ -149,12 +205,11 @@
     if (folioBody) {
       folioBody.innerHTML = item.paragraphs.map((p) => `<p>${p}</p>`).join("");
     }
+    if (folioPractice) folioPractice.textContent = item.practice;
   };
 
   if (folioTabs.length) {
-    folioTabs.forEach((tab, i) => {
-      tab.addEventListener("click", () => renderPrinciple(i));
-    });
+    folioTabs.forEach((tab, i) => tab.addEventListener("click", () => renderPrinciple(i)));
     if (folioPrev) folioPrev.addEventListener("click", () => renderPrinciple(activePrinciple - 1));
     if (folioNext) folioNext.addEventListener("click", () => renderPrinciple(activePrinciple + 1));
     renderPrinciple(0);
@@ -193,7 +248,7 @@
     });
   }
 
-  /* ---------- Модальные окна (единый менеджер) ---------- */
+  /* ---------- Модальные окна ---------- */
   const videoModal = document.getElementById("video-modal");
   const videoStage = document.getElementById("video-modal-stage");
   const readerModal = document.getElementById("reader-modal");
@@ -236,12 +291,12 @@
     closeModal(demoModal);
   });
 
-  /* ---------- Приветственное видео Марины ---------- */
+  /* ---------- Приветственное видео ---------- */
   document.querySelectorAll("[data-open-video]").forEach((btn) => {
     btn.addEventListener("click", () => {
       if (SITE_CONFIG.welcomeVideoYouTubeId && videoStage) {
         const id = encodeURIComponent(SITE_CONFIG.welcomeVideoYouTubeId);
-        videoStage.innerHTML = `<iframe src="https://www.youtube-nocookie.com/embed/${id}?autoplay=1&rel=0" title="Видео-приветствие Марины Шультайс" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>`;
+        videoStage.innerHTML = `<iframe src="https://www.youtube-nocookie.com/embed/${id}?autoplay=1&rel=0" title="О моей раЗУМной школе — Марина Шультайс" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>`;
       } else if (SITE_CONFIG.welcomeVideoMp4Path && videoStage) {
         videoStage.innerHTML = `<video src="${SITE_CONFIG.welcomeVideoMp4Path}" controls autoplay playsinline></video>`;
       }
@@ -281,20 +336,18 @@
       <h3 class="reading-title">${item.title}</h3>
       <p class="reading-excerpt">${item.excerpt}</p>
       <button class="reading-open-btn" type="button" data-read-id="${item.id}">
-        <span>Открыть заметку</span>
+        <span>Читать заметку</span>
         <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14"/><path d="M13 6l6 6-6 6"/></svg>
       </button>
     </article>
   `;
 
-  /* Витрина на главной */
   const homePreviewList = document.getElementById("kopilka-home-list");
   if (homePreviewList && kopilkaData) {
     const featured = kopilkaData.items.filter((x) => x.featured).slice(0, 3);
     homePreviewList.innerHTML = featured.map(renderReadingRow).join("");
   }
 
-  /* Архив на kopilka.html */
   const archiveGrid = document.getElementById("kopilka-archive");
   const filterPills = Array.from(document.querySelectorAll(".filter-pill"));
 
@@ -328,7 +381,7 @@
     openReaderById(btn.getAttribute("data-read-id"));
   });
 
-  /* ---------- Мягкий «Компас формата» и Telegram-запись ---------- */
+  /* ---------- Мягкий «Компас формата» (с поддержкой ?format= между страницами) ---------- */
   const compassState = {
     level: "continue",
     goal: "system",
@@ -345,8 +398,8 @@
     if (compassState.goal === "reading") {
       return {
         title: "Вам особенно откликнется «Вечерний чай с…»",
-        note: "Камерный курс чтения (5 тёплых вечеров между циклами) — идеальный способ полюбить живой французский текст. А на 30-минутном знакомстве Марина подскажет дату ближайшего вечера и подходящую группу.",
-        msg: `Здравствуйте, Марина! Я ${levelLabels[compassState.level]}. Особенно интересен курс чтения «Вечерний чай с…» и знакомство со школой — хотел(а) бы записаться на бесплатные 30 минут в Zoom.`
+        note: "Камерный курс чтения (5 тёплых вечеров между циклами) — идеальный способ полюбить живой французский текст. На 30-минутном знакомстве Марина подскажет дату ближайшего вечера.",
+        msg: `Здравствуйте, Марина! Я ${levelLabels[compassState.level]}. Особенно интересен курс чтения «Вечерний чай с…» — хотел(а) бы записаться на бесплатное 30-минутное знакомство в Zoom.`
       };
     }
     if (compassState.pace === "solo" || compassState.goal === "personal") {
@@ -368,7 +421,12 @@
   const telegramBtn = document.getElementById("telegram-direct-btn");
   let currentTelegramText = computeRecommendation().msg;
 
-  const updateCompass = () => {
+  const syncCompassUI = () => {
+    ["level", "goal", "pace"].forEach((g) => {
+      document.querySelectorAll(`.compass-btn[data-group="${g}"]`).forEach((b) => {
+        b.setAttribute("aria-pressed", String(b.getAttribute("data-value") === compassState[g]));
+      });
+    });
     const rec = computeRecommendation();
     currentTelegramText = rec.msg;
     if (recTitleEl) recTitleEl.textContent = rec.title;
@@ -380,43 +438,39 @@
     }
   };
 
+  const applyPreset = (preset) => {
+    if (preset === "tete") {
+      compassState.pace = "solo";
+      compassState.goal = "personal";
+    } else if (preset === "tea") {
+      compassState.goal = "reading";
+    } else if (preset === "group") {
+      compassState.pace = "group";
+      compassState.goal = "system";
+    }
+    syncCompassUI();
+  };
+
   document.querySelectorAll(".compass-btn").forEach((btn) => {
     btn.addEventListener("click", () => {
-      const group = btn.getAttribute("data-group");
-      const val = btn.getAttribute("data-value");
-      compassState[group] = val;
-      document.querySelectorAll(`.compass-btn[data-group="${group}"]`).forEach((b) => {
-        b.setAttribute("aria-pressed", String(b === btn));
-      });
-      updateCompass();
+      compassState[btn.getAttribute("data-group")] = btn.getAttribute("data-value");
+      syncCompassUI();
     });
   });
 
-  /* Быстрый выбор формата со ссылок на странице */
   document.querySelectorAll("[data-preset]").forEach((link) => {
-    link.addEventListener("click", () => {
-      const preset = link.getAttribute("data-preset");
-      if (preset === "tete") {
-        compassState.pace = "solo";
-        compassState.goal = "personal";
-      } else if (preset === "tea") {
-        compassState.goal = "reading";
-      } else {
-        compassState.pace = "group";
-        compassState.goal = "system";
-      }
-      ["level", "goal", "pace"].forEach((g) => {
-        document.querySelectorAll(`.compass-btn[data-group="${g}"]`).forEach((b) => {
-          b.setAttribute("aria-pressed", String(b.getAttribute("data-value") === compassState[g]));
-        });
-      });
-      updateCompass();
-    });
+    link.addEventListener("click", () => applyPreset(link.getAttribute("data-preset")));
   });
 
-  updateCompass();
+  /* Подхват выбранного формата при переходе с внутренних страниц (?format=tete / tea / group) */
+  const urlFormat = new URLSearchParams(window.location.search).get("format");
+  if (urlFormat) {
+    applyPreset(urlFormat);
+  } else {
+    syncCompassUI();
+  }
 
-  /* Демо-окно Telegram на всех страницах (пока не заполнен SITE_CONFIG) */
+  /* Контакты Telegram на всех страницах */
   const demoTitle = document.getElementById("demo-modal-title");
   const demoDesc = document.getElementById("demo-modal-desc");
   const demoMsg = document.getElementById("demo-modal-message");
@@ -432,10 +486,10 @@
     }
     btn.addEventListener("click", (e) => {
       e.preventDefault();
-      if (demoTitle) demoTitle.textContent = "Прямая запись в Telegram Марины";
+      if (demoTitle) demoTitle.textContent = "Запись в Telegram";
       if (demoDesc) {
         demoDesc.textContent =
-          "Как только добавим ваш ник в SITE_CONFIG, эта кнопка на всех страницах сразу откроет личный диалог в Telegram с уже подготовленным текстом обращения:";
+          "Сюда подключается прямая ссылка на ваш Telegram — после клика сразу откроется чат с уже подготовленным текстом обращения:";
       }
       if (demoMsg) {
         demoMsg.hidden = false;
@@ -459,7 +513,7 @@
       if (demoTitle) demoTitle.textContent = "Telegram-канал «РаЗУМной школы»";
       if (demoDesc) {
         demoDesc.textContent =
-          "Сюда подключим прямую ссылку на Telegram-канал Марины — гости смогут сразу читать заметки, смотреть видео и узнавать о старте новых циклов.";
+          "Сюда подключается прямая ссылка на Telegram-канал Марины с заметками, видео и анонсами новых циклов.";
       }
       if (demoMsg) demoMsg.hidden = true;
       if (demoCopy) demoCopy.hidden = true;

@@ -1,41 +1,41 @@
 /* ==========================================================================
    «РаЗУМная школа» — Марина Шультайс (Страсбург)
    Издательская (книжно-журнальная) дизайн-система.
-   Без шаблонной карточности, без ИИ-клише, 0 сторонних ресурсов.
+   Спокойные жёлто-синие тона, без карточности, 0 сторонних ресурсов.
    ========================================================================== */
 
 :root {
   color-scheme: light;
 
-  /* Спокойные кремово-синие и антично-охристые тона */
-  --paper: #FAF7F0;
-  --paper-alt: #F2ECE0;
-  --paper-warm: #F6EEDB;
+  /* Спокойные тёплые жёлто-синие тона (строго без кислотности) */
+  --paper: #FAF7EF;
+  --paper-alt: #F3ECD9;
+  --sun-wash: #FAF0D1;     /* Тёплый мягкий солнечно-жёлтый фон */
   --paper-card: #FFFDF8;
 
   --indigo: #1D3557;
   --indigo-deep: #142640;
-  --indigo-soft: #314E76;
+  --indigo-soft: #2E4D78;
 
   --ink: #1B2432;
-  --ink-2: #384354;
-  --muted: #5A677A;
+  --ink-2: #364152;
+  --muted: #586578;
 
-  --ochre: #966619;        /* Читаемый тёмно-охристый на светлом */
-  --ochre-mid: #C49137;    /* Тонкие линейки и штрихи */
-  --ochre-bright: #E4BE6A; /* Акцент на глубоком индиго */
-  --ochre-wash: #F4E6C3;   /* Пергаментная подложка */
+  --ochre: #8F6014;        /* Контрастный охристый для текста на светлом */
+  --ochre-mid: #C99635;    /* Тёплые золотистые линейки и штрихи */
+  --ochre-bright: #E8C468; /* Спокойный солнечный жёлтый на синем */
+  --ochre-wash: #F5E2AE;   /* Выразительная, но спокойная жёлтая подложка */
 
-  --line: rgba(29, 53, 87, 0.15);
-  --line-strong: rgba(29, 53, 87, 0.28);
-  --line-light: rgba(250, 247, 240, 0.18);
+  --line: rgba(29, 53, 87, 0.14);
+  --line-strong: rgba(29, 53, 87, 0.26);
+  --line-warm: rgba(185, 134, 38, 0.34);
+  --line-light: rgba(250, 247, 239, 0.18);
 
   --serif: "Cormorant Garamond", Georgia, "Times New Roman", serif;
   --sans: "Golos Text", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
 
   --ease: cubic-bezier(0.22, 1, 0.36, 1);
   --radius-sm: 4px;
-  --radius-md: 10px;
   --wrap: min(100% - 2.5rem, 75rem);
 }
 
@@ -54,12 +54,17 @@ body {
   background-color: var(--paper);
   color: var(--ink);
   font: 400 1.03125rem/1.7 var(--sans);
+  font-variant-numeric: lining-nums;
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
 }
 
-h1, h2, h3, h4, p, ul, ol, figure, blockquote, dl, dd {
+h1, h2, h3, h4, p, ul, ol, figure, blockquote, dl, dd, table {
   margin: 0;
+}
+
+h1, h2, h3, h4, summary, blockquote {
+  font-variant-numeric: lining-nums;
 }
 
 ul, ol {
@@ -134,7 +139,6 @@ button {
   stroke-linejoin: round;
 }
 
-/* Предотвращение переполнения гридов на узких экранах */
 .grid-safe > * {
   min-width: 0;
 }
@@ -150,15 +154,15 @@ button {
 .zum-hero {
   color: var(--ochre);
   font-weight: 600;
-  background: linear-gradient(transparent 76%, var(--ochre-wash) 76%, var(--ochre-wash) 95%, transparent 95%);
-  padding-inline: 0.04em;
+  background: linear-gradient(transparent 72%, var(--ochre-wash) 72%, var(--ochre-wash) 95%, transparent 95%);
+  padding-inline: 0.05em;
 }
 
 .zum-inline {
   color: var(--indigo);
   font-weight: 500;
   background: var(--ochre-wash);
-  padding: 0.03em 0.25em;
+  padding: 0.04em 0.28em;
   border-radius: 3px;
   letter-spacing: 0.02em;
 }
@@ -177,16 +181,15 @@ button {
 .kicker-num {
   font-family: var(--serif);
   font-style: italic;
-  font-size: 1rem;
+  font-size: 1.04rem;
   letter-spacing: 0.02em;
   text-transform: none;
   color: var(--ochre);
-  font-variant-numeric: lining-nums;
 }
 
 .kicker-rule {
-  width: 1.75rem;
-  height: 1px;
+  width: 1.85rem;
+  height: 1.5px;
   background: var(--ochre-mid);
   flex: none;
 }
@@ -199,7 +202,6 @@ button {
   letter-spacing: -0.015em;
   color: var(--indigo);
   text-wrap: balance;
-  font-variant-numeric: lining-nums;
 }
 
 .display-h2 em {
@@ -211,9 +213,9 @@ button {
 .french-note {
   font-family: var(--serif);
   font-style: italic;
-  font-size: 1.15rem;
+  font-size: 1.18rem;
   color: var(--ochre);
-  letter-spacing: 0.01em;
+  line-height: 1.4;
 }
 
 .prose {
@@ -245,13 +247,19 @@ button {
 /* ---------- Полосы и разделители ---------- */
 
 .band {
-  padding-block: clamp(4rem, 7.5vw, 6.5rem);
+  padding-block: clamp(3.75rem, 7vw, 6.25rem);
 }
 
 .band-linen {
   background-color: var(--paper-alt);
-  border-top: 1px solid var(--line);
-  border-bottom: 1px solid var(--line);
+  border-top: 1px solid var(--line-warm);
+  border-bottom: 1px solid var(--line-warm);
+}
+
+.band-sun {
+  background-color: var(--sun-wash);
+  border-top: 1px solid var(--line-warm);
+  border-bottom: 1px solid var(--line-warm);
 }
 
 .band-indigo {
@@ -263,8 +271,8 @@ button {
 .band-head {
   display: grid;
   gap: 1.1rem;
-  padding-bottom: clamp(1.75rem, 3.5vw, 2.75rem);
-  margin-bottom: clamp(2rem, 4vw, 3.25rem);
+  padding-bottom: clamp(1.65rem, 3.2vw, 2.6rem);
+  margin-bottom: clamp(2rem, 3.8vw, 3rem);
   border-bottom: 1px solid var(--line);
 }
 
@@ -329,7 +337,7 @@ button {
 }
 
 .btn-warm:hover {
-  background: #EED08B;
+  background: #F1D384;
 }
 
 .btn-line {
@@ -345,13 +353,13 @@ button {
 
 .btn-line-light {
   background: transparent;
-  border-color: rgba(250, 247, 240, 0.34);
+  border-color: rgba(250, 247, 239, 0.34);
   color: var(--paper);
 }
 
 .btn-line-light:hover {
   border-color: var(--ochre-bright);
-  background: rgba(250, 247, 240, 0.07);
+  background: rgba(250, 247, 239, 0.08);
 }
 
 .ed-link {
@@ -363,7 +371,7 @@ button {
   font-size: 0.96rem;
   text-decoration: none;
   padding-bottom: 0.18rem;
-  border-bottom: 1px solid var(--ochre-mid);
+  border-bottom: 1.5px solid var(--ochre-mid);
   transition: color 0.24s var(--ease), border-color 0.24s var(--ease);
 }
 
@@ -380,13 +388,13 @@ button {
   transform: translateX(3px);
 }
 
-/* ---------- Общая шапка (5 страниц) ---------- */
+/* ---------- Общая шапка ---------- */
 
 .site-header {
   position: sticky;
   top: 0;
   z-index: 50;
-  background: rgba(250, 247, 240, 0.92);
+  background: rgba(250, 247, 239, 0.93);
   backdrop-filter: saturate(1.25) blur(12px);
   -webkit-backdrop-filter: saturate(1.25) blur(12px);
   border-bottom: 1px solid var(--line);
@@ -394,7 +402,7 @@ button {
 }
 
 .site-header.scrolled {
-  background: rgba(250, 247, 240, 0.98);
+  background: rgba(250, 247, 239, 0.98);
 }
 
 .header-row {
@@ -462,7 +470,7 @@ button {
   left: 0;
   right: 0;
   bottom: 0;
-  height: 1.5px;
+  height: 2px;
   background: var(--ochre-mid);
   transform: scaleX(0);
   transform-origin: left;
@@ -558,10 +566,10 @@ button {
   }
 }
 
-/* ---------- 1. Нешаблонный Editorial Hero (Главная) ---------- */
+/* ---------- 1. Editorial Hero (Главная) ---------- */
 
 .ed-hero {
-  padding-block: clamp(1.75rem, 3.5vw, 2.75rem) clamp(3.5rem, 6.5vw, 5.5rem);
+  padding-block: clamp(1.6rem, 3.2vw, 2.5rem) clamp(3.25rem, 6vw, 5rem);
 }
 
 .hero-masthead {
@@ -570,8 +578,8 @@ button {
   justify-content: space-between;
   align-items: center;
   gap: 0.5rem 1.5rem;
-  padding-bottom: 1.15rem;
-  border-bottom: 1px solid var(--line);
+  padding-bottom: 1.05rem;
+  border-bottom: 1px solid var(--line-warm);
   font-size: 0.77rem;
   letter-spacing: 0.1em;
   text-transform: uppercase;
@@ -581,17 +589,17 @@ button {
 .hero-masthead-fr {
   font-family: var(--serif);
   font-style: italic;
-  font-size: 1.02rem;
+  font-size: 1.05rem;
   letter-spacing: 0.02em;
   text-transform: none;
   color: var(--ochre);
 }
 
 .hero-headline-block {
-  padding-block: clamp(1.85rem, 4vw, 3.1rem) clamp(1.75rem, 3.5vw, 2.5rem);
+  padding-block: clamp(1.75rem, 3.6vw, 2.85rem) clamp(1.65rem, 3.2vw, 2.35rem);
   border-bottom: 1px solid var(--line);
   display: grid;
-  gap: 0.9rem;
+  gap: 0.85rem;
 }
 
 .hero-title {
@@ -601,7 +609,6 @@ button {
   line-height: 0.96;
   letter-spacing: -0.02em;
   color: var(--indigo);
-  font-variant-numeric: lining-nums;
 }
 
 .hero-subtitle-line {
@@ -622,7 +629,7 @@ button {
 }
 
 .hero-location-tag {
-  font-size: 0.85rem;
+  font-size: 0.86rem;
   color: var(--muted);
   white-space: nowrap;
 }
@@ -630,7 +637,7 @@ button {
 .hero-spread {
   display: grid;
   gap: clamp(2rem, 4.5vw, 3.75rem);
-  padding-top: clamp(1.85rem, 3.8vw, 2.75rem);
+  padding-top: clamp(1.75rem, 3.5vw, 2.6rem);
   align-items: start;
 }
 
@@ -642,7 +649,7 @@ button {
 
 .hero-editorial-col {
   display: grid;
-  gap: 1.5rem;
+  gap: 1.45rem;
 }
 
 .hero-lead {
@@ -662,16 +669,16 @@ button {
   display: flex;
   align-items: center;
   gap: 0.95rem;
-  padding-top: 1.35rem;
+  padding-top: 1.3rem;
   border-top: 1px solid var(--line);
 }
 
 .author-avatar {
-  width: 3.35rem;
-  height: 3.35rem;
+  width: 3.4rem;
+  height: 3.4rem;
   border-radius: 50%;
   overflow: hidden;
-  border: 1.5px solid var(--ochre-mid);
+  border: 2px solid var(--ochre-mid);
   flex: none;
   background: var(--paper-card);
 }
@@ -693,13 +700,13 @@ button {
   display: block;
   color: var(--indigo);
   font-weight: 600;
-  font-size: 0.94rem;
+  font-size: 0.95rem;
 }
 
 /* Правая кинематографичная видео-сцена в Hero */
 .hero-video-figure {
   display: grid;
-  gap: 0.75rem;
+  gap: 0.7rem;
 }
 
 .video-stage-btn {
@@ -732,7 +739,7 @@ button {
   background: linear-gradient(
     to top,
     rgba(20, 38, 64, 0.84) 0%,
-    rgba(20, 38, 64, 0.28) 46%,
+    rgba(20, 38, 64, 0.26) 46%,
     rgba(20, 38, 64, 0.06) 100%
   );
   display: flex;
@@ -746,9 +753,9 @@ button {
   display: inline-flex;
   align-items: center;
   gap: 0.45rem;
-  padding: 0.34rem 0.72rem;
+  padding: 0.34rem 0.78rem;
   border-radius: 999px;
-  background: rgba(250, 247, 240, 0.92);
+  background: rgba(250, 240, 209, 0.94);
   color: var(--indigo);
   font-size: 0.77rem;
   font-weight: 500;
@@ -774,25 +781,24 @@ button {
   height: 3.5rem;
   flex: none;
   border-radius: 50%;
-  background: var(--paper);
-  color: var(--indigo);
-  border: 1.5px solid var(--ochre-bright);
+  background: var(--ochre-bright);
+  color: var(--indigo-deep);
+  border: 2px solid var(--paper);
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  transition: background-color 0.28s var(--ease), color 0.28s var(--ease), transform 0.28s var(--ease);
+  transition: background-color 0.28s var(--ease), transform 0.28s var(--ease);
 }
 
 .video-stage-btn:hover .play-disc {
-  background: var(--ochre-bright);
-  color: var(--indigo-deep);
+  background: var(--paper);
   transform: scale(1.05);
 }
 
 .video-play-copy strong {
   display: block;
   font-family: var(--serif);
-  font-size: clamp(1.22rem, 2.2vw, 1.55rem);
+  font-size: clamp(1.25rem, 2.2vw, 1.58rem);
   font-weight: 500;
   line-height: 1.14;
   color: var(--paper);
@@ -801,7 +807,7 @@ button {
 .video-play-copy span {
   display: block;
   font-size: 0.85rem;
-  color: rgba(250, 247, 240, 0.84);
+  color: rgba(250, 247, 239, 0.85);
   margin-top: 0.16rem;
 }
 
@@ -814,7 +820,7 @@ button {
   color: var(--muted);
 }
 
-/* ---------- 2. Философия «О школе» (Журнальный разворот) ---------- */
+/* ---------- 2. Философия «О школе» + закладка «Слово и оттенок» ---------- */
 
 .essay-spread {
   display: grid;
@@ -824,18 +830,18 @@ button {
 
 @media (min-width: 56rem) {
   .essay-spread {
-    grid-template-columns: minmax(0, 0.4fr) minmax(0, 0.6fr);
+    grid-template-columns: minmax(0, 0.42fr) minmax(0, 0.58fr);
   }
 }
 
 .marginalia {
   display: grid;
-  gap: 1.4rem;
+  gap: 1.75rem;
 }
 
 .margin-quote {
   padding-left: 1.35rem;
-  border-left: 2px solid var(--ochre-mid);
+  border-left: 2.5px solid var(--ochre-mid);
 }
 
 .margin-quote p {
@@ -852,6 +858,72 @@ button {
   color: var(--muted);
 }
 
+/* Авторская книжная закладка «Слово и оттенок» */
+.nuance-bookmark {
+  background: var(--sun-wash);
+  border: 1px solid var(--line-warm);
+  border-top: 3px solid var(--indigo);
+  border-radius: var(--radius-sm);
+  padding: 1.35rem 1.4rem 1.25rem;
+  display: grid;
+  gap: 0.7rem;
+}
+
+.nuance-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  font-size: 0.74rem;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+  color: var(--ochre);
+  font-weight: 600;
+}
+
+.nuance-counter {
+  font-variant-numeric: tabular-nums;
+  color: var(--muted);
+}
+
+.nuance-phrase {
+  font-family: var(--serif);
+  font-style: italic;
+  font-size: 1.8rem;
+  font-weight: 500;
+  line-height: 1.12;
+  color: var(--indigo);
+}
+
+.nuance-lit {
+  font-size: 0.85rem;
+  color: var(--ochre);
+  font-weight: 500;
+}
+
+.nuance-note {
+  font-size: 0.92rem;
+  line-height: 1.58;
+  color: var(--ink-2);
+}
+
+.nuance-next {
+  justify-self: start;
+  margin-top: 0.25rem;
+  background: none;
+  border: 0;
+  padding: 0.2rem 0;
+  font-size: 0.87rem;
+  font-weight: 500;
+  color: var(--indigo);
+  border-bottom: 1px solid var(--ochre-mid);
+  transition: color 0.2s var(--ease);
+}
+
+.nuance-next:hover {
+  color: var(--ochre);
+}
+
 /* ---------- 3. Интерактивный каталог 7 принципов (I–VII) ---------- */
 
 .folio-desktop {
@@ -863,7 +935,7 @@ button {
 
 @media (min-width: 54rem) {
   .folio-desktop {
-    grid-template-columns: minmax(0, 0.44fr) minmax(0, 0.56fr);
+    grid-template-columns: minmax(0, 0.43fr) minmax(0, 0.57fr);
   }
 }
 
@@ -879,16 +951,17 @@ button {
 
 .folio-tab {
   display: grid;
-  grid-template-columns: 2.75rem 1fr auto;
+  grid-template-columns: 2.6rem 1fr auto;
   align-items: baseline;
-  gap: 0.75rem;
+  gap: 0.7rem;
   width: 100%;
-  padding: 1.15rem 1.25rem 1.15rem 0.25rem;
+  padding: 1rem 1.2rem 1rem 0.35rem;
   background: transparent;
   border: 0;
   border-bottom: 1px solid var(--line);
+  border-left: 3px solid transparent;
   text-align: left;
-  transition: background-color 0.24s var(--ease), padding-left 0.24s var(--ease);
+  transition: background-color 0.24s var(--ease), border-color 0.24s var(--ease), padding-left 0.24s var(--ease);
 }
 
 .folio-tab:last-child {
@@ -898,14 +971,13 @@ button {
 .folio-roman {
   font-family: var(--serif);
   font-style: italic;
-  font-size: 1.2rem;
+  font-size: 1.18rem;
   color: var(--ochre);
-  font-variant-numeric: lining-nums;
 }
 
 .folio-tab-title {
   font-family: var(--serif);
-  font-size: 1.52rem;
+  font-size: 1.48rem;
   font-weight: 500;
   line-height: 1.14;
   color: var(--ink-2);
@@ -917,7 +989,7 @@ button {
   font-style: italic;
   font-size: 0.96rem;
   color: var(--muted);
-  opacity: 0.78;
+  opacity: 0.8;
 }
 
 .folio-tab:hover .folio-tab-title {
@@ -925,8 +997,9 @@ button {
 }
 
 .folio-tab[aria-selected="true"] {
-  background: rgba(244, 230, 195, 0.55);
-  padding-left: 0.85rem;
+  background: var(--sun-wash);
+  border-left-color: var(--ochre-mid);
+  padding-left: 0.8rem;
 }
 
 .folio-tab[aria-selected="true"] .folio-tab-title {
@@ -940,11 +1013,11 @@ button {
 }
 
 .folio-stage {
-  padding: clamp(2rem, 4vw, 3.25rem) clamp(1.5rem, 4vw, 3.25rem);
+  padding: clamp(1.85rem, 3.6vw, 2.75rem) clamp(1.5rem, 3.6vw, 2.85rem);
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  gap: 2rem;
+  gap: 1.6rem;
   background: var(--paper-card);
 }
 
@@ -953,13 +1026,13 @@ button {
   align-items: baseline;
   justify-content: space-between;
   gap: 1rem;
-  padding-bottom: 1rem;
+  padding-bottom: 0.9rem;
   border-bottom: 1px solid var(--line);
 }
 
 .folio-big-roman {
   font-family: var(--serif);
-  font-size: clamp(2.6rem, 4.5vw, 3.8rem);
+  font-size: clamp(2.4rem, 4vw, 3.4rem);
   line-height: 0.9;
   font-weight: 400;
   color: var(--ochre-mid);
@@ -968,24 +1041,24 @@ button {
 .folio-epigraph {
   font-family: var(--serif);
   font-style: italic;
-  font-size: 1.35rem;
+  font-size: 1.38rem;
   color: var(--ochre);
 }
 
 .folio-stage-title {
   font-family: var(--serif);
-  font-size: clamp(1.95rem, 3vw, 2.55rem);
+  font-size: clamp(1.9rem, 2.8vw, 2.45rem);
   font-weight: 500;
   line-height: 1.1;
   color: var(--indigo);
-  margin-top: 1.35rem;
+  margin-top: 1.15rem;
 }
 
 .folio-stage-body {
-  margin-top: 1.15rem;
+  margin-top: 1rem;
   display: grid;
-  gap: 0.9rem;
-  font-size: 1.03rem;
+  gap: 0.85rem;
+  font-size: 1.02rem;
   line-height: 1.72;
   color: var(--ink-2);
 }
@@ -995,12 +1068,36 @@ button {
   font-weight: 600;
 }
 
+/* Тёплый практический блок внизу правой страницы — убирает пустоту на коротких принципах */
+.folio-practice {
+  padding: 1rem 1.2rem;
+  background: var(--sun-wash);
+  border-left: 2.5px solid var(--ochre-mid);
+  border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+  display: grid;
+  gap: 0.3rem;
+}
+
+.folio-practice-label {
+  font-size: 0.74rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--ochre);
+  font-weight: 600;
+}
+
+.folio-practice p {
+  font-size: 0.93rem;
+  line-height: 1.56;
+  color: var(--indigo);
+}
+
 .folio-pager {
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 1rem;
-  padding-top: 1.25rem;
+  padding-top: 1.05rem;
   border-top: 1px solid var(--line);
 }
 
@@ -1010,7 +1107,7 @@ button {
   gap: 0.45rem;
   background: none;
   border: 0;
-  padding: 0.35rem 0;
+  padding: 0.3rem 0;
   font-size: 0.9rem;
   font-weight: 500;
   color: var(--indigo);
@@ -1106,7 +1203,7 @@ button {
   display: none;
 }
 
-/* ---------- 4. «Ритм учебного года» (Нешаблонные форматы) ---------- */
+/* ---------- 4. «Ритм учебного года» ---------- */
 
 .rhythm-list {
   display: grid;
@@ -1116,7 +1213,7 @@ button {
 .rhythm-row {
   display: grid;
   gap: 1.25rem 2.5rem;
-  padding-block: clamp(1.9rem, 3.8vw, 2.85rem);
+  padding-block: clamp(1.85rem, 3.6vw, 2.75rem);
   border-bottom: 1px solid var(--line);
   align-items: start;
 }
@@ -1128,7 +1225,7 @@ button {
 }
 
 .rhythm-row-tea {
-  background: linear-gradient(90deg, rgba(244, 230, 195, 0.42) 0%, rgba(244, 230, 195, 0.14) 100%);
+  background: linear-gradient(90deg, var(--sun-wash) 0%, rgba(250, 240, 209, 0.35) 100%);
   padding-inline: clamp(1rem, 2.5vw, 1.75rem);
   margin-inline: calc(-1 * clamp(1rem, 2.5vw, 1.75rem));
   border-left: 3px solid var(--ochre-mid);
@@ -1186,8 +1283,8 @@ button {
 
 .rhythm-specs span::before {
   content: "";
-  width: 4px;
-  height: 4px;
+  width: 5px;
+  height: 5px;
   border-radius: 50%;
   background: var(--ochre-mid);
 }
@@ -1213,7 +1310,124 @@ button {
   padding-top: 1.65rem;
 }
 
-/* ---------- 5. Тизер «О Марине» на главной ---------- */
+/* ---------- Атмосферная фото-вставка (Страсбург / Вечерний чай) ---------- */
+
+.atmosphere-figure {
+  display: grid;
+  gap: 0.75rem;
+}
+
+.atmosphere-frame {
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+  border: 1px solid var(--line-strong);
+  background: var(--indigo-deep);
+}
+
+.atmosphere-frame img {
+  width: 100%;
+  height: auto;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+}
+
+.atmosphere-frame-wide img {
+  aspect-ratio: 21 / 9;
+}
+
+@media (max-width: 44rem) {
+  .atmosphere-frame-wide img {
+    aspect-ratio: 16 / 10;
+  }
+}
+
+.atmosphere-caption {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 0.4rem 1.5rem;
+  font-size: 0.84rem;
+  color: var(--muted);
+}
+
+.atmosphere-caption em {
+  font-family: var(--serif);
+  font-style: italic;
+  font-size: 1.04rem;
+  color: var(--ochre);
+}
+
+/* Парная редакционная сцена с фото («Вечерний чай с…» на programmes.html) */
+.feature-photo-spread {
+  display: grid;
+  gap: clamp(1.75rem, 4vw, 3.5rem);
+  align-items: center;
+}
+
+@media (min-width: 56rem) {
+  .feature-photo-spread {
+    grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr);
+  }
+}
+
+/* ---------- Таблица сравнения форматов (programmes.html) ---------- */
+
+.compare-wrap {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+.compare-table {
+  width: 100%;
+  min-width: 42rem;
+  border-collapse: collapse;
+  border-top: 1.5px solid var(--indigo);
+}
+
+.compare-table th,
+.compare-table td {
+  text-align: left;
+  vertical-align: top;
+  padding: 1.15rem 1.1rem 1.15rem 0;
+  border-bottom: 1px solid var(--line);
+  font-size: 0.95rem;
+  line-height: 1.58;
+}
+
+.compare-table thead th {
+  font-family: var(--serif);
+  font-size: 1.48rem;
+  font-weight: 600;
+  color: var(--indigo);
+  padding-bottom: 1rem;
+  border-bottom: 1px solid var(--line-strong);
+}
+
+.compare-table thead th:first-child {
+  font-family: var(--sans);
+  font-size: 0.76rem;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+  color: var(--ochre);
+  vertical-align: bottom;
+}
+
+.compare-table tbody th {
+  font-weight: 600;
+  color: var(--indigo);
+  width: 13rem;
+}
+
+.compare-table td {
+  color: var(--ink-2);
+}
+
+.compare-highlight {
+  background: rgba(250, 240, 209, 0.45);
+  padding-inline: 1rem !important;
+}
+
+/* ---------- 5. Тизер «О Марине» ---------- */
 
 .portrait-spread {
   display: grid;
@@ -1230,7 +1444,7 @@ button {
 .bookplate-portrait {
   position: relative;
   background: linear-gradient(162deg, #213C63 0%, #152843 100%);
-  border: 1px solid rgba(212, 162, 76, 0.38);
+  border: 1px solid rgba(232, 196, 104, 0.42);
   border-radius: var(--radius-sm);
   padding: clamp(1.85rem, 3.5vw, 2.6rem) 1.5rem 1.85rem;
   display: flex;
@@ -1244,7 +1458,7 @@ button {
   content: "";
   position: absolute;
   inset: 0.65rem;
-  border: 1px solid rgba(228, 190, 106, 0.26);
+  border: 1px solid rgba(232, 196, 104, 0.3);
   pointer-events: none;
 }
 
@@ -1255,7 +1469,7 @@ button {
   aspect-ratio: 1 / 1;
   border-radius: 50%;
   overflow: hidden;
-  border: 2px solid rgba(228, 190, 106, 0.78);
+  border: 2px solid rgba(232, 196, 104, 0.85);
   box-shadow: 0 18px 36px -16px rgba(10, 20, 36, 0.65);
   background: var(--paper);
 }
@@ -1291,7 +1505,7 @@ button {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 1.15rem 2rem;
-  margin-top: 1.65rem;
+  margin-top: 1.5rem;
   padding-top: 1.35rem;
   border-top: 1px solid var(--line);
 }
@@ -1314,7 +1528,7 @@ button {
   margin-top: 0.25rem;
 }
 
-/* ---------- 6. Витрина Копилки (Главная) и Читальный зал (kopilka.html) ---------- */
+/* ---------- 6. Витрина Копилки и Читальный зал ---------- */
 
 .kopilka-preview-spread {
   display: grid;
@@ -1404,7 +1618,6 @@ button {
   font-weight: 600;
   line-height: 1.16;
   color: var(--indigo);
-  font-variant-numeric: lining-nums;
 }
 
 .reading-excerpt {
@@ -1425,14 +1638,13 @@ button {
   font-size: 0.9rem;
   font-weight: 500;
   color: var(--indigo);
-  border-bottom: 1px solid var(--ochre-mid);
+  border-bottom: 1.5px solid var(--ochre-mid);
 }
 
 .reading-open-btn:hover {
   color: var(--ochre);
 }
 
-/* Фильтр и сетка на отдельной странице kopilka.html */
 .filter-bar {
   display: flex;
   flex-wrap: wrap;
@@ -1467,7 +1679,7 @@ button {
 
 .kopilka-archive-grid {
   display: grid;
-  gap: 0 2.5rem;
+  gap: 0 2.75rem;
   border-top: 1px solid var(--line-strong);
 }
 
@@ -1477,10 +1689,10 @@ button {
   }
 }
 
-/* ---------- 7. Мягкий «Компас формата» и Запись (Индиго-финал) ---------- */
+/* ---------- 7. Мягкий «Компас формата» и Запись ---------- */
 
 .band-indigo .kicker {
-  color: rgba(250, 247, 240, 0.72);
+  color: rgba(250, 247, 239, 0.72);
 }
 
 .band-indigo .kicker-num {
@@ -1496,7 +1708,7 @@ button {
 }
 
 .band-indigo .band-lead {
-  color: rgba(250, 247, 240, 0.84);
+  color: rgba(250, 247, 239, 0.84);
 }
 
 .contact-spread {
@@ -1544,13 +1756,12 @@ button {
 .step-item p {
   font-size: 0.93rem;
   line-height: 1.6;
-  color: rgba(250, 247, 240, 0.78);
+  color: rgba(250, 247, 239, 0.78);
 }
 
-/* Компас формата */
 .compass-box {
   background: rgba(255, 253, 248, 0.055);
-  border: 1px solid rgba(250, 247, 240, 0.16);
+  border: 1px solid rgba(250, 247, 239, 0.16);
   border-radius: var(--radius-sm);
   padding: clamp(1.4rem, 3vw, 2.1rem);
   display: grid;
@@ -1572,7 +1783,7 @@ button {
 
 .compass-head p {
   font-size: 0.89rem;
-  color: rgba(250, 247, 240, 0.74);
+  color: rgba(250, 247, 239, 0.74);
 }
 
 .compass-group {
@@ -1598,9 +1809,9 @@ button {
 .compass-btn {
   padding: 0.46rem 0.85rem;
   border-radius: 999px;
-  border: 1px solid rgba(250, 247, 240, 0.26);
+  border: 1px solid rgba(250, 247, 239, 0.26);
   background: transparent;
-  color: rgba(250, 247, 240, 0.9);
+  color: rgba(250, 247, 239, 0.9);
   font-size: 0.86rem;
   transition: background-color 0.22s var(--ease), border-color 0.22s var(--ease), color 0.22s var(--ease);
 }
@@ -1619,7 +1830,7 @@ button {
 .compass-result {
   padding: 1rem 1.15rem;
   background: rgba(20, 38, 64, 0.58);
-  border: 1px solid rgba(228, 190, 106, 0.34);
+  border: 1px solid rgba(232, 196, 104, 0.38);
   border-radius: var(--radius-sm);
   display: grid;
   gap: 0.45rem;
@@ -1627,7 +1838,7 @@ button {
 
 .compass-rec-title {
   font-family: var(--serif);
-  font-size: 1.38rem;
+  font-size: 1.4rem;
   font-weight: 500;
   color: var(--ochre-bright);
   line-height: 1.18;
@@ -1636,7 +1847,7 @@ button {
 .compass-rec-text {
   font-size: 0.9rem;
   line-height: 1.56;
-  color: rgba(250, 247, 240, 0.88);
+  color: rgba(250, 247, 239, 0.88);
 }
 
 .contact-actions {
@@ -1646,16 +1857,16 @@ button {
 
 .contact-footnote {
   font-size: 0.83rem;
-  color: rgba(250, 247, 240, 0.66);
+  color: rgba(250, 247, 239, 0.68);
   line-height: 1.5;
   padding-top: 0.75rem;
   border-top: 1px solid var(--line-light);
 }
 
-/* ---------- Внутренние страницы: шапка, хронология, поэзия, FAQ ---------- */
+/* ---------- Внутренние страницы: шапка, хронология, поэзия, 2-колоночный FAQ ---------- */
 
 .page-intro {
-  padding-block: clamp(2.5rem, 5.5vw, 4.25rem) clamp(2.5rem, 4.5vw, 3.5rem);
+  padding-block: clamp(2.5rem, 5.5vw, 4.1rem) clamp(2.4rem, 4.2vw, 3.35rem);
   border-bottom: 1px solid var(--line);
 }
 
@@ -1674,12 +1885,11 @@ button {
 .page-h1 {
   font-family: var(--serif);
   font-weight: 500;
-  font-size: clamp(2.5rem, 5.5vw, 4.35rem);
+  font-size: clamp(2.5rem, 5.5vw, 4.3rem);
   line-height: 1.01;
   letter-spacing: -0.02em;
   color: var(--indigo);
   margin-top: 0.85rem;
-  font-variant-numeric: lining-nums;
 }
 
 .page-h1 em {
@@ -1688,7 +1898,6 @@ button {
   color: var(--indigo-soft);
 }
 
-/* Хронология Марины */
 .timeline {
   display: grid;
   border-top: 1px solid var(--line-strong);
@@ -1703,22 +1912,21 @@ button {
 
 @media (min-width: 48rem) {
   .timeline-row {
-    grid-template-columns: 12rem minmax(0, 1fr);
+    grid-template-columns: 12.5rem minmax(0, 1fr);
   }
 }
 
 .timeline-year {
   font-family: var(--serif);
-  font-size: 1.45rem;
+  font-size: 1.48rem;
   font-weight: 600;
   color: var(--ochre);
   line-height: 1.15;
-  font-variant-numeric: lining-nums;
 }
 
 .timeline-row h3 {
   font-family: var(--serif);
-  font-size: 1.52rem;
+  font-size: 1.54rem;
   font-weight: 600;
   color: var(--indigo);
   line-height: 1.18;
@@ -1731,7 +1939,6 @@ button {
   line-height: 1.66;
 }
 
-/* Поэтическая полка */
 .poetry-shelf {
   display: grid;
   gap: 2rem;
@@ -1744,32 +1951,31 @@ button {
 }
 
 .book-edition {
-  padding: 1.75rem 1.65rem;
+  padding: 1.85rem 1.75rem;
   background: var(--paper-card);
-  border: 1px solid var(--line);
-  border-left: 3px solid var(--ochre-mid);
+  border: 1px solid var(--line-warm);
+  border-left: 3.5px solid var(--ochre-mid);
   display: grid;
-  gap: 0.65rem;
+  gap: 0.7rem;
 }
 
 .book-edition h3 {
   font-family: var(--serif);
-  font-size: 1.85rem;
+  font-size: 1.9rem;
   font-weight: 500;
   line-height: 1.14;
   color: var(--indigo);
 }
 
 .book-edition p {
-  font-size: 0.95rem;
-  line-height: 1.64;
+  font-size: 0.96rem;
+  line-height: 1.66;
   color: var(--ink-2);
 }
 
-/* Как проходит урок (4 колонки на линейках) */
 .lesson-flow {
   display: grid;
-  gap: 1.75rem 2rem;
+  gap: 1.75rem 2.25rem;
   border-top: 1px solid var(--line-strong);
   padding-top: 2rem;
 }
@@ -1788,20 +1994,18 @@ button {
 
 .lesson-step-num {
   font-family: var(--serif);
-  font-size: 1.8rem;
+  font-size: 1.85rem;
   font-weight: 500;
   color: var(--ochre);
-  font-variant-numeric: lining-nums;
   line-height: 1;
 }
 
 .lesson-step h3 {
   font-family: var(--serif);
-  font-size: 1.42rem;
+  font-size: 1.44rem;
   font-weight: 600;
   color: var(--indigo);
   line-height: 1.18;
-  font-variant-numeric: lining-nums;
 }
 
 .lesson-step p {
@@ -1810,11 +2014,42 @@ button {
   color: var(--ink-2);
 }
 
-/* FAQ на programmes.html */
+/* Двухколоночный FAQ — никакой пустоты справа */
+.faq-spread {
+  display: grid;
+  gap: clamp(2rem, 5vw, 4rem);
+  align-items: start;
+}
+
+@media (min-width: 56rem) {
+  .faq-spread {
+    grid-template-columns: minmax(0, 0.4fr) minmax(0, 0.6fr);
+  }
+}
+
+.faq-aside {
+  display: grid;
+  gap: 1.25rem;
+}
+
+.faq-aside-box {
+  padding: 1.35rem 1.4rem;
+  background: var(--sun-wash);
+  border: 1px solid var(--line-warm);
+  border-radius: var(--radius-sm);
+  display: grid;
+  gap: 0.75rem;
+}
+
+.faq-aside-box p {
+  font-size: 0.94rem;
+  line-height: 1.6;
+  color: var(--ink-2);
+}
+
 .faq-list {
   display: grid;
   border-top: 1px solid var(--line-strong);
-  max-width: 52rem;
 }
 
 .faq-item {
@@ -1858,7 +2093,6 @@ button {
   font-size: 0.98rem;
   line-height: 1.7;
   color: var(--ink-2);
-  max-width: 44rem;
 }
 
 /* Mentions légales */
@@ -1975,7 +2209,7 @@ button {
   border-bottom-color: var(--indigo);
 }
 
-/* ---------- Модальные окна (Видео, Книжный ридер Копилки, Демо-Telegram) ---------- */
+/* ---------- Модальные окна ---------- */
 
 .modal-backdrop {
   position: fixed;
@@ -2062,65 +2296,6 @@ button {
   display: block;
 }
 
-.modal-video-placeholder {
-  position: relative;
-  width: 100%;
-  height: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-  padding: 1.5rem;
-  color: var(--paper);
-}
-
-.modal-video-placeholder > img {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  opacity: 0.25;
-}
-
-.modal-video-inner {
-  position: relative;
-  z-index: 1;
-  max-width: 28rem;
-  display: grid;
-  gap: 0.6rem;
-}
-
-.modal-video-thumb {
-  width: 4.5rem;
-  height: 4.5rem;
-  margin-inline: auto;
-  border-radius: 50%;
-  overflow: hidden;
-  border: 2px solid var(--ochre-bright);
-}
-
-.modal-video-thumb img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  transform: scale(1.1);
-}
-
-.modal-video-inner strong {
-  font-family: var(--serif);
-  font-size: 1.6rem;
-  font-weight: 500;
-  color: var(--ochre-bright);
-}
-
-.modal-video-inner p {
-  font-size: 0.93rem;
-  line-height: 1.56;
-  color: rgba(250, 247, 240, 0.88);
-}
-
-/* Книжный ридер «Копилки» */
 .reader-kicker {
   font-size: 0.77rem;
   letter-spacing: 0.08em;
@@ -2147,7 +2322,7 @@ button {
 
 .reader-example {
   padding: 1rem 1.2rem;
-  background: var(--paper-alt);
+  background: var(--sun-wash);
   border-left: 2.5px solid var(--ochre-mid);
   font-family: var(--serif);
   font-style: italic;
@@ -2162,13 +2337,6 @@ button {
   font-family: var(--sans);
   font-style: normal;
   font-size: 0.84rem;
-  color: var(--muted);
-}
-
-.reader-demo-note {
-  padding-top: 1rem;
-  border-top: 1px solid var(--line);
-  font-size: 0.85rem;
   color: var(--muted);
 }
 

@@ -19,8 +19,8 @@
       <a class="brand" href="index.html" aria-label="РаЗУМная школа — главная">
         <svg class="brand-mark" viewBox="0 0 44 44" aria-hidden="true">
           <rect width="44" height="44" rx="4" fill="#1D3557"/>
-          <rect x="3.5" y="3.5" width="37" height="37" rx="2" fill="none" stroke="#E4BE6A" stroke-opacity="0.55" stroke-width="1"/>
-          <text x="22" y="28.5" text-anchor="middle" font-family="'Cormorant Garamond', Georgia, serif" font-size="18.5" font-weight="500" fill="#FAF7F0" letter-spacing="0.8">M<tspan fill="#E4BE6A" font-style="italic">S</tspan></text>
+          <rect x="3.5" y="3.5" width="37" height="37" rx="2" fill="none" stroke="#E8C468" stroke-opacity="0.6" stroke-width="1"/>
+          <text x="22" y="28.5" text-anchor="middle" font-family="'Cormorant Garamond', Georgia, serif" font-size="18.5" font-weight="500" fill="#FAF7EF" letter-spacing="0.8">M<tspan fill="#E8C468" font-style="italic">S</tspan></text>
         </svg>
         <span class="brand-text">
           <span class="brand-name">Ра<span class="zum">ЗУМ</span>ная школа</span>
@@ -104,7 +104,7 @@
           </div>
 
           <figure class="hero-video-figure">
-            <button class="video-stage-btn" type="button" data-open-video aria-label="Смотреть приветственное видео Марины Шультайс">
+            <button class="video-stage-btn" type="button" data-open-video aria-label="Смотреть видео О моей раЗУМной школе">
               <img
                 class="video-stage-img"
                 src="img/hero-atelier.jpg"
@@ -139,7 +139,7 @@
       </div>
     </section>
 
-    <!-- ==================== 2. Философия «О школе» ==================== -->
+    <!-- ==================== 2. Философия «О школе» + «Слово и оттенок» ==================== -->
     <section class="band" id="o-shkole" data-reveal>
       <div class="wrap">
         <div class="band-head">
@@ -157,9 +157,17 @@
               <p>«Полюбить этот непростой язык непросто, но не любить его невозможно!»</p>
               <footer>— Марина Шультайс</footer>
             </blockquote>
-            <p class="french-note">
-              «Этот язык „иной“, иногда очень „странный“ — именно поэтому он „иностранный“…»
-            </p>
+
+            <div class="nuance-bookmark" aria-live="polite">
+              <div class="nuance-head">
+                <span>Слово и оттенок</span>
+                <span class="nuance-counter" id="nuance-counter">1 / 5</span>
+              </div>
+              <p class="nuance-phrase" id="nuance-phrase">Avoir le déclic</p>
+              <p class="nuance-lit" id="nuance-lit">дословно: «почувствовать щелчок»</p>
+              <p class="nuance-note" id="nuance-note">Тот самый момент в изучении языка, когда разрозненные правила вдруг складываются в ясную картину — и фраза рождается легко.</p>
+              <button class="nuance-next" id="nuance-next-btn" type="button">Следующее наблюдение →</button>
+            </div>
           </aside>
 
           <div class="prose">
@@ -170,10 +178,10 @@
               Здесь нет давления и гонки за результатами. У нас вас ждёт тёплая атмосфера, живая логика, осмысленное объяснение даже самых сложных тем. Каждое занятие — это не просто урок, а шаг к пониманию языка и себя в языке.
             </p>
             <p>
-              Французский — это красиво. И я учу так, чтобы вы это почувствовали. Мой <span class="zum-inline">раЗУМный</span> подход основан на огромном опыте преподавания: система сочетает разные методики, позволяющие не только достаточно быстро и правильно заговорить, но и научиться понимать логику языка.
+              Французский — это красиво. И я учу так, чтобы вы это почувствовали. Этот язык «иной», иногда очень «странный» — именно поэтому он «иностранный»…
             </p>
             <p>
-              Среди моих учеников — видные дипломаты, бизнесмены, журналисты и просто замечательные люди. Разумность для меня — основа успешности изучения французского…
+              Мой <span class="zum-inline">раЗУМный</span> подход основан на огромном опыте преподавания: система сочетает разные методики, позволяющие не только достаточно быстро и правильно заговорить, но и научиться понимать логику языка. Среди моих учеников — видные дипломаты, бизнесмены, журналисты и просто замечательные люди. Разумность для меня — основа успешности изучения французского…
             </p>
           </div>
         </div>
@@ -249,9 +257,15 @@
               </div>
             </div>
 
-            <div class="folio-pager">
-              <button class="folio-nav-btn" id="folio-prev" type="button">← Предыдущий</button>
-              <button class="folio-nav-btn" id="folio-next" type="button">Следующий принцип →</button>
+            <div style="display: grid; gap: 1.2rem;">
+              <div class="folio-practice">
+                <span class="folio-practice-label">Как это ощущается на уроке</span>
+                <p id="folio-practice-text">Учёба подстраивается под вашу географию и жизнь: к занятиям в Zoom подключаются ученики из Франции, Европы и других стран — без дороги и привязки к одному городу.</p>
+              </div>
+              <div class="folio-pager">
+                <button class="folio-nav-btn" id="folio-prev" type="button">← Предыдущий</button>
+                <button class="folio-nav-btn" id="folio-next" type="button">Следующий принцип →</button>
+              </div>
             </div>
           </div>
         </div>
@@ -344,7 +358,7 @@
       </div>
     </section>
 
-    <!-- ==================== 4. «Ритм учебного года» (Нешаблонные форматы) ==================== -->
+    <!-- ==================== 4. «Ритм учебного года» ==================== -->
     <section class="band" id="ritm" data-reveal>
       <div class="wrap">
         <div class="band-head band-head-split">
@@ -425,7 +439,7 @@
 
         <div class="rhythm-footer">
           <p style="color: var(--muted); font-size: 0.94rem;">
-            Хотите узнать подробнее, как устроен урок, что делать при пропуске и ответы на частые вопросы?
+            Сравнение форматов, разбор устройства урока и ответы на частые вопросы — на отдельной странице.
           </p>
           <a class="ed-link" href="programmes.html">
             <span>Подробно о форматах и уроках</span>
@@ -506,7 +520,7 @@
             <h2 class="display-h2" style="margin-top: 0.75rem;">Читальный зал <em>по папкам</em></h2>
           </div>
           <p class="band-lead">
-            Авторские заметки, шпаргалки, наблюдения переводчика и тексты к вечерам чтения — откройте любую заметку прямо сейчас, чтобы почувствовать формат.
+            Авторские заметки, шпаргалки, наблюдения переводчика и тексты к вечерам чтения — откройте любую заметку прямо сейчас.
           </p>
         </div>
 
@@ -515,19 +529,19 @@
             <div class="folder-directory" aria-label="Папки Копилки">
               <a class="folder-dir-row" href="kopilka.html#grammar">
                 <strong>Грамматика без страха</strong>
-                <span>2 материала →</span>
+                <span>2 заметки →</span>
               </a>
               <a class="folder-dir-row" href="kopilka.html#lexis">
                 <strong>Живая лексика</strong>
-                <span>2 материала →</span>
+                <span>2 заметки →</span>
               </a>
               <a class="folder-dir-row" href="kopilka.html#reading">
                 <strong>Чтение и поэзия</strong>
-                <span>2 материала →</span>
+                <span>2 заметки →</span>
               </a>
               <a class="folder-dir-row" href="kopilka.html#media">
                 <strong>Аудио и видео</strong>
-                <span>2 материала →</span>
+                <span>2 заметки →</span>
               </a>
             </div>
 
@@ -537,9 +551,7 @@
             </div>
           </div>
 
-          <div class="reading-list" id="kopilka-home-list">
-            <!-- Наполняется из js/kopilka-data.js -->
-          </div>
+          <div class="reading-list" id="kopilka-home-list"></div>
         </div>
       </div>
     </section>
@@ -672,8 +684,8 @@
         </div>
       </div>
       <div class="footer-bottom">
-        <span>© РаЗУМная школа · Марина Шультайс · Страсбург</span>
-        <span>0 сторонних трекеров · Демо-версия: <a href="https://kiteko.fr/" target="_blank" rel="noopener noreferrer">Kiteko</a></span>
+        <span>© РаЗУМная школа · Марина Шультайс · Страсбург, Франция</span>
+        <span>Онлайн-занятия в Zoom · <a href="mentions.html">Правовая информация</a></span>
       </div>
     </div>
   </footer>
@@ -688,18 +700,7 @@
         </button>
       </div>
       <div class="modal-body">
-        <div class="modal-video-stage" id="video-modal-stage">
-          <div class="modal-video-placeholder">
-            <img src="img/hero-atelier.jpg" alt="" aria-hidden="true">
-            <div class="modal-video-inner">
-              <div class="modal-video-thumb">
-                <img src="img/marina-portrait.jpg" alt="Марина Шультайс" width="720" height="720">
-              </div>
-              <strong>О моей раЗУМной школе</strong>
-              <p>Видео загружается…</p>
-            </div>
-          </div>
-        </div>
+        <div class="modal-video-stage" id="video-modal-stage"></div>
         <div class="modal-actions">
           <a class="btn btn-primary" href="#zapis" data-close-modal>Записаться на 30-минутное знакомство</a>
           <a class="btn btn-line" href="https://youtu.be/y_lfsGmHdeQ" target="_blank" rel="noopener noreferrer">Открыть на YouTube</a>
@@ -722,10 +723,7 @@
         <span class="reader-kicker" id="reader-kicker"></span>
         <h4 class="reader-title" id="reader-title"></h4>
         <div class="reader-content" id="reader-content"></div>
-        <p class="reader-demo-note">
-          Демонстрационная заметка показывает, как будут читаться ваши материалы, PDF-памятки и разборы в «Копилке».
-        </p>
-        <div class="modal-actions">
+        <div class="modal-actions" style="padding-top: 0.75rem; border-top: 1px solid var(--line);">
           <a class="btn btn-primary" href="kopilka.html">Открыть все папки Копилки</a>
           <button class="btn btn-line" type="button" data-close-modal>Закрыть</button>
         </div>
@@ -733,21 +731,21 @@
     </div>
   </div>
 
-  <!-- ==================== Модальное окно: Демо-подключение Telegram ==================== -->
+  <!-- ==================== Модальное окно: Контакты Telegram ==================== -->
   <div class="modal-backdrop" id="demo-contact-modal" role="dialog" aria-modal="true" aria-labelledby="demo-modal-title" hidden>
     <div class="modal-dialog">
       <div class="modal-head">
-        <h3 id="demo-modal-title">Прямая запись в Telegram</h3>
+        <h3 id="demo-modal-title">Запись в Telegram</h3>
         <button class="modal-close" type="button" data-close-modal aria-label="Закрыть окно">
           <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><line x1="6" y1="6" x2="18" y2="18"/><line x1="18" y1="6" x2="6" y2="18"/></svg>
         </button>
       </div>
       <div class="modal-body">
         <p id="demo-modal-desc" style="color: var(--ink-2); line-height: 1.62;"></p>
-        <p id="demo-modal-message" style="padding: 0.95rem 1.1rem; background: var(--paper-alt); border-left: 2.5px solid var(--ochre-mid); font-size: 0.94rem; color: var(--indigo);"></p>
+        <p id="demo-modal-message" style="padding: 0.95rem 1.1rem; background: var(--sun-wash); border-left: 2.5px solid var(--ochre-mid); font-size: 0.94rem; color: var(--indigo);"></p>
         <div class="modal-actions">
           <button class="btn btn-primary" id="demo-copy-btn" type="button">Скопировать текст обращения</button>
-          <button class="btn btn-line" type="button" data-close-modal>Понятно</button>
+          <button class="btn btn-line" type="button" data-close-modal>Закрыть</button>
           <span class="copy-feedback" id="demo-copy-feedback" aria-live="polite"></span>
         </div>
       </div>
