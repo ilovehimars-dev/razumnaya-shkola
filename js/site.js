@@ -113,9 +113,15 @@
 
   document.documentElement.classList.add("js-ready");
 
-  /* ---------- Мобильное меню ---------- */
+  /* ---------- Мобильное меню (автозакрытие при расширении окна до ПК) ---------- */
   const menuBtn = document.getElementById("menu-toggle");
   const mobileDrawer = document.getElementById("mobile-drawer");
+
+  const closeMobileMenu = () => {
+    if (!menuBtn || !mobileDrawer) return;
+    menuBtn.setAttribute("aria-expanded", "false");
+    mobileDrawer.hidden = true;
+  };
 
   if (menuBtn && mobileDrawer) {
     menuBtn.addEventListener("click", () => {
@@ -124,15 +130,26 @@
       mobileDrawer.hidden = open;
     });
     mobileDrawer.querySelectorAll("a").forEach((a) => {
-      a.addEventListener("click", () => {
-        menuBtn.setAttribute("aria-expanded", "false");
-        mobileDrawer.hidden = true;
-      });
+      a.addEventListener("click", closeMobileMenu);
     });
+    const desktopMq = window.matchMedia("(min-width: 60.01rem)");
+    if (desktopMq.addEventListener) {
+      desktopMq.addEventListener("change", (e) => { if (e.matches) closeMobileMenu(); });
+    } else {
+      window.addEventListener("resize", () => { if (window.innerWidth >= 961) closeMobileMenu(); }, { passive: true });
+    }
   }
 
-  /* ---------- Плавное появление ---------- */
-  const revealEls = document.querySelectorAll("[data-reveal]");
+  /* ---------- Плавное появление (надёжно при якорных переходах) ---------- */
+  const revealEls = Array.from(document.querySelectorAll("[data-reveal]"));
+  const revealAboveOrInView = () => {
+    const limit = window.innerHeight * 1.15;
+    revealEls.forEach((el) => {
+      if (el.classList.contains("is-visible")) return;
+      if (el.getBoundingClientRect().top <= limit) el.classList.add("is-visible");
+    });
+  };
+
   if ("IntersectionObserver" in window && revealEls.length) {
     const obs = new IntersectionObserver(
       (entries, observer) => {
@@ -142,9 +159,18 @@
           observer.unobserve(entry.target);
         });
       },
-      { rootMargin: "0px 0px -6% 0px", threshold: 0.04 }
+      { rootMargin: "0px 0px -4% 0px", threshold: 0.02 }
     );
     revealEls.forEach((el) => obs.observe(el));
+    revealAboveOrInView();
+    window.addEventListener("hashchange", () => setTimeout(revealAboveOrInView, 120));
+    window.addEventListener("scroll", revealAboveOrInView, { passive: true });
+    document.querySelectorAll('a[href^="#"]').forEach((link) => {
+      link.addEventListener("click", () => {
+        setTimeout(revealAboveOrInView, 80);
+        setTimeout(revealAboveOrInView, 450);
+      });
+    });
   } else {
     revealEls.forEach((el) => el.classList.add("is-visible"));
   }
@@ -214,19 +240,6 @@
     if (pPrev) pPrev.addEventListener("click", () => renderPrinciple(activePrinciple - 1, true));
     if (pNext) pNext.addEventListener("click", () => renderPrinciple(activePrinciple + 1, true));
     renderPrinciple(0, false);
-  }
-
-  /* Деликатная кнопка быстрой связи после прокрутки первого экрана */
-  const quickTg = document.getElementById("quick-tg");
-  if (quickTg) {
-    const toggleQuickTg = () => {
-      const zapis = document.getElementById("zapis");
-      const pastHero = window.scrollY > 480;
-      const inZapis = zapis ? zapis.getBoundingClientRect().top < window.innerHeight * 0.78 : false;
-      quickTg.classList.toggle("is-shown", pastHero && !inZapis);
-    };
-    toggleQuickTg();
-    window.addEventListener("scroll", toggleQuickTg, { passive: true });
   }
 
   const mobilePrinciplesWrap = document.getElementById("principles-mobile-list");
@@ -304,12 +317,26 @@
     closeModal(demoModal);
   });
 
-  /* ---------- Видео Марины ---------- */
+  /* ---------- Видео Марины (постер + надёжный YouTube embed с фолбэком) ---------- */
   document.querySelectorAll("[data-open-video]").forEach((btn) => {
     btn.addEventListener("click", () => {
       if (SITE_CONFIG.welcomeVideoYouTubeId && videoStage) {
         const id = encodeURIComponent(SITE_CONFIG.welcomeVideoYouTubeId);
-        videoStage.innerHTML = `<iframe src="https://www.youtube-nocookie.com/embed/${id}?autoplay=1&rel=0" title="О моей раЗУМной школе — Марина Шультайс" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>`;
+        const ytLink = `https://youtu.be/${id}`;
+        const fallbackHtml = `
+          <div class="video-stage-fallback">
+            <img src="img/strasbourg-golden.jpg" alt="О моей РаЗУМной школе — Марина Шультайс">
+            <div class="video-stage-fallback-overlay">
+              <p>Если встроенный плеер YouTube не открылся в вашем браузере, посмотрите видео напрямую:</p>
+              <a class="btn btn-sun" href="${ytLink}" target="_blank" rel="noopener noreferrer">Открыть видео на YouTube →</a>
+            </div>
+          </div>
+        `;
+        const canEmbed = window.location.protocol === "http:" || window.location.protocol === "https:";
+        const iframeHtml = canEmbed
+          ? `<iframe src="https://www.youtube.com/embed/${id}?rel=0&modestbranding=1" title="О моей РаЗУМной школе — Марина Шультайс" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>`
+          : "";
+        videoStage.innerHTML = fallbackHtml + iframeHtml;
       } else if (SITE_CONFIG.welcomeVideoMp4Path && videoStage) {
         videoStage.innerHTML = `<video src="${SITE_CONFIG.welcomeVideoMp4Path}" controls autoplay playsinline></video>`;
       }
@@ -498,13 +525,19 @@
   const demoFeedback = document.getElementById("demo-copy-feedback");
 
   document.querySelectorAll("[data-telegram-direct]").forEach((btn) => {
-    if (SITE_CONFIG.telegramHandle) {
-      btn.href = `https://t.me/${SITE_CONFIG.telegramHandle}?text=${encodeURIComponent(currentMsg)}`;
-      btn.target = "_blank";
-      btn.rel = "noopener noreferrer";
-      return;
-    }
     btn.addEventListener("click", (e) => {
+      if (SITE_CONFIG.telegramHandle) {
+        const url = `https://t.me/${SITE_CONFIG.telegramHandle}?text=${encodeURIComponent(currentMsg)}`;
+        if (btn.tagName === "A") {
+          btn.href = url;
+          btn.target = "_blank";
+          btn.rel = "noopener noreferrer";
+          return;
+        }
+        e.preventDefault();
+        window.open(url, "_blank", "noopener,noreferrer");
+        return;
+      }
       e.preventDefault();
       if (demoTitle) demoTitle.textContent = "Запись в Telegram";
       if (demoDesc) demoDesc.textContent = "После подключения ника Марины эта кнопка сразу откроет чат в Telegram с готовым текстом обращения:";
@@ -516,13 +549,18 @@
   });
 
   document.querySelectorAll("[data-channel-btn]").forEach((btn) => {
-    if (SITE_CONFIG.telegramChannelUrl) {
-      btn.href = SITE_CONFIG.telegramChannelUrl;
-      btn.target = "_blank";
-      btn.rel = "noopener noreferrer";
-      return;
-    }
     btn.addEventListener("click", (e) => {
+      if (SITE_CONFIG.telegramChannelUrl) {
+        if (btn.tagName === "A") {
+          btn.href = SITE_CONFIG.telegramChannelUrl;
+          btn.target = "_blank";
+          btn.rel = "noopener noreferrer";
+          return;
+        }
+        e.preventDefault();
+        window.open(SITE_CONFIG.telegramChannelUrl, "_blank", "noopener,noreferrer");
+        return;
+      }
       e.preventDefault();
       if (demoTitle) demoTitle.textContent = "Telegram-канал «РаЗУМной школы»";
       if (demoDesc) demoDesc.textContent = "Сюда подключится прямая ссылка на Telegram-канал Марины с заметками, видео и анонсами новых наборов.";

@@ -5,10 +5,10 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Копилка — Только для вас | РаЗУМная школа</title>
   <meta name="description" content="Библиотека «РаЗУМной школы» по папкам: грамматика без страха, живая лексика, чтение и поэзия, аудио и видеоразборы.">
-  <meta name="theme-color" content="#162F56">
+  <meta name="theme-color" content="#1B365D">
   <link rel="icon" type="image/svg+xml" href="img/favicon.svg">
-  <link rel="stylesheet" href="css/fonts.css?v=9">
-  <link rel="stylesheet" href="css/site.css?v=9">
+  <link rel="stylesheet" href="css/fonts.css?v=10">
+  <link rel="stylesheet" href="css/site.css?v=10">
 </head>
 <body>
   <a class="skip-link" href="#main">Перейти к содержанию</a>
@@ -17,9 +17,9 @@
     <div class="wrap header-row">
       <a class="brand" href="index.html">
         <svg class="brand-mark" viewBox="0 0 44 44" aria-hidden="true">
-          <rect width="44" height="44" rx="6" fill="#162F56"/>
-          <rect x="3" y="3" width="38" height="38" rx="4" fill="none" stroke="#E6B84C" stroke-opacity="0.55" stroke-width="1"/>
-          <text x="22" y="28.5" text-anchor="middle" font-family="'Spectral', Georgia, serif" font-size="16.5" font-weight="600" fill="#FFFFFF">M<tspan fill="#E6B84C" font-style="italic">S</tspan></text>
+          <rect width="44" height="44" rx="6" fill="#1B365D"/>
+          <rect x="3" y="3" width="38" height="38" rx="4" fill="none" stroke="#E6BF5A" stroke-opacity="0.55" stroke-width="1"/>
+          <text x="22" y="28.5" text-anchor="middle" font-family="'Spectral', Georgia, serif" font-size="16.5" font-weight="600" fill="#FFFFFF">M<tspan fill="#E6BF5A">S</tspan></text>
         </svg>
         <span>
           <span class="brand-name">Ра<span class="zum">ЗУМ</span>ная школа</span>
@@ -55,12 +55,24 @@
 
   <main id="main">
     <section class="page-banner">
-      <div class="wrap page-banner-inner">
-        <p class="eyebrow eyebrow-light">Только для вас · Библиотека по папкам</p>
-        <h1 class="page-h1">Копилка — <em>живые заметки и разборы</em></h1>
-        <p class="sec-lead">
-          Памятки по грамматике, наблюдения переводчика, тексты к вечерам чтения и подборки видео. Выберите папку или найдите нужную тему.
-        </p>
+      <div class="wrap page-banner-grid grid-safe">
+        <div class="page-banner-inner">
+          <p class="eyebrow">Только для вас · Библиотека по&nbsp;папкам</p>
+          <h1 class="page-h1">Копилка — живые заметки и&nbsp;разборы</h1>
+          <p class="sec-lead">
+            Памятки по грамматике, наблюдения переводчика, тексты к вечерам чтения и подборки видео. Выберите папку или найдите нужную тему.
+          </p>
+        </div>
+
+        <aside class="banner-aside">
+          <span class="banner-aside-title">Четыре папки библиотеки</span>
+          <ul class="banner-aside-list">
+            <li>Грамматика без страха — живые образы правил</li>
+            <li>Живая лексика — тонкости и ложные друзья</li>
+            <li>Чтение и поэзия — к вечерам «Вечерний чай с…»</li>
+            <li>Аудио и видео — что слушать на уровнях A2–B2</li>
+          </ul>
+        </aside>
       </div>
     </section>
 
@@ -68,12 +80,12 @@
       <div class="wrap">
         <article class="kopilka-spotlight grid-safe">
           <div class="kopilka-spotlight-img">
-            <img src="img/evening-tea.jpg" alt="Вечерний чай и открытая французская книга" width="1280" height="714">
+            <img src="img/kopilka-library.jpg" alt="Стопка французских книг, открытый блокнот с рукописными строками и латунная перьевая ручка в солнечном свете" width="1280" height="720">
           </div>
           <div class="kopilka-spotlight-body">
             <p class="eyebrow">Клуб чтения · 3 мин чтения</p>
             <h2 class="sec-h2" style="font-size: clamp(1.55rem, 2.6vw, 2.05rem);">
-              Как читать по-французски в удовольствие, не спотыкаясь о словарь
+              Как читать по-французски в удовольствие, не&nbsp;спотыкаясь о&nbsp;словарь
             </h2>
             <p class="sec-lead" style="font-size: 0.98rem;">
               Спокойный метод погружения в оригинальные тексты: как слышать мелодику фразы, угадывать смысл из контекста и обсуждать прочитанное за вечерним чаем.
@@ -112,11 +124,11 @@
       <div class="wrap" style="display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 1.5rem 2.5rem;">
         <div style="max-width: 38rem; display: grid; gap: 0.7rem;">
           <p class="eyebrow">Живой канал школы</p>
-          <h2 class="sec-h2">Свежие заметки и анонсы — <em>в Telegram-канале Марины</em></h2>
+          <h2 class="sec-h2">Свежие заметки и анонсы — в&nbsp;Telegram-канале Марины</h2>
           <p class="sec-lead">Новые наблюдения о языке, короткие видео и даты следующих наборов появляются там первыми.</p>
         </div>
         <div style="display: flex; flex-wrap: wrap; gap: 0.75rem;">
-          <a class="btn btn-navy" href="#zapis" data-channel-btn>Открыть Telegram-канал</a>
+          <button class="btn btn-navy" type="button" data-channel-btn>Открыть Telegram-канал</button>
           <a class="btn btn-outline" href="index.html#zapis" style="background: #fff;">30 минут знакомства</a>
         </div>
       </div>
@@ -143,7 +155,7 @@
           <p class="footer-title">Связь и право</p>
           <ul class="footer-links">
             <li><a href="index.html#zapis">Записаться на 30 минут</a></li>
-            <li><a href="#zapis" data-channel-btn>Telegram-канал</a></li>
+            <li><a href="index.html#zapis" data-channel-btn>Telegram-канал</a></li>
             <li><a href="mentions.html">Mentions légales</a></li>
           </ul>
         </div>
@@ -154,11 +166,6 @@
       </div>
     </div>
   </footer>
-
-  <a class="quick-tg" id="quick-tg" href="index.html#zapis" aria-label="Написать Марине и записаться на 30 минут">
-    <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M21 5L2.5 12.2l6.2 2.2 2.4 6.1 3.4-4.2 5.2 3.8L21 5z"/><path d="M8.7 14.4L19.5 6.8"/></svg>
-    <span>Написать Марине</span>
-  </a>
 
   <!-- Читальный зал -->
   <div class="modal-backdrop" id="reader-modal" role="dialog" aria-modal="true" aria-labelledby="reader-title" hidden>
@@ -201,7 +208,7 @@
     </div>
   </div>
 
-  <script src="js/kopilka-data.js?v=9" defer></script>
-  <script src="js/site.js?v=9" defer></script>
+  <script src="js/kopilka-data.js?v=10" defer></script>
+  <script src="js/site.js?v=10" defer></script>
 </body>
 </html>
