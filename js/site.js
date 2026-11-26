@@ -675,8 +675,8 @@
         return;
       }
       e.preventDefault();
-      if (demoTitle) demoTitle.textContent = "Запись на знакомство в Telegram";
-      if (demoDesc) demoDesc.textContent = "Скопируйте готовый текст обращения и отправьте Марине в Telegram — она отвечает лично и предложит удобное время для бесплатной 30-минутной встречи в Zoom:";
+      if (demoTitle) demoTitle.textContent = "Запись в Telegram";
+      if (demoDesc) demoDesc.textContent = "После привязки аккаунта кнопка сразу откроет чат с Мариной в Telegram с готовым текстом:";
       if (demoMsg) { demoMsg.hidden = false; demoMsg.textContent = currentMsg; }
       if (demoCopy) demoCopy.hidden = false;
       if (demoFeedback) demoFeedback.textContent = "";
@@ -698,8 +698,8 @@
         return;
       }
       e.preventDefault();
-      if (demoTitle) demoTitle.textContent = "Telegram-канал «РаЗУМной школы»";
-      if (demoDesc) demoDesc.textContent = "В канале Марина делится наблюдениями о французском языке, короткими видеоразборами и датами новых 10-недельных циклов. Прямая ссылка на канал появится здесь перед официальным запуском.";
+      if (demoTitle) demoTitle.textContent = "Telegram-канал";
+      if (demoDesc) demoDesc.textContent = "Сюда подключается прямая ссылка на Telegram-канал школы.";
       if (demoMsg) demoMsg.hidden = true;
       if (demoCopy) demoCopy.hidden = true;
       if (demoFeedback) demoFeedback.textContent = "";
@@ -711,7 +711,7 @@
     demoCopy.addEventListener("click", async () => {
       try {
         await navigator.clipboard.writeText(currentMsg);
-        if (demoFeedback) demoFeedback.textContent = "Текст обращения скопирован";
+        if (demoFeedback) demoFeedback.textContent = "Скопировано";
       } catch {
         if (demoFeedback) demoFeedback.textContent = "Скопируйте текст выше";
       }
