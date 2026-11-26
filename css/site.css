@@ -619,25 +619,36 @@ button {
   }
 }
 
-/* Правая сцена в Hero: цельный живой портрет Марины + чистая панель видео снизу (без градиента поверх лица) */
+/* Правая сцена в Hero: вся карточка — кликабельный видеоплеер с лицом Марины, кнопкой Play и хронометражом 3:01 */
 .hero-right {
   display: grid;
   justify-items: center;
 }
 
-.hero-portrait-stage {
+.hero-video-card {
   width: 100%;
   max-width: 27.5rem;
+  padding: 0;
+  border: 0;
   background: var(--surface);
   color: var(--ink);
   border-radius: var(--r-lg);
   overflow: hidden;
-  box-shadow: 0 28px 60px -24px rgba(7, 16, 33, 0.55);
+  text-align: left;
+  cursor: pointer;
+  box-shadow: 0 28px 60px -24px rgba(7, 16, 33, 0.58);
+  transition: transform 0.28s var(--ease), box-shadow 0.28s var(--ease);
+}
+
+.hero-video-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 34px 68px -24px rgba(7, 16, 33, 0.68);
 }
 
 .hero-portrait-photo {
   position: relative;
   background: #F4ECE1;
+  overflow: hidden;
 }
 
 .hero-portrait-photo img {
@@ -647,48 +658,105 @@ button {
   object-fit: cover;
   object-position: center 14%;
   display: block;
+  transition: transform 0.65s var(--ease);
 }
 
-.hero-video-bar-btn {
-  width: 100%;
-  display: flex;
+.hero-video-card:hover .hero-portrait-photo img {
+  transform: scale(1.025);
+}
+
+/* Тонкий нижний градиент только у самой кромки платья — лицо Марины на 100% открыто */
+.hero-portrait-photo::after {
+  content: "";
+  position: absolute;
+  inset: auto 0 0 0;
+  height: 36%;
+  background: linear-gradient(to top, rgba(19, 40, 71, 0.56) 0%, rgba(19, 40, 71, 0) 100%);
+  pointer-events: none;
+}
+
+/* Бейдж хронометража в правом верхнем углу кадра */
+.hero-video-duration {
+  position: absolute;
+  top: 0.9rem;
+  right: 0.9rem;
+  z-index: 2;
+  display: inline-flex;
   align-items: center;
-  gap: 0.95rem;
-  padding: 1.05rem 1.3rem;
-  border: 0;
-  border-top: 1px solid var(--line);
-  background: var(--tint-sun);
-  color: var(--navy);
-  text-align: left;
-  transition: background-color 0.22s var(--ease);
+  gap: 0.42rem;
+  padding: 0.36rem 0.72rem;
+  border-radius: 99px;
+  background: rgba(19, 40, 71, 0.84);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  color: #fff;
+  font-size: 0.76rem;
+  font-weight: 600;
+  letter-spacing: 0.03em;
 }
 
-.hero-video-bar-btn:hover {
-  background: #F4E9C9;
+.hero-video-duration::before {
+  content: "";
+  width: 0.45rem;
+  height: 0.45rem;
+  border-radius: 50%;
+  background: var(--sun);
+}
+
+/* Заметная центральная кнопка Play — в нижней трети кадра, чтобы сразу читалось видео и не закрывало лицо */
+.hero-center-play {
+  position: absolute;
+  left: 50%;
+  bottom: 1.35rem;
+  transform: translateX(-50%);
+  z-index: 3;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.65rem;
+  padding: 0.5rem 1.25rem 0.5rem 0.55rem;
+  border-radius: 99px;
+  background: rgba(19, 40, 71, 0.9);
+  border: 1.5px solid rgba(230, 191, 90, 0.72);
+  color: #fff;
+  font-size: 0.9rem;
+  font-weight: 600;
+  white-space: nowrap;
+  box-shadow: 0 0 0 6px rgba(27, 54, 93, 0.22), 0 14px 28px -8px rgba(10, 22, 44, 0.55);
+  transition: transform 0.26s var(--ease), background-color 0.24s var(--ease), box-shadow 0.26s var(--ease);
+}
+
+.hero-video-card:hover .hero-center-play {
+  transform: translateX(-50%) scale(1.04);
+  background: var(--navy-deep);
+  box-shadow: 0 0 0 9px rgba(230, 191, 90, 0.28), 0 18px 34px -8px rgba(10, 22, 44, 0.62);
 }
 
 .play-disc {
-  width: 3rem;
-  height: 3rem;
+  width: 2.55rem;
+  height: 2.55rem;
   flex: none;
   border-radius: 50%;
-  background: var(--navy);
+  background: var(--sun);
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  transition: transform 0.24s var(--ease), background-color 0.24s var(--ease);
-}
-
-.hero-video-bar-btn:hover .play-disc {
-  transform: scale(1.05);
-  background: var(--navy-deep);
 }
 
 .play-disc svg {
-  width: 1.12rem;
-  height: 1.12rem;
+  width: 1.05rem;
+  height: 1.05rem;
   margin-left: 2px;
   display: block;
+}
+
+.hero-video-caption {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  padding: 1rem 1.3rem;
+  border-top: 1px solid var(--line);
+  background: var(--tint-sun);
 }
 
 .hero-video-text strong {
@@ -707,15 +775,25 @@ button {
   margin-top: 0.14rem;
 }
 
+.hero-video-arrow {
+  color: var(--navy);
+  flex: none;
+  transition: transform 0.22s var(--ease);
+}
+
+.hero-video-card:hover .hero-video-arrow {
+  transform: translateX(3px);
+}
+
 @media (max-width: 57.99rem) {
   .atelier-hero {
-    padding-block: 1.5rem 2.15rem;
+    padding-block: 1.45rem 2rem;
   }
   .hero-layout {
-    gap: 1.5rem;
+    gap: 1.35rem;
   }
   .hero-left {
-    gap: 0.95rem;
+    gap: 0.9rem;
   }
   .hero-h1 {
     font-size: clamp(2.15rem, 8.8vw, 2.75rem);
@@ -726,13 +804,13 @@ button {
   }
   .hero-lead {
     font-size: 0.96rem;
-    line-height: 1.56;
+    line-height: 1.54;
   }
   .hero-credentials {
     grid-template-columns: repeat(3, minmax(0, 1fr));
     gap: 0.75rem;
-    margin-top: 0.35rem;
-    padding-top: 1rem;
+    margin-top: 0.3rem;
+    padding-top: 0.95rem;
   }
   .hero-cred strong {
     font-size: 1.05rem;
@@ -741,26 +819,38 @@ button {
     font-size: 0.74rem;
     line-height: 1.3;
   }
-  /* Компактная живая карточка Марины на мобильном: лицо + кнопка видео сразу видны */
-  .hero-portrait-stage {
+  /* Компактный видеоплеер Марины на мобильном: лицо + кнопка Play поверх кадра + 3:01 */
+  .hero-video-card {
     max-width: 100%;
     display: grid;
-    grid-template-columns: 6.2rem 1fr;
+    grid-template-columns: 7rem 1fr;
     align-items: stretch;
   }
   .hero-portrait-photo img {
     height: 100%;
     aspect-ratio: 1 / 1.05;
   }
-  .hero-video-bar-btn {
+  .hero-video-duration {
+    display: none;
+  }
+  .hero-center-play {
+    bottom: 0.55rem;
+    padding: 0;
+    border-radius: 50%;
+    border-width: 1.5px;
+    box-shadow: 0 0 0 4px rgba(27, 54, 93, 0.25);
+  }
+  .hero-center-play .play-label {
+    display: none;
+  }
+  .play-disc {
+    width: 2.3rem;
+    height: 2.3rem;
+  }
+  .hero-video-caption {
     border-top: 0;
     border-left: 1px solid var(--line);
     padding: 0.85rem 1rem;
-    gap: 0.75rem;
-  }
-  .play-disc {
-    width: 2.65rem;
-    height: 2.65rem;
   }
   .hero-video-text strong {
     font-size: 1.02rem;
