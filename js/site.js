@@ -113,6 +113,16 @@
 
   document.documentElement.classList.add("js-ready");
 
+  /* ---------- Лёгкая тень липкой шапки при прокрутке ---------- */
+  const siteHeader = document.querySelector(".site-header");
+  if (siteHeader) {
+    const syncHeaderShadow = () => {
+      siteHeader.classList.toggle("is-scrolled", window.scrollY > 12);
+    };
+    syncHeaderShadow();
+    window.addEventListener("scroll", syncHeaderShadow, { passive: true });
+  }
+
   /* ---------- Мобильное меню (автозакрытие при расширении окна до ПК) ---------- */
   const menuBtn = document.getElementById("menu-toggle");
   const mobileDrawer = document.getElementById("mobile-drawer");
@@ -177,13 +187,15 @@
 
   /* ---------- Французский нюанс ---------- */
   const nuanceBtn = document.getElementById("nuance-next-btn");
+  const nuancePanel = nuanceBtn ? nuanceBtn.closest(".nuance-panel") : null;
   const nuancePhrase = document.getElementById("nuance-phrase");
   const nuanceLit = document.getElementById("nuance-lit");
   const nuanceNote = document.getElementById("nuance-note");
   const nuanceCounter = document.getElementById("nuance-counter");
   let nuanceIdx = 0;
+  let nuanceTimer = null;
 
-  const renderNuance = (i) => {
+  const applyNuance = (i) => {
     nuanceIdx = (i + NUANCES.length) % NUANCES.length;
     const n = NUANCES[nuanceIdx];
     if (nuancePhrase) nuancePhrase.textContent = n.phrase;
@@ -192,9 +204,26 @@
     if (nuanceCounter) nuanceCounter.textContent = `${nuanceIdx + 1} / ${NUANCES.length}`;
   };
 
+  const renderNuance = (i, animate = false) => {
+    if (nuanceTimer) {
+      clearTimeout(nuanceTimer);
+      nuanceTimer = null;
+    }
+    if (animate && nuancePanel) {
+      nuancePanel.classList.add("is-swapping");
+      nuanceTimer = setTimeout(() => {
+        applyNuance(i);
+        nuancePanel.classList.remove("is-swapping");
+        nuanceTimer = null;
+      }, 140);
+    } else {
+      applyNuance(i);
+    }
+  };
+
   if (nuanceBtn) {
-    nuanceBtn.addEventListener("click", () => renderNuance(nuanceIdx + 1));
-    renderNuance(0);
+    nuanceBtn.addEventListener("click", () => renderNuance(nuanceIdx + 1, true));
+    renderNuance(0, false);
   }
 
   /* ---------- 7 принципов (ПК с полосой прогресса + плавной сменой + полные тексты на мобильном) ---------- */
@@ -604,10 +633,16 @@
     syncCompass();
   };
 
+  const compassOutput = document.querySelector(".compass-output");
   document.querySelectorAll(".compass-btn").forEach((b) => {
     b.addEventListener("click", () => {
       compassState[b.getAttribute("data-group")] = b.getAttribute("data-value");
       syncCompass();
+      if (compassOutput) {
+        compassOutput.classList.remove("is-updated");
+        void compassOutput.offsetWidth;
+        compassOutput.classList.add("is-updated");
+      }
     });
   });
 

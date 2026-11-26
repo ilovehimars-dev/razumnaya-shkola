@@ -2721,13 +2721,159 @@ button {
   font-weight: 500;
 }
 
-/* ---------- Мягкое появление ---------- */
+/* ---------- Мягкое появление и деликатные микро-анимации ---------- */
+
+.site-header {
+  transition: box-shadow 0.28s var(--ease), background-color 0.28s var(--ease);
+}
+
+.site-header.is-scrolled {
+  background: rgba(253, 252, 249, 0.98);
+  box-shadow: 0 12px 32px -24px rgba(19, 40, 71, 0.28);
+}
+
+.btn:active,
+.compass-btn:active,
+.filter-pill:active,
+.p-pager-btn:active {
+  transform: translateY(0) scale(0.988);
+}
+
+.btn .icon,
+.arrow-link .icon,
+.note-card-btn .icon {
+  transition: transform 0.24s var(--ease);
+}
+
+.btn:hover .icon,
+.arrow-link:hover .icon,
+.note-card-btn:hover .icon {
+  transform: translateX(3px);
+}
+
+.arrow-link:hover {
+  gap: 0.45rem;
+  border-bottom-color: var(--navy);
+}
+
+.tl-item,
+.flow-item,
+.surface-box,
+.kopilka-spotlight,
+.strasbourg-card,
+.marina-portrait-card {
+  transition: border-color 0.28s var(--ease), box-shadow 0.32s var(--ease);
+}
+
+.tl-item:hover,
+.flow-item:hover,
+.kopilka-spotlight:hover {
+  border-color: var(--line-strong);
+  box-shadow: 0 14px 32px -26px rgba(27, 54, 93, 0.22);
+}
+
+.strasbourg-card img,
+.kopilka-spotlight-img img {
+  transition: transform 0.7s var(--ease);
+}
+
+.strasbourg-card:hover img,
+.kopilka-spotlight:hover .kopilka-spotlight-img img {
+  transform: scale(1.022);
+}
+
+.nuance-phrase,
+.nuance-lit,
+.nuance-note {
+  transition: opacity 0.18s var(--ease);
+}
+
+.nuance-panel.is-swapping .nuance-phrase,
+.nuance-panel.is-swapping .nuance-lit,
+.nuance-panel.is-swapping .nuance-note {
+  opacity: 0;
+}
+
+.compass-output {
+  transition: border-color 0.26s var(--ease), background-color 0.26s var(--ease);
+}
 
 @media (prefers-reduced-motion: no-preference) {
+  @keyframes editorialRise {
+    from {
+      opacity: 0;
+      transform: translateY(8px);
+    }
+    to {
+      opacity: 1;
+      transform: none;
+    }
+  }
+
+  @keyframes modalFadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+
+  @keyframes modalLiftIn {
+    from {
+      opacity: 0;
+      transform: translateY(10px) scale(0.992);
+    }
+    to {
+      opacity: 1;
+      transform: none;
+    }
+  }
+
+  .hero-left > * {
+    animation: editorialRise 0.5s var(--ease) both;
+  }
+  .hero-left > *:nth-child(1) { animation-delay: 0.02s; }
+  .hero-left > *:nth-child(2) { animation-delay: 0.07s; }
+  .hero-left > *:nth-child(3) { animation-delay: 0.12s; }
+  .hero-left > *:nth-child(4) { animation-delay: 0.17s; }
+  .hero-left > *:nth-child(5) { animation-delay: 0.22s; }
+
+  .hero-video-card {
+    animation: editorialRise 0.55s var(--ease) 0.1s both;
+  }
+
+  .page-banner-inner > * {
+    animation: editorialRise 0.44s var(--ease) both;
+  }
+  .page-banner-inner > *:nth-child(2) { animation-delay: 0.05s; }
+  .page-banner-inner > *:nth-child(3) { animation-delay: 0.1s; }
+
+  .banner-aside,
+  .banner-quote {
+    animation: editorialRise 0.48s var(--ease) 0.09s both;
+  }
+
+  .modal-backdrop:not([hidden]) {
+    animation: modalFadeIn 0.2s var(--ease) both;
+  }
+
+  .modal-backdrop:not([hidden]) .modal-dialog {
+    animation: modalLiftIn 0.26s var(--ease) both;
+  }
+
+  .mobile-drawer:not([hidden]) {
+    animation: editorialRise 0.22s var(--ease) both;
+  }
+
+  .faq-item[open] .faq-answer {
+    animation: editorialRise 0.24s var(--ease) both;
+  }
+
+  .compass-output.is-updated {
+    animation: editorialRise 0.24s var(--ease);
+  }
+
   .js-ready [data-reveal] {
     opacity: 0;
-    transform: translateY(14px);
-    transition: opacity 0.6s var(--ease), transform 0.6s var(--ease);
+    transform: translateY(12px);
+    transition: opacity 0.56s var(--ease), transform 0.56s var(--ease);
   }
   .js-ready [data-reveal].is-visible {
     opacity: 1;
