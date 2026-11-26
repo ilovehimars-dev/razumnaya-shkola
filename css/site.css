@@ -619,74 +619,78 @@ button {
   }
 }
 
-/* Правая сцена в Hero: вся карточка — кликабельный видеоплеер с лицом Марины, кнопкой Play и хронометражом 3:01 */
+/* Правая сцена в Hero: горизонтальный 16:9 видеоплеер с реальным превью YouTube, центральной кнопкой Play и 3:01 */
 .hero-right {
   display: grid;
-  justify-items: center;
+  justify-items: stretch;
 }
 
 .hero-video-card {
   width: 100%;
-  max-width: 27.5rem;
+  max-width: 34rem;
+  margin-inline: auto;
   padding: 0;
-  border: 0;
+  border: 1px solid rgba(255, 255, 255, 0.16);
   background: var(--surface);
   color: var(--ink);
   border-radius: var(--r-lg);
   overflow: hidden;
   text-align: left;
   cursor: pointer;
-  box-shadow: 0 28px 60px -24px rgba(7, 16, 33, 0.58);
-  transition: transform 0.28s var(--ease), box-shadow 0.28s var(--ease);
+  box-shadow: 0 28px 64px -22px rgba(7, 16, 33, 0.65);
+  transition: transform 0.28s var(--ease), box-shadow 0.28s var(--ease), border-color 0.28s var(--ease);
 }
 
 .hero-video-card:hover {
   transform: translateY(-2px);
-  box-shadow: 0 34px 68px -24px rgba(7, 16, 33, 0.68);
+  border-color: rgba(230, 191, 90, 0.6);
+  box-shadow: 0 34px 72px -22px rgba(7, 16, 33, 0.76);
 }
 
 .hero-portrait-photo {
   position: relative;
-  background: #F4ECE1;
+  background: var(--navy-deep);
   overflow: hidden;
 }
 
 .hero-portrait-photo img {
   width: 100%;
   height: auto;
-  aspect-ratio: 4 / 4.25;
+  aspect-ratio: 16 / 9;
   object-fit: cover;
-  object-position: center 14%;
+  object-position: center 22%;
   display: block;
-  transition: transform 0.65s var(--ease);
+  transition: transform 0.65s var(--ease), filter 0.35s var(--ease);
 }
 
 .hero-video-card:hover .hero-portrait-photo img {
-  transform: scale(1.025);
+  transform: scale(1.03);
+  filter: brightness(1.04);
 }
 
-/* Тонкий нижний градиент только у самой кромки платья — лицо Марины на 100% открыто */
+/* Мягкая киновиньетка на превью, чтобы центральная кнопка Play светилась и «просила нажать» */
 .hero-portrait-photo::after {
   content: "";
   position: absolute;
-  inset: auto 0 0 0;
-  height: 36%;
-  background: linear-gradient(to top, rgba(19, 40, 71, 0.56) 0%, rgba(19, 40, 71, 0) 100%);
+  inset: 0;
+  background:
+    radial-gradient(circle at 50% 52%, rgba(19, 40, 71, 0.14) 0%, rgba(19, 40, 71, 0.42) 100%),
+    linear-gradient(to top, rgba(19, 40, 71, 0.55) 0%, rgba(19, 40, 71, 0) 45%);
   pointer-events: none;
 }
 
-/* Бейдж хронометража в правом верхнем углу кадра */
+/* Бейдж хронометража в правом верхнем углу плеера */
 .hero-video-duration {
   position: absolute;
-  top: 0.9rem;
-  right: 0.9rem;
-  z-index: 2;
+  top: 0.85rem;
+  right: 0.85rem;
+  z-index: 3;
   display: inline-flex;
   align-items: center;
   gap: 0.42rem;
-  padding: 0.36rem 0.72rem;
-  border-radius: 99px;
-  background: rgba(19, 40, 71, 0.84);
+  padding: 0.35rem 0.72rem;
+  border-radius: 6px;
+  background: rgba(15, 31, 56, 0.86);
   backdrop-filter: blur(8px);
   -webkit-backdrop-filter: blur(8px);
   color: #fff;
@@ -703,50 +707,60 @@ button {
   background: var(--sun);
 }
 
-/* Заметная центральная кнопка Play — в нижней трети кадра, чтобы сразу читалось видео и не закрывало лицо */
+/* Центральная выразительная кнопка Play поверх 16:9 кадра */
 .hero-center-play {
   position: absolute;
   left: 50%;
-  bottom: 1.35rem;
-  transform: translateX(-50%);
+  top: 50%;
+  transform: translate(-50%, -50%);
   z-index: 3;
-  display: inline-flex;
-  align-items: center;
-  gap: 0.65rem;
-  padding: 0.5rem 1.25rem 0.5rem 0.55rem;
-  border-radius: 99px;
-  background: rgba(19, 40, 71, 0.9);
-  border: 1.5px solid rgba(230, 191, 90, 0.72);
-  color: #fff;
-  font-size: 0.9rem;
-  font-weight: 600;
-  white-space: nowrap;
-  box-shadow: 0 0 0 6px rgba(27, 54, 93, 0.22), 0 14px 28px -8px rgba(10, 22, 44, 0.55);
-  transition: transform 0.26s var(--ease), background-color 0.24s var(--ease), box-shadow 0.26s var(--ease);
-}
-
-.hero-video-card:hover .hero-center-play {
-  transform: translateX(-50%) scale(1.04);
-  background: var(--navy-deep);
-  box-shadow: 0 0 0 9px rgba(230, 191, 90, 0.28), 0 18px 34px -8px rgba(10, 22, 44, 0.62);
-}
-
-.play-disc {
-  width: 2.55rem;
-  height: 2.55rem;
-  flex: none;
+  width: 4.5rem;
+  height: 4.5rem;
   border-radius: 50%;
   background: var(--sun);
   display: inline-flex;
   align-items: center;
   justify-content: center;
+  box-shadow:
+    0 0 0 10px rgba(230, 191, 90, 0.28),
+    0 0 0 20px rgba(255, 255, 255, 0.1),
+    0 16px 34px -6px rgba(10, 22, 44, 0.65);
+  transition: transform 0.26s var(--ease), background-color 0.24s var(--ease), box-shadow 0.26s var(--ease);
 }
 
-.play-disc svg {
-  width: 1.05rem;
-  height: 1.05rem;
-  margin-left: 2px;
+.hero-video-card:hover .hero-center-play {
+  transform: translate(-50%, -50%) scale(1.08);
+  background: var(--sun-hover);
+  box-shadow:
+    0 0 0 14px rgba(230, 191, 90, 0.36),
+    0 0 0 26px rgba(255, 255, 255, 0.14),
+    0 20px 40px -6px rgba(10, 22, 44, 0.72);
+}
+
+.hero-center-play svg {
+  width: 1.65rem;
+  height: 1.65rem;
+  margin-left: 4px;
   display: block;
+}
+
+/* Прогресс-линия плеера в самом низу 16:9 кадра — мгновенный рефлекс «это видео!» */
+.hero-video-scrubber {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 3;
+  height: 3.5px;
+  background: rgba(255, 255, 255, 0.26);
+}
+
+.hero-video-scrubber::before {
+  content: "";
+  display: block;
+  width: 24%;
+  height: 100%;
+  background: var(--sun);
 }
 
 .hero-video-caption {
@@ -754,8 +768,7 @@ button {
   align-items: center;
   justify-content: space-between;
   gap: 0.75rem;
-  padding: 1rem 1.3rem;
-  border-top: 1px solid var(--line);
+  padding: 0.95rem 1.25rem;
   background: var(--tint-sun);
 }
 
@@ -770,93 +783,84 @@ button {
 
 .hero-video-text > span {
   display: block;
-  font-size: 0.83rem;
+  font-size: 0.84rem;
   color: var(--ink-2);
   margin-top: 0.14rem;
 }
 
-.hero-video-arrow {
-  color: var(--navy);
+.hero-video-cta-tag {
   flex: none;
-  transition: transform 0.22s var(--ease);
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.42rem 0.8rem;
+  border-radius: 6px;
+  background: var(--navy);
+  color: #fff;
+  font-size: 0.8rem;
+  font-weight: 600;
+  white-space: nowrap;
+  transition: background-color 0.22s var(--ease);
 }
 
-.hero-video-card:hover .hero-video-arrow {
-  transform: translateX(3px);
+.hero-video-card:hover .hero-video-cta-tag {
+  background: var(--navy-deep);
 }
 
 @media (max-width: 57.99rem) {
   .atelier-hero {
-    padding-block: 1.45rem 2rem;
+    padding-block: 1.35rem 1.9rem;
   }
   .hero-layout {
-    gap: 1.35rem;
+    gap: 1.25rem;
   }
   .hero-left {
-    gap: 0.9rem;
+    gap: 0.85rem;
   }
   .hero-h1 {
-    font-size: clamp(2.15rem, 8.8vw, 2.75rem);
+    font-size: clamp(2.1rem, 8.6vw, 2.7rem);
   }
   .hero-h1 .hero-sub {
-    font-size: clamp(1.22rem, 5vw, 1.5rem);
-    margin-top: 0.35rem;
+    font-size: clamp(1.18rem, 4.8vw, 1.48rem);
+    margin-top: 0.3rem;
   }
   .hero-lead {
-    font-size: 0.96rem;
-    line-height: 1.54;
+    font-size: 0.95rem;
+    line-height: 1.52;
   }
   .hero-credentials {
     grid-template-columns: repeat(3, minmax(0, 1fr));
-    gap: 0.75rem;
-    margin-top: 0.3rem;
-    padding-top: 0.95rem;
+    gap: 0.7rem;
+    margin-top: 0.25rem;
+    padding-top: 0.85rem;
   }
   .hero-cred strong {
-    font-size: 1.05rem;
+    font-size: 1.02rem;
   }
   .hero-cred span {
-    font-size: 0.74rem;
-    line-height: 1.3;
+    font-size: 0.73rem;
+    line-height: 1.28;
   }
-  /* Компактный видеоплеер Марины на мобильном: лицо + кнопка Play поверх кадра + 3:01 */
-  .hero-video-card {
-    max-width: 100%;
-    display: grid;
-    grid-template-columns: 7rem 1fr;
-    align-items: stretch;
-  }
-  .hero-portrait-photo img {
-    height: 100%;
-    aspect-ratio: 1 / 1.05;
-  }
-  .hero-video-duration {
-    display: none;
-  }
+  /* Горизонтальный 16:9 плеер и на мобильном — сразу считывается видео! */
   .hero-center-play {
-    bottom: 0.55rem;
-    padding: 0;
-    border-radius: 50%;
-    border-width: 1.5px;
-    box-shadow: 0 0 0 4px rgba(27, 54, 93, 0.25);
+    width: 3.75rem;
+    height: 3.75rem;
   }
-  .hero-center-play .play-label {
-    display: none;
-  }
-  .play-disc {
-    width: 2.3rem;
-    height: 2.3rem;
+  .hero-center-play svg {
+    width: 1.35rem;
+    height: 1.35rem;
   }
   .hero-video-caption {
-    border-top: 0;
-    border-left: 1px solid var(--line);
-    padding: 0.85rem 1rem;
+    padding: 0.8rem 1rem;
   }
   .hero-video-text strong {
     font-size: 1.02rem;
   }
   .hero-video-text > span {
     font-size: 0.78rem;
+  }
+  .hero-video-cta-tag {
+    display: none;
   }
 }
 

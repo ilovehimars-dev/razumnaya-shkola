@@ -332,7 +332,7 @@
 
         videoStage.innerHTML = `
           <div class="video-stage-fallback">
-            <img src="img/strasbourg-golden.jpg" alt="О моей РаЗУМной школе — Марина Шультайс">
+            <img src="img/video-preview.jpg" alt="О моей РаЗУМной школе — Марина Шультайс">
             <div class="video-stage-fallback-overlay">
               <p id="video-fallback-note">${initialStatus}</p>
               <a class="btn btn-sun" href="${ytLink}" target="_blank" rel="noopener noreferrer">Смотреть видео на YouTube →</a>
