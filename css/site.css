@@ -1207,6 +1207,49 @@ button {
   .marina-feature {
     grid-template-columns: minmax(0, 21.5rem) minmax(0, 1fr);
   }
+  .marina-feature-home {
+    align-items: stretch;
+  }
+  .marina-feature-home .marina-portrait-card {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+  }
+  .marina-feature-home .marina-portrait-card img {
+    flex: 1 1 auto;
+    height: 100%;
+    min-height: 21rem;
+    aspect-ratio: auto;
+    object-position: center 15%;
+  }
+}
+
+.marina-copy {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 1.2rem;
+}
+
+.marina-head {
+  display: grid;
+  gap: 0.55rem;
+}
+
+.marina-foot {
+  padding-top: 1.15rem;
+  border-top: 1px solid var(--line);
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem 1.5rem;
+}
+
+.marina-foot-note {
+  font-size: 0.92rem;
+  line-height: 1.5;
+  color: var(--ink-2);
 }
 
 .marina-portrait-card {
