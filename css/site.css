@@ -1014,6 +1014,28 @@ button {
   color: var(--ink-2);
 }
 
+.pillars-foot {
+  margin-top: 1.6rem;
+  padding-top: 1.35rem;
+  border-top: 1px solid var(--line);
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.85rem 1.5rem;
+}
+
+.pillars-foot p {
+  font-size: 0.94rem;
+  line-height: 1.55;
+  color: var(--ink-2);
+  max-width: 46rem;
+}
+
+.pillars-foot strong {
+  color: var(--navy);
+}
+
 /* Ясная практическая плашка «График и стоимость» в блоке форматов */
 .format-clarity-bar {
   margin-top: 1.5rem;
