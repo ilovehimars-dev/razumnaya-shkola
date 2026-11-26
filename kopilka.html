@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Копилка — Только для вас | РаЗУМная школа</title>
+  <meta name="description" content="Читальный зал и библиотека по папкам «РаЗУМной школы»: грамматика без страха, живая лексика, чтение и поэзия, аудио и видеоразборы.">
+  <meta name="theme-color" content="#1D3557">
+  <link rel="icon" type="image/svg+xml" href="img/favicon.svg">
+  <link rel="stylesheet" href="css/fonts.css">
+  <link rel="stylesheet" href="css/site.css">
+</head>
+<body>
+  <a class="skip-link" href="#main">Перейти к содержанию</a>
+
+  <header class="site-header">
+    <div class="wrap header-row">
+      <a class="brand" href="index.html" aria-label="РаЗУМная школа — главная">
+        <svg class="brand-mark" viewBox="0 0 44 44" aria-hidden="true">
+          <rect width="44" height="44" rx="4" fill="#1D3557"/>
+          <rect x="3.5" y="3.5" width="37" height="37" rx="2" fill="none" stroke="#E4BE6A" stroke-opacity="0.55" stroke-width="1"/>
+          <text x="22" y="28.5" text-anchor="middle" font-family="'Cormorant Garamond', Georgia, serif" font-size="18.5" font-weight="500" fill="#FAF7F0" letter-spacing="0.8">M<tspan fill="#E4BE6A" font-style="italic">S</tspan></text>
+        </svg>
+        <span class="brand-text">
+          <span class="brand-name">Ра<span class="zum">ЗУМ</span>ная школа</span>
+          <span class="brand-sub">Французский · Страсбург</span>
+        </span>
+      </a>
+
+      <nav class="nav" aria-label="Основная навигация">
+        <a href="index.html">Главная</a>
+        <a href="marina.html">О преподавателе</a>
+        <a href="programmes.html">Форматы и уроки</a>
+        <a href="kopilka.html" aria-current="page">Копилка</a>
+      </nav>
+
+      <div class="header-actions">
+        <a class="btn btn-primary header-cta" href="index.html#zapis">Записаться</a>
+        <button class="menu-btn" id="menu-toggle" type="button" aria-expanded="false" aria-controls="mobile-drawer" aria-label="Открыть меню">
+          <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><line x1="4" y1="7" x2="20" y2="7"/><line x1="4" y1="12" x2="20" y2="12"/><line x1="4" y1="17" x2="20" y2="17"/></svg>
+        </button>
+      </div>
+    </div>
+
+    <div class="mobile-drawer" id="mobile-drawer" hidden>
+      <div class="wrap mobile-drawer-nav">
+        <a href="index.html">Главная</a>
+        <a href="marina.html">О преподавателе</a>
+        <a href="programmes.html">Форматы и уроки</a>
+        <a href="kopilka.html" aria-current="page">Копилка — читальный зал</a>
+        <a class="btn btn-primary" href="index.html#zapis">Записаться на 30-минутное знакомство</a>
+      </div>
+    </div>
+  </header>
+
+  <main id="main">
+    <section class="page-intro">
+      <div class="wrap page-intro-grid grid-safe">
+        <div>
+          <p class="kicker">
+            <span class="kicker-num">Только для вас</span>
+            <span class="kicker-rule" aria-hidden="true"></span>
+            Читальный зал
+          </p>
+          <h1 class="page-h1">Копилка — <em>папки с материалами</em></h1>
+        </div>
+        <p class="band-lead">
+          Спокойная библиотека заметок, памяток, текстов к вечерам чтения и разборов. Нажмите на любую заметку, чтобы открыть её в книжном ридере.
+        </p>
+      </div>
+    </section>
+
+    <section class="band">
+      <div class="wrap">
+        <div class="filter-bar" role="group" aria-label="Папки Копилки">
+          <button class="filter-pill" type="button" data-filter="all" aria-pressed="true">Все папки (8)</button>
+          <button class="filter-pill" type="button" data-filter="grammar" aria-pressed="false">Грамматика без страха</button>
+          <button class="filter-pill" type="button" data-filter="lexis" aria-pressed="false">Живая лексика</button>
+          <button class="filter-pill" type="button" data-filter="reading" aria-pressed="false">Чтение и поэзия</button>
+          <button class="filter-pill" type="button" data-filter="media" aria-pressed="false">Аудио и видео</button>
+        </div>
+
+        <div class="kopilka-archive-grid" id="kopilka-archive" aria-live="polite">
+          <!-- Наполняется из js/kopilka-data.js -->
+        </div>
+
+        <div style="margin-top: 2.75rem; padding-top: 1.75rem; border-top: 1px solid var(--line); display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 1rem 2rem;">
+          <p style="color: var(--muted); max-width: 38rem; font-size: 0.94rem;">
+            Новые материалы (статьи, PDF-шпаргалки и ссылки на YouTube) добавляются в один простой файл <code>js/kopilka-data.js</code>. Свежие заметки и анонсы Марина также публикует в Telegram-канале.
+          </p>
+          <a class="btn btn-line" href="#zapis" data-channel-btn>Открыть Telegram-канал</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap">
+      <div class="footer-top">
+        <div>
+          <a class="footer-brand" href="index.html">Ра<span class="zum">ЗУМ</span>ная школа</a>
+          <p class="footer-tagline">Авторская онлайн-школа французского языка Марины Шультайс в Страсбурге. Официальное ИП во Франции с 2001 года.</p>
+        </div>
+        <div>
+          <p class="footer-col-title">Разделы</p>
+          <ul class="footer-links">
+            <li><a href="index.html">Главная</a></li>
+            <li><a href="marina.html">О преподавателе</a></li>
+            <li><a href="programmes.html">Форматы и уроки</a></li>
+            <li><a href="kopilka.html">Копилка</a></li>
+          </ul>
+        </div>
+        <div>
+          <p class="footer-col-title">Связь и право</p>
+          <ul class="footer-links">
+            <li><a href="index.html#zapis">Записаться на 30 минут</a></li>
+            <li><a href="#zapis" data-channel-btn>Telegram-канал</a></li>
+            <li><a href="mentions.html">Mentions légales</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>© РаЗУМная школа · Марина Шультайс · Страсбург</span>
+        <span>0 сторонних трекеров · Демо-версия: <a href="https://kiteko.fr/" target="_blank" rel="noopener noreferrer">Kiteko</a></span>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Книжный ридер -->
+  <div class="modal-backdrop" id="reader-modal" role="dialog" aria-modal="true" aria-labelledby="reader-title" hidden>
+    <div class="modal-dialog">
+      <div class="modal-head">
+        <h3>Копилка · Читальный зал</h3>
+        <button class="modal-close" type="button" data-close-modal aria-label="Закрыть заметку">
+          <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><line x1="6" y1="6" x2="18" y2="18"/><line x1="18" y1="6" x2="6" y2="18"/></svg>
+        </button>
+      </div>
+      <div class="modal-body">
+        <span class="reader-kicker" id="reader-kicker"></span>
+        <h4 class="reader-title" id="reader-title"></h4>
+        <div class="reader-content" id="reader-content"></div>
+        <p class="reader-demo-note">
+          Демонстрационная заметка показывает, как будут читаться авторские материалы, PDF-памятки и разборы Марины.
+        </p>
+        <div class="modal-actions">
+          <a class="btn btn-primary" href="index.html#zapis">Записаться на 30-минутное знакомство</a>
+          <button class="btn btn-line" type="button" data-close-modal>Закрыть</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Демо-окно Telegram -->
+  <div class="modal-backdrop" id="demo-contact-modal" role="dialog" aria-modal="true" aria-labelledby="demo-modal-title" hidden>
+    <div class="modal-dialog">
+      <div class="modal-head">
+        <h3 id="demo-modal-title">Telegram-канал «РаЗУМной школы»</h3>
+        <button class="modal-close" type="button" data-close-modal aria-label="Закрыть окно">
+          <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><line x1="6" y1="6" x2="18" y2="18"/><line x1="18" y1="6" x2="6" y2="18"/></svg>
+        </button>
+      </div>
+      <div class="modal-body">
+        <p id="demo-modal-desc" style="color: var(--ink-2); line-height: 1.62;"></p>
+        <p id="demo-modal-message" hidden></p>
+        <div class="modal-actions">
+          <button class="btn btn-primary" id="demo-copy-btn" type="button" hidden>Скопировать</button>
+          <button class="btn btn-line" type="button" data-close-modal>Понятно</button>
+          <span class="copy-feedback" id="demo-copy-feedback" aria-live="polite"></span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="js/kopilka-data.js" defer></script>
+  <script src="js/site.js" defer></script>
+</body>
+</html>
