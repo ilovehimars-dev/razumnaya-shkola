@@ -581,7 +581,7 @@ button {
 .hero-credentials {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 1.25rem;
+  gap: 1.35rem;
   margin-top: 0.75rem;
   padding-top: 1.4rem;
   border-top: 1px solid var(--line-light);
@@ -590,25 +590,19 @@ button {
 .hero-cred strong {
   display: block;
   font-family: var(--serif);
-  font-size: 1.32rem;
+  font-size: clamp(1.06rem, 1.32vw, 1.2rem);
   font-weight: 600;
   color: var(--sun);
-  line-height: 1.15;
+  line-height: 1.18;
+  white-space: nowrap;
 }
 
 .hero-cred span {
   display: block;
-  font-size: 0.82rem;
-  color: rgba(253, 252, 249, 0.74);
-  margin-top: 0.22rem;
-  line-height: 1.38;
-}
-
-@media (max-width: 36rem) {
-  .hero-credentials {
-    grid-template-columns: minmax(0, 1fr);
-    gap: 0.85rem;
-  }
+  font-size: 0.84rem;
+  color: rgba(253, 252, 249, 0.78);
+  margin-top: 0.28rem;
+  line-height: 1.42;
 }
 
 /* Правая сцена в Hero: горизонтальный 16:9 видеоплеер с реальным превью YouTube, центральной кнопкой Play и 3:01 */
@@ -774,34 +768,6 @@ button {
     font-size: 0.99rem;
     line-height: 1.58;
   }
-  .hero-credentials {
-    grid-template-columns: minmax(0, 1fr);
-    gap: 0;
-    margin-top: 0.35rem;
-    padding-top: 0.35rem;
-  }
-  .hero-cred dd {
-    display: grid;
-    grid-template-columns: 8.1rem minmax(0, 1fr);
-    align-items: baseline;
-    gap: 0.7rem;
-    padding-block: 0.72rem;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.12);
-  }
-  .hero-cred:last-child dd {
-    border-bottom: 0;
-    padding-bottom: 0.15rem;
-  }
-  .hero-cred strong {
-    font-size: 1.08rem;
-    white-space: nowrap;
-  }
-  .hero-cred span {
-    font-size: 0.9rem;
-    line-height: 1.4;
-    margin-top: 0;
-    color: rgba(253, 252, 249, 0.84);
-  }
   /* Горизонтальный 16:9 плеер на мобильном: строгая кнопка слева снизу, лицо открыто */
   .hero-center-play {
     left: 0.85rem;
@@ -818,6 +784,33 @@ button {
   }
   .hero-video-text > span {
     font-size: 0.88rem;
+  }
+}
+
+@media (max-width: 40rem) {
+  .hero-credentials {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 0.55rem;
+    margin-top: 0.35rem;
+    padding-top: 1rem;
+    border-top: 1px solid var(--line-light);
+  }
+  .hero-cred {
+    background: rgba(255, 255, 255, 0.055);
+    border: 1px solid rgba(255, 255, 255, 0.11);
+    border-left: 2.5px solid var(--sun);
+    border-radius: 6px;
+    padding: 0.72rem 0.95rem;
+  }
+  .hero-cred strong {
+    font-size: 1.08rem;
+    white-space: normal;
+  }
+  .hero-cred span {
+    font-size: 0.88rem;
+    line-height: 1.38;
+    margin-top: 0.16rem;
+    color: rgba(253, 252, 249, 0.84);
   }
 }
 
