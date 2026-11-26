@@ -161,24 +161,14 @@ button {
   background: linear-gradient(transparent 68%, rgba(230, 184, 76, 0.45) 68%, rgba(230, 184, 76, 0.45) 94%, transparent 94%);
 }
 
-/* Строгая архитектурная рубрика вместо «ИИ-бейджей с точками» */
+/* Строгая архитектурная рубрика без лишнего декора */
 .eyebrow {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.7rem;
+  display: inline-block;
   font-size: 0.78rem;
   font-weight: 600;
   letter-spacing: 0.11em;
   text-transform: uppercase;
   color: var(--sun-ink);
-}
-
-.eyebrow::before {
-  content: "";
-  width: 1.5rem;
-  height: 2px;
-  background: var(--sun);
-  flex: none;
 }
 
 .eyebrow-light {
