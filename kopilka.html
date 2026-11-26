@@ -4,8 +4,8 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Копилка — Только для вас | РаЗУМная школа</title>
-  <meta name="description" content="Читальный зал и библиотека по папкам «РаЗУМной школы»: грамматика без страха, живая лексика, чтение и поэзия, аудио и видеоразборы.">
-  <meta name="theme-color" content="#1D3557">
+  <meta name="description" content="Библиотека «РаЗУМной школы» по папкам: грамматика без страха, живая лексика, чтение и поэзия, аудио и видеоразборы.">
+  <meta name="theme-color" content="#1B3B6F">
   <link rel="icon" type="image/svg+xml" href="img/favicon.svg">
   <link rel="stylesheet" href="css/fonts.css">
   <link rel="stylesheet" href="css/site.css">
@@ -17,11 +17,11 @@
     <div class="wrap header-row">
       <a class="brand" href="index.html" aria-label="РаЗУМная школа — главная">
         <svg class="brand-mark" viewBox="0 0 44 44" aria-hidden="true">
-          <rect width="44" height="44" rx="4" fill="#1D3557"/>
-          <rect x="3.5" y="3.5" width="37" height="37" rx="2" fill="none" stroke="#E8C468" stroke-opacity="0.6" stroke-width="1"/>
-          <text x="22" y="28.5" text-anchor="middle" font-family="'Cormorant Garamond', Georgia, serif" font-size="18.5" font-weight="500" fill="#FAF7EF" letter-spacing="0.8">M<tspan fill="#E8C468" font-style="italic">S</tspan></text>
+          <rect width="44" height="44" rx="12" fill="#1B3B6F"/>
+          <circle cx="34" cy="10" r="4" fill="#E9B949"/>
+          <text x="20" y="29" text-anchor="middle" font-family="'Lora', Georgia, serif" font-size="17" font-weight="600" fill="#FFFFFF">M<tspan fill="#FCE8A6" font-style="italic">S</tspan></text>
         </svg>
-        <span class="brand-text">
+        <span>
           <span class="brand-name">Ра<span class="zum">ЗУМ</span>ная школа</span>
           <span class="brand-sub">Французский · Страсбург</span>
         </span>
@@ -29,13 +29,13 @@
 
       <nav class="nav" aria-label="Основная навигация">
         <a href="index.html">Главная</a>
-        <a href="marina.html">О преподавателе</a>
-        <a href="programmes.html">Форматы и уроки</a>
+        <a href="marina.html">Преподаватель</a>
+        <a href="programmes.html">Форматы</a>
         <a href="kopilka.html" aria-current="page">Копилка</a>
       </nav>
 
       <div class="header-actions">
-        <a class="btn btn-primary header-cta" href="index.html#zapis">Записаться</a>
+        <a class="btn btn-primary header-cta" href="index.html#zapis">30 мин бесплатно</a>
         <button class="menu-btn" id="menu-toggle" type="button" aria-expanded="false" aria-controls="mobile-drawer" aria-label="Открыть меню">
           <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><line x1="4" y1="7" x2="20" y2="7"/><line x1="4" y1="12" x2="20" y2="12"/><line x1="4" y1="17" x2="20" y2="17"/></svg>
         </button>
@@ -47,59 +47,87 @@
         <a href="index.html">Главная</a>
         <a href="marina.html">О преподавателе</a>
         <a href="programmes.html">Форматы и уроки</a>
-        <a href="kopilka.html" aria-current="page">Копилка — читальный зал</a>
-        <a class="btn btn-primary" href="index.html#zapis">Записаться на 30-минутное знакомство</a>
+        <a href="kopilka.html" aria-current="page">Копилка</a>
+        <a class="btn btn-primary" href="index.html#zapis">Записаться на 30 мин бесплатно</a>
       </div>
     </div>
   </header>
 
   <main id="main">
-    <section class="page-intro">
-      <div class="wrap page-intro-grid grid-safe">
+    <section class="page-hero">
+      <div class="wrap page-hero-inner">
         <div>
-          <p class="kicker">
-            <span class="kicker-num">Только для вас</span>
-            <span class="kicker-rule" aria-hidden="true"></span>
-            Читальный зал
-          </p>
-          <h1 class="page-h1">Копилка — <em>папки с материалами</em></h1>
+          <span class="badge badge-sun">
+            <span class="badge-dot" aria-hidden="true"></span>
+            Только для вас · Библиотека по папкам
+          </span>
         </div>
-        <p class="band-lead">
-          Спокойная библиотека заметок, памяток, текстов к вечерам чтения и наблюдений переводчика. Выберите нужную папку и откройте любую заметку.
+        <h1 class="page-h1">Копилка — <em>живые заметки и разборы</em></h1>
+        <p class="sec-lead">
+          Удобные папки с памятками по грамматике, наблюдениями переводчика, текстами к вечерам чтения и подборками видео. Выберите раздел или найдите нужную тему.
         </p>
       </div>
     </section>
 
-    <section class="band">
+    <section class="section">
       <div class="wrap">
-        <div class="filter-bar" role="group" aria-label="Папки Копилки">
-          <button class="filter-pill" type="button" data-filter="all" aria-pressed="true">Все папки (8)</button>
-          <button class="filter-pill" type="button" data-filter="grammar" aria-pressed="false">Грамматика без страха</button>
-          <button class="filter-pill" type="button" data-filter="lexis" aria-pressed="false">Живая лексика</button>
-          <button class="filter-pill" type="button" data-filter="reading" aria-pressed="false">Чтение и поэзия</button>
-          <button class="filter-pill" type="button" data-filter="media" aria-pressed="false">Аудио и видео</button>
+        <!-- Выделенная главная статья с фотографией -->
+        <article class="kopilka-spotlight">
+          <div class="kopilka-spotlight-img">
+            <img src="img/evening-tea.jpg" alt="Вечерний чай и открытая французская книга" width="1280" height="714">
+          </div>
+          <div class="kopilka-spotlight-body">
+            <div style="display: flex; flex-wrap: wrap; align-items: center; gap: 0.6rem;">
+              <span class="cat-chip cat-reading">Чтение и поэзия</span>
+              <span class="note-time">Выбор редакции · 3 мин чтения</span>
+            </div>
+            <h2 class="sec-h2" style="font-size: clamp(1.55rem, 2.6vw, 2.05rem);">
+              Как читать по-французски в удовольствие, не спотыкаясь о словарь
+            </h2>
+            <p class="sec-lead" style="font-size: 0.98rem;">
+              Спокойный метод погружения в оригинальные тексты: как слышать мелодику фразы, угадывать смысл из контекста и обсуждать прочитанное за вечерним чаем.
+            </p>
+            <div>
+              <button class="btn btn-primary" type="button" data-read-id="evening-tea-reading">Читать заметку полностью</button>
+            </div>
+          </div>
+        </article>
+
+        <!-- Фильтр по папкам + живой поиск -->
+        <div class="kopilka-controls">
+          <div class="filter-pills" role="group" aria-label="Папки Копилки">
+            <button class="filter-pill" type="button" data-filter="all" aria-pressed="true">Все папки (9)</button>
+            <button class="filter-pill" type="button" data-filter="grammar" aria-pressed="false">Грамматика без страха</button>
+            <button class="filter-pill" type="button" data-filter="lexis" aria-pressed="false">Живая лексика</button>
+            <button class="filter-pill" type="button" data-filter="reading" aria-pressed="false">Чтение и поэзия</button>
+            <button class="filter-pill" type="button" data-filter="media" aria-pressed="false">Аудио и видео</button>
+          </div>
+
+          <label class="search-box">
+            <span class="sr-only">Поиск по заметкам</span>
+            <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7"/><line x1="20" y1="20" x2="16.65" y2="16.65"/></svg>
+            <input type="search" id="kopilka-search" placeholder="Поиск по темам…" autocomplete="off">
+          </label>
         </div>
 
-        <div class="kopilka-archive-grid" id="kopilka-archive" aria-live="polite"></div>
+        <div class="kopilka-cards kopilka-cards-3" id="kopilka-archive" aria-live="polite"></div>
+
+        <p id="kopilka-empty" hidden style="text-align: center; padding: 2.5rem 1rem; color: var(--muted);">
+          По этому запросу заметок пока нет — попробуйте выбрать другую папку.
+        </p>
       </div>
     </section>
 
-    <section class="band band-sun" data-reveal>
-      <div class="wrap" style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 1.5rem 2.5rem;">
-        <div style="max-width: 38rem; display: grid; gap: 0.65rem;">
-          <p class="kicker">
-            <span class="kicker-num">Пополнение</span>
-            <span class="kicker-rule" aria-hidden="true"></span>
-            Живой канал школы
-          </p>
-          <h2 class="display-h2">Свежие заметки и анонсы — <em>в Telegram-канале Марины</em></h2>
-          <p style="color: var(--ink-2);">
-            Копилка регулярно пополняется новыми статьями, памятками и текстами для учеников, а короткие наблюдения и даты новых наборов выходят в канале.
-          </p>
+    <section class="section section-sun" data-reveal>
+      <div class="wrap" style="display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 1.5rem 2.5rem;">
+        <div style="max-width: 38rem; display: grid; gap: 0.7rem;">
+          <div><span class="badge" style="background: #fff;">Telegram-канал</span></div>
+          <h2 class="sec-h2">Свежие заметки и анонсы — <em>в канале Марины</em></h2>
+          <p class="sec-lead">Новые наблюдения о языке, короткие видео и даты следующих наборов появляются там первыми.</p>
         </div>
-        <div style="display: flex; flex-wrap: wrap; gap: 0.85rem;">
+        <div style="display: flex; flex-wrap: wrap; gap: 0.75rem;">
           <a class="btn btn-primary" href="#zapis" data-channel-btn>Открыть Telegram-канал</a>
-          <a class="btn btn-line" href="index.html#zapis">Записаться на 30 минут</a>
+          <a class="btn btn-soft" href="index.html#zapis">30 минут знакомства</a>
         </div>
       </div>
     </section>
@@ -107,13 +135,13 @@
 
   <footer class="site-footer">
     <div class="wrap">
-      <div class="footer-top">
+      <div class="footer-grid">
         <div>
-          <a class="footer-brand" href="index.html">Ра<span class="zum">ЗУМ</span>ная школа</a>
-          <p class="footer-tagline">Авторская онлайн-школа французского языка Марины Шультайс в Страсбурге. Официальное ИП во Франции с 2001 года.</p>
+          <a class="brand" href="index.html"><span class="brand-name">Ра<span class="zum">ЗУМ</span>ная школа</span></a>
+          <p style="margin-top: 0.65rem; max-width: 24rem; line-height: 1.58;">Авторская онлайн-школа французского языка Марины Шультайс в Страсбурге. Официальное ИП во Франции с 2001 года.</p>
         </div>
         <div>
-          <p class="footer-col-title">Разделы</p>
+          <p class="footer-title">Навигация</p>
           <ul class="footer-links">
             <li><a href="index.html">Главная</a></li>
             <li><a href="marina.html">О преподавателе</a></li>
@@ -122,7 +150,7 @@
           </ul>
         </div>
         <div>
-          <p class="footer-col-title">Связь и право</p>
+          <p class="footer-title">Контакты и право</p>
           <ul class="footer-links">
             <li><a href="index.html#zapis">Записаться на 30 минут</a></li>
             <li><a href="#zapis" data-channel-btn>Telegram-канал</a></li>
@@ -132,27 +160,27 @@
       </div>
       <div class="footer-bottom">
         <span>© РаЗУМная школа · Марина Шультайс · Страсбург, Франция</span>
-        <span>Онлайн-занятия в Zoom · <a href="mentions.html">Правовая информация</a></span>
+        <span>Онлайн в Zoom · <a href="mentions.html">Правовая информация</a></span>
       </div>
     </div>
   </footer>
 
-  <!-- Книжный ридер -->
+  <!-- Читальный зал -->
   <div class="modal-backdrop" id="reader-modal" role="dialog" aria-modal="true" aria-labelledby="reader-title" hidden>
     <div class="modal-dialog">
       <div class="modal-head">
         <h3>Копилка · Читальный зал</h3>
-        <button class="modal-close" type="button" data-close-modal aria-label="Закрыть заметку">
+        <button class="modal-close" type="button" data-close-modal aria-label="Закрыть">
           <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><line x1="6" y1="6" x2="18" y2="18"/><line x1="18" y1="6" x2="6" y2="18"/></svg>
         </button>
       </div>
       <div class="modal-body">
-        <span class="reader-kicker" id="reader-kicker"></span>
+        <div><span class="cat-chip cat-grammar" id="reader-badge"></span></div>
         <h4 class="reader-title" id="reader-title"></h4>
         <div class="reader-content" id="reader-content"></div>
-        <div class="modal-actions" style="padding-top: 0.75rem; border-top: 1px solid var(--line);">
-          <a class="btn btn-primary" href="index.html#zapis">Записаться на 30-минутное знакомство</a>
-          <button class="btn btn-line" type="button" data-close-modal>Закрыть</button>
+        <div class="modal-actions" style="padding-top: 0.75rem; border-top: 1px solid var(--border);">
+          <a class="btn btn-primary" href="index.html#zapis">Записаться на 30 минут</a>
+          <button class="btn btn-soft" type="button" data-close-modal>Закрыть</button>
         </div>
       </div>
     </div>
@@ -162,16 +190,16 @@
     <div class="modal-dialog">
       <div class="modal-head">
         <h3 id="demo-modal-title">Telegram-канал «РаЗУМной школы»</h3>
-        <button class="modal-close" type="button" data-close-modal aria-label="Закрыть окно">
+        <button class="modal-close" type="button" data-close-modal aria-label="Закрыть">
           <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><line x1="6" y1="6" x2="18" y2="18"/><line x1="18" y1="6" x2="6" y2="18"/></svg>
         </button>
       </div>
       <div class="modal-body">
-        <p id="demo-modal-desc" style="color: var(--ink-2); line-height: 1.62;"></p>
+        <p id="demo-modal-desc" style="color: var(--ink-2);"></p>
         <p id="demo-modal-message" hidden></p>
         <div class="modal-actions">
           <button class="btn btn-primary" id="demo-copy-btn" type="button" hidden>Скопировать</button>
-          <button class="btn btn-line" type="button" data-close-modal>Закрыть</button>
+          <button class="btn btn-soft" type="button" data-close-modal>Закрыть</button>
           <span class="copy-feedback" id="demo-copy-feedback" aria-live="polite"></span>
         </div>
       </div>

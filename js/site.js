@@ -1,24 +1,20 @@
 /* ==========================================================================
-   «РаЗУМная школа» — единый конфиг и интерактивность всех страниц
+   «РаЗУМная школа» — интерактивность современной версии (все страницы)
    ========================================================================== */
 
 (() => {
   "use strict";
 
   const SITE_CONFIG = {
-    /* Ник Марины в Telegram без @, например: "marina_schultheiss" */
     telegramHandle: "",
-    /* Прямая ссылка на Telegram-канал, например: "https://t.me/razumnaya_shkola" */
     telegramChannelUrl: "",
-    /* Приветственное видео: YouTube ID или локальный MP4 */
     welcomeVideoYouTubeId: "y_lfsGmHdeQ",
     welcomeVideoMp4Path: ""
   };
 
-  /* 7 принципов обучения (полные вычитанные тексты Марины + практический ориентир) */
   const PRINCIPLES = [
     {
-      roman: "I",
+      num: "01",
       title: "Доступность",
       fr: "Liberté",
       paragraphs: [
@@ -27,7 +23,7 @@
       practice: "Учёба подстраивается под вашу географию и жизнь: к занятиям в Zoom подключаются ученики из Франции, Европы и других стран — без дороги и привязки к одному городу."
     },
     {
-      roman: "II",
+      num: "02",
       title: "Индивидуальность",
       fr: "Attention",
       paragraphs: [
@@ -36,7 +32,7 @@
       practice: "В группах собираются люди близкого уровня и настроя — вы не чувствуете себя «отстающим» и не скучаете от слишком простого материала."
     },
     {
-      roman: "III",
+      num: "03",
       title: "Открытость",
       fr: "Clarté",
       paragraphs: [
@@ -46,7 +42,7 @@
       practice: "На уроке можно остановить объяснение и задать любой вопрос — здесь нет школьной строгости, а непонятное правило разбирается до полной ясности."
     },
     {
-      roman: "IV",
+      num: "04",
       title: "Осознанность и лёгкость",
       fr: "Légèreté",
       paragraphs: [
@@ -56,7 +52,7 @@
       practice: "Мягкий ритм и регулярная повторяемость дают устойчивый результат без выгорания и ночной зубрёжки."
     },
     {
-      roman: "V",
+      num: "05",
       title: "Совместность",
       fr: "Rencontre",
       paragraphs: [
@@ -66,7 +62,7 @@
       practice: "Вы слышите живую речь разных людей, учитесь не бояться говорить вслух и обретаете тёплый круг единомышленников."
     },
     {
-      roman: "VI",
+      num: "06",
       title: "Безграничность",
       fr: "Mémoire",
       paragraphs: [
@@ -76,7 +72,7 @@
       practice: "Командировка, отпуск или плотный рабочий день не ломают обучение — пропущенный урок спокойно смотрится в записи."
     },
     {
-      roman: "VII",
+      num: "07",
       title: "Самобытность и эстетичность",
       fr: "Beauté",
       paragraphs: [
@@ -87,7 +83,6 @@
     }
   ];
 
-  /* Авторская книжная закладка «Слово и оттенок» */
   const NUANCES = [
     {
       phrase: "Avoir le déclic",
@@ -97,7 +92,7 @@
     {
       phrase: "Tête-à-tête",
       lit: "дословно: «голова к голове», наедине",
-      note: "Во французском это не про сухой деловой формат, а про доверительный разговор двух людей, где всё внимание — смыслу."
+      note: "Во французском это не про сухой формат, а про доверительный разговор двух людей, где всё внимание — смыслу."
     },
     {
       phrase: "Prendre le temps",
@@ -107,7 +102,7 @@
     {
       phrase: "Un coup de cœur",
       lit: "дословно: «удар сердца»",
-      note: "Искреннее увлечение с первого взгляда — книгой, мелодией, городом или тем, как звучит чужой, но уже родной язык."
+      note: "Искреннее увлечение с первого взгляда — книгой, мелодией, городом или тем, как звучит новый, но уже родной язык."
     },
     {
       phrase: "L’esprit de l’escalier",
@@ -143,7 +138,7 @@
     });
   }
 
-  /* ---------- Плавное появление секций ---------- */
+  /* ---------- Плавное появление ---------- */
   const revealEls = document.querySelectorAll("[data-reveal]");
   if ("IntersectionObserver" in window && revealEls.length) {
     const obs = new IntersectionObserver(
@@ -161,7 +156,7 @@
     revealEls.forEach((el) => el.classList.add("is-visible"));
   }
 
-  /* ---------- Авторская закладка «Слово и оттенок» ---------- */
+  /* ---------- Французский нюанс ---------- */
   const nuanceBtn = document.getElementById("nuance-next-btn");
   const nuancePhrase = document.getElementById("nuance-phrase");
   const nuanceLit = document.getElementById("nuance-lit");
@@ -183,70 +178,45 @@
     renderNuance(0);
   }
 
-  /* ---------- Интерактивный каталог 7 принципов (Главная) ---------- */
-  const folioTabs = Array.from(document.querySelectorAll(".folio-tab"));
-  const folioRoman = document.getElementById("folio-big-roman");
-  const folioEpigraph = document.getElementById("folio-epigraph");
-  const folioTitle = document.getElementById("folio-stage-title");
-  const folioBody = document.getElementById("folio-stage-body");
-  const folioPractice = document.getElementById("folio-practice-text");
-  const folioPrev = document.getElementById("folio-prev");
-  const folioNext = document.getElementById("folio-next");
+  /* ---------- 7 принципов (Десктоп-табы + мобильный аккордеон) ---------- */
+  const pTabs = Array.from(document.querySelectorAll(".p-tab"));
+  const pBadge = document.getElementById("p-stage-badge");
+  const pFr = document.getElementById("p-stage-fr");
+  const pTitle = document.getElementById("p-stage-title");
+  const pBody = document.getElementById("p-stage-body");
+  const pPractice = document.getElementById("p-practice-text");
+  const pPrev = document.getElementById("p-prev");
+  const pNext = document.getElementById("p-next");
   let activePrinciple = 0;
 
   const renderPrinciple = (idx) => {
-    const safeIdx = (idx + PRINCIPLES.length) % PRINCIPLES.length;
-    activePrinciple = safeIdx;
-    const item = PRINCIPLES[safeIdx];
-    folioTabs.forEach((t, i) => t.setAttribute("aria-selected", String(i === safeIdx)));
-    if (folioRoman) folioRoman.textContent = item.roman;
-    if (folioEpigraph) folioEpigraph.textContent = item.fr;
-    if (folioTitle) folioTitle.textContent = item.title;
-    if (folioBody) {
-      folioBody.innerHTML = item.paragraphs.map((p) => `<p>${p}</p>`).join("");
-    }
-    if (folioPractice) folioPractice.textContent = item.practice;
+    const safe = (idx + PRINCIPLES.length) % PRINCIPLES.length;
+    activePrinciple = safe;
+    const item = PRINCIPLES[safe];
+    pTabs.forEach((t, i) => t.setAttribute("aria-selected", String(i === safe)));
+    if (pBadge) pBadge.textContent = `Принцип ${item.num} из 07`;
+    if (pFr) pFr.textContent = item.fr;
+    if (pTitle) pTitle.textContent = item.title;
+    if (pBody) pBody.innerHTML = item.paragraphs.map((p) => `<p>${p}</p>`).join("");
+    if (pPractice) pPractice.textContent = item.practice;
   };
 
-  if (folioTabs.length) {
-    folioTabs.forEach((tab, i) => tab.addEventListener("click", () => renderPrinciple(i)));
-    if (folioPrev) folioPrev.addEventListener("click", () => renderPrinciple(activePrinciple - 1));
-    if (folioNext) folioNext.addEventListener("click", () => renderPrinciple(activePrinciple + 1));
+  if (pTabs.length) {
+    pTabs.forEach((tab, i) => tab.addEventListener("click", () => renderPrinciple(i)));
+    if (pPrev) pPrev.addEventListener("click", () => renderPrinciple(activePrinciple - 1));
+    if (pNext) pNext.addEventListener("click", () => renderPrinciple(activePrinciple + 1));
     renderPrinciple(0);
   }
 
-  /* Мобильный аккордеон 7 принципов */
-  const accRows = Array.from(document.querySelectorAll(".acc-row"));
-  const accToggleAll = document.getElementById("acc-toggle-all");
-
-  const syncAccLabel = () => {
-    if (!accToggleAll) return;
-    const allOpen = accRows.every((r) => r.getAttribute("data-open") === "true");
-    accToggleAll.textContent = allOpen ? "Свернуть все" : "Развернуть все 7 принципов";
-  };
-
-  accRows.forEach((row) => {
-    const btn = row.querySelector(".acc-btn");
+  document.querySelectorAll(".m-acc-card").forEach((card) => {
+    const btn = card.querySelector(".m-acc-btn");
     if (!btn) return;
     btn.addEventListener("click", () => {
-      const isOpen = row.getAttribute("data-open") === "true";
-      row.setAttribute("data-open", String(!isOpen));
-      btn.setAttribute("aria-expanded", String(!isOpen));
-      syncAccLabel();
+      const open = card.getAttribute("data-open") === "true";
+      card.setAttribute("data-open", String(!open));
+      btn.setAttribute("aria-expanded", String(!open));
     });
   });
-
-  if (accToggleAll) {
-    accToggleAll.addEventListener("click", () => {
-      const next = !accRows.every((r) => r.getAttribute("data-open") === "true");
-      accRows.forEach((row) => {
-        row.setAttribute("data-open", String(next));
-        const btn = row.querySelector(".acc-btn");
-        if (btn) btn.setAttribute("aria-expanded", String(next));
-      });
-      syncAccLabel();
-    });
-  }
 
   /* ---------- Модальные окна ---------- */
   const videoModal = document.getElementById("video-modal");
@@ -291,7 +261,7 @@
     closeModal(demoModal);
   });
 
-  /* ---------- Приветственное видео ---------- */
+  /* ---------- Видео Марины ---------- */
   document.querySelectorAll("[data-open-video]").forEach((btn) => {
     btn.addEventListener("click", () => {
       if (SITE_CONFIG.welcomeVideoYouTubeId && videoStage) {
@@ -304,17 +274,37 @@
     });
   });
 
-  /* ---------- «Копилка»: витрина, архив и книжный ридер ---------- */
+  /* ---------- «Копилка»: карточки, фильтрация, живой поиск и ридер ---------- */
   const kopilkaData = window.KOPILKA_DATA;
+  const catClass = (folder) => `cat-${folder}`;
+
+  const renderNoteCard = (item) => `
+    <article class="note-card">
+      <div class="note-card-top">
+        <span class="cat-chip ${catClass(item.folder)}">${item.kind}</span>
+        <span class="note-time">${item.readTime}</span>
+      </div>
+      <h3>${item.title}</h3>
+      <p>${item.excerpt}</p>
+      <button class="note-card-btn" type="button" data-read-id="${item.id}">
+        <span>Читать заметку</span>
+        <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14"/><path d="M13 6l6 6-6 6"/></svg>
+      </button>
+    </article>
+  `;
+
   const openReaderById = (id) => {
     if (!kopilkaData || !readerModal) return;
     const item = kopilkaData.items.find((x) => x.id === id);
     if (!item) return;
 
-    const rKicker = document.getElementById("reader-kicker");
+    const rBadge = document.getElementById("reader-badge");
     const rTitle = document.getElementById("reader-title");
     const rContent = document.getElementById("reader-content");
-    if (rKicker) rKicker.textContent = `${item.kind} · ${item.readTime}`;
+    if (rBadge) {
+      rBadge.textContent = `${item.kind} · ${item.readTime}`;
+      rBadge.className = `cat-chip ${catClass(item.folder)}`;
+    }
     if (rTitle) rTitle.textContent = item.title;
     if (rContent) {
       const paras = item.body.map((p) => `<p>${p}</p>`).join("");
@@ -327,150 +317,142 @@
     openModal(readerModal);
   };
 
-  const renderReadingRow = (item) => `
-    <article class="reading-item">
-      <div class="reading-meta">
-        <span>${item.kind}</span>
-        <span class="reading-meta-sub">${item.readTime}</span>
-      </div>
-      <h3 class="reading-title">${item.title}</h3>
-      <p class="reading-excerpt">${item.excerpt}</p>
-      <button class="reading-open-btn" type="button" data-read-id="${item.id}">
-        <span>Читать заметку</span>
-        <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14"/><path d="M13 6l6 6-6 6"/></svg>
-      </button>
-    </article>
-  `;
-
-  const homePreviewList = document.getElementById("kopilka-home-list");
-  if (homePreviewList && kopilkaData) {
-    const featured = kopilkaData.items.filter((x) => x.featured).slice(0, 3);
-    homePreviewList.innerHTML = featured.map(renderReadingRow).join("");
+  /* Витрина на главной (3 карточки) */
+  const homeKopilka = document.getElementById("kopilka-home-grid");
+  if (homeKopilka && kopilkaData) {
+    homeKopilka.innerHTML = kopilkaData.items
+      .filter((x) => x.featured)
+      .slice(0, 3)
+      .map(renderNoteCard)
+      .join("");
   }
 
+  /* Архив + живой поиск на kopilka.html */
   const archiveGrid = document.getElementById("kopilka-archive");
   const filterPills = Array.from(document.querySelectorAll(".filter-pill"));
+  const searchInput = document.getElementById("kopilka-search");
+  const emptyMsg = document.getElementById("kopilka-empty");
+  let activeFolder = "all";
+  let searchQuery = "";
 
-  const renderArchive = (folderId) => {
+  const renderArchive = () => {
     if (!archiveGrid || !kopilkaData) return;
-    const list =
-      folderId === "all"
-        ? kopilkaData.items
-        : kopilkaData.items.filter((x) => x.folder === folderId);
-    archiveGrid.innerHTML = list.map(renderReadingRow).join("");
+    const q = searchQuery.trim().toLowerCase();
+    const list = kopilkaData.items.filter((item) => {
+      const matchFolder = activeFolder === "all" || item.folder === activeFolder;
+      const matchQuery =
+        !q ||
+        item.title.toLowerCase().includes(q) ||
+        item.excerpt.toLowerCase().includes(q) ||
+        item.kind.toLowerCase().includes(q);
+      return matchFolder && matchQuery;
+    });
+    archiveGrid.innerHTML = list.map(renderNoteCard).join("");
+    if (emptyMsg) emptyMsg.hidden = list.length > 0;
   };
 
   if (archiveGrid && kopilkaData) {
-    const hashFolder = window.location.hash.replace("#", "");
-    const validFolders = kopilkaData.folders.map((f) => f.id);
-    const initial = validFolders.includes(hashFolder) ? hashFolder : "all";
-    filterPills.forEach((p) => {
-      p.setAttribute("aria-pressed", String(p.getAttribute("data-filter") === initial));
-      p.addEventListener("click", () => {
-        const f = p.getAttribute("data-filter");
-        filterPills.forEach((b) => b.setAttribute("aria-pressed", String(b === p)));
-        renderArchive(f);
+    const hash = window.location.hash.replace("#", "");
+    const valid = kopilkaData.folders.map((f) => f.id);
+    if (valid.includes(hash)) activeFolder = hash;
+
+    filterPills.forEach((pill) => {
+      pill.setAttribute("aria-pressed", String(pill.getAttribute("data-filter") === activeFolder));
+      pill.addEventListener("click", () => {
+        activeFolder = pill.getAttribute("data-filter");
+        filterPills.forEach((b) => b.setAttribute("aria-pressed", String(b === pill)));
+        renderArchive();
       });
     });
-    renderArchive(initial);
+
+    if (searchInput) {
+      searchInput.addEventListener("input", () => {
+        searchQuery = searchInput.value;
+        renderArchive();
+      });
+    }
+    renderArchive();
   }
 
   document.addEventListener("click", (e) => {
     const btn = e.target.closest("[data-read-id]");
-    if (!btn) return;
-    openReaderById(btn.getAttribute("data-read-id"));
+    if (btn) openReaderById(btn.getAttribute("data-read-id"));
   });
 
-  /* ---------- Мягкий «Компас формата» (с поддержкой ?format= между страницами) ---------- */
-  const compassState = {
-    level: "continue",
-    goal: "system",
-    pace: "group"
-  };
-
+  /* ---------- Компас формата + Telegram ---------- */
+  const compassState = { level: "continue", goal: "system", pace: "group" };
   const levelLabels = {
     zero: "начинаю с нуля",
     continue: "учил(а) раньше и хочу заговорить увереннее",
     advanced: "читаю и говорю, хочу тонкости и глубину"
   };
 
-  const computeRecommendation = () => {
+  const computeRec = () => {
     if (compassState.goal === "reading") {
       return {
-        title: "Вам особенно откликнется «Вечерний чай с…»",
-        note: "Камерный курс чтения (5 тёплых вечеров между циклами) — идеальный способ полюбить живой французский текст. На 30-минутном знакомстве Марина подскажет дату ближайшего вечера.",
-        msg: `Здравствуйте, Марина! Я ${levelLabels[compassState.level]}. Особенно интересен курс чтения «Вечерний чай с…» — хотел(а) бы записаться на бесплатное 30-минутное знакомство в Zoom.`
+        title: "Вам особенно подойдёт «Вечерний чай с…»",
+        note: "5 уютных вечеров чтения и живого обсуждения французских текстов между циклами. На 30-минутном знакомстве Марина подскажет ближайшие даты.",
+        msg: `Здравствуйте, Марина! Я ${levelLabels[compassState.level]}. Интересует курс чтения «Вечерний чай с…» — хотел(а) бы записаться на бесплатное 30-минутное знакомство в Zoom.`
       };
     }
     if (compassState.pace === "solo" || compassState.goal === "personal") {
       return {
-        title: "Рекомендуем формат Tête-à-tête",
-        note: "Индивидуальная «лаборатория языковой алхимии» в вашем темпе и под ваши личные задачи. Начнём с бесплатного 30-минутного знакомства в Zoom, чтобы наметить маршрут.",
+        title: "Рекомендуем индивидуальный формат Tête-à-tête",
+        note: "«Лаборатория языковой алхимии» в личном темпе и под ваши задачи. Начнём с бесплатной 30-минутной беседы в Zoom.",
         msg: `Здравствуйте, Марина! Я ${levelLabels[compassState.level]}. Мне ближе индивидуальный формат Tête-à-tête — хотел(а) бы договориться о бесплатном 30-минутном знакомстве в Zoom.`
       };
     }
     return {
       title: "Рекомендуем 10-недельный групповой цикл",
-      note: "2 живых занятия в неделю по 60 минут в Zoom, тёплая энергия небольшой группы и безлимитные записи всех уроков на YouTube. Стартуем с бесплатного 30-минутного тестирования-знакомства.",
-      msg: `Здравствуйте, Марина! Я ${levelLabels[compassState.level]}. Хотел(а) бы записаться на бесплатное 30-минутное тестирование-знакомство и подобрать ближайший 10-недельный групповой цикл.`
+      note: "2 живых занятия в неделю по 60 минут в Zoom, тёплая группа близкого уровня и безлимитные видеозаписи всех уроков на YouTube.",
+      msg: `Здравствуйте, Марина! Я ${levelLabels[compassState.level]}. Хотел(а) бы записаться на бесплатное 30-минутное тестирование-знакомство и подобрать 10-недельный групповой цикл.`
     };
   };
 
-  const recTitleEl = document.getElementById("compass-rec-title");
-  const recTextEl = document.getElementById("compass-rec-text");
+  const recTitle = document.getElementById("compass-rec-title");
+  const recText = document.getElementById("compass-rec-text");
   const telegramBtn = document.getElementById("telegram-direct-btn");
-  let currentTelegramText = computeRecommendation().msg;
+  let currentMsg = computeRec().msg;
 
-  const syncCompassUI = () => {
+  const syncCompass = () => {
     ["level", "goal", "pace"].forEach((g) => {
       document.querySelectorAll(`.compass-btn[data-group="${g}"]`).forEach((b) => {
         b.setAttribute("aria-pressed", String(b.getAttribute("data-value") === compassState[g]));
       });
     });
-    const rec = computeRecommendation();
-    currentTelegramText = rec.msg;
-    if (recTitleEl) recTitleEl.textContent = rec.title;
-    if (recTextEl) recTextEl.textContent = rec.note;
+    const r = computeRec();
+    currentMsg = r.msg;
+    if (recTitle) recTitle.textContent = r.title;
+    if (recText) recText.textContent = r.note;
     if (telegramBtn && SITE_CONFIG.telegramHandle) {
-      telegramBtn.href = `https://t.me/${SITE_CONFIG.telegramHandle}?text=${encodeURIComponent(rec.msg)}`;
+      telegramBtn.href = `https://t.me/${SITE_CONFIG.telegramHandle}?text=${encodeURIComponent(r.msg)}`;
       telegramBtn.target = "_blank";
       telegramBtn.rel = "noopener noreferrer";
     }
   };
 
-  const applyPreset = (preset) => {
-    if (preset === "tete") {
-      compassState.pace = "solo";
-      compassState.goal = "personal";
-    } else if (preset === "tea") {
-      compassState.goal = "reading";
-    } else if (preset === "group") {
-      compassState.pace = "group";
-      compassState.goal = "system";
-    }
-    syncCompassUI();
+  const applyPreset = (p) => {
+    if (p === "tete") { compassState.pace = "solo"; compassState.goal = "personal"; }
+    else if (p === "tea") { compassState.goal = "reading"; }
+    else if (p === "group") { compassState.pace = "group"; compassState.goal = "system"; }
+    syncCompass();
   };
 
-  document.querySelectorAll(".compass-btn").forEach((btn) => {
-    btn.addEventListener("click", () => {
-      compassState[btn.getAttribute("data-group")] = btn.getAttribute("data-value");
-      syncCompassUI();
+  document.querySelectorAll(".compass-btn").forEach((b) => {
+    b.addEventListener("click", () => {
+      compassState[b.getAttribute("data-group")] = b.getAttribute("data-value");
+      syncCompass();
     });
   });
 
-  document.querySelectorAll("[data-preset]").forEach((link) => {
-    link.addEventListener("click", () => applyPreset(link.getAttribute("data-preset")));
+  document.querySelectorAll("[data-preset]").forEach((l) => {
+    l.addEventListener("click", () => applyPreset(l.getAttribute("data-preset")));
   });
 
-  /* Подхват выбранного формата при переходе с внутренних страниц (?format=tete / tea / group) */
-  const urlFormat = new URLSearchParams(window.location.search).get("format");
-  if (urlFormat) {
-    applyPreset(urlFormat);
-  } else {
-    syncCompassUI();
-  }
+  const urlFmt = new URLSearchParams(window.location.search).get("format");
+  if (urlFmt) applyPreset(urlFmt); else syncCompass();
 
-  /* Контакты Telegram на всех страницах */
+  /* Telegram модалка */
   const demoTitle = document.getElementById("demo-modal-title");
   const demoDesc = document.getElementById("demo-modal-desc");
   const demoMsg = document.getElementById("demo-modal-message");
@@ -479,7 +461,7 @@
 
   document.querySelectorAll("[data-telegram-direct]").forEach((btn) => {
     if (SITE_CONFIG.telegramHandle) {
-      btn.href = `https://t.me/${SITE_CONFIG.telegramHandle}?text=${encodeURIComponent(currentTelegramText)}`;
+      btn.href = `https://t.me/${SITE_CONFIG.telegramHandle}?text=${encodeURIComponent(currentMsg)}`;
       btn.target = "_blank";
       btn.rel = "noopener noreferrer";
       return;
@@ -487,14 +469,8 @@
     btn.addEventListener("click", (e) => {
       e.preventDefault();
       if (demoTitle) demoTitle.textContent = "Запись в Telegram";
-      if (demoDesc) {
-        demoDesc.textContent =
-          "Сюда подключается прямая ссылка на ваш Telegram — после клика сразу откроется чат с уже подготовленным текстом обращения:";
-      }
-      if (demoMsg) {
-        demoMsg.hidden = false;
-        demoMsg.textContent = currentTelegramText;
-      }
+      if (demoDesc) demoDesc.textContent = "После подключения ника Марины эта кнопка сразу откроет чат в Telegram с готовым текстом обращения:";
+      if (demoMsg) { demoMsg.hidden = false; demoMsg.textContent = currentMsg; }
       if (demoCopy) demoCopy.hidden = false;
       if (demoFeedback) demoFeedback.textContent = "";
       openModal(demoModal);
@@ -511,10 +487,7 @@
     btn.addEventListener("click", (e) => {
       e.preventDefault();
       if (demoTitle) demoTitle.textContent = "Telegram-канал «РаЗУМной школы»";
-      if (demoDesc) {
-        demoDesc.textContent =
-          "Сюда подключается прямая ссылка на Telegram-канал Марины с заметками, видео и анонсами новых циклов.";
-      }
+      if (demoDesc) demoDesc.textContent = "Сюда подключится прямая ссылка на Telegram-канал Марины с заметками, видео и анонсами новых наборов.";
       if (demoMsg) demoMsg.hidden = true;
       if (demoCopy) demoCopy.hidden = true;
       if (demoFeedback) demoFeedback.textContent = "";
@@ -525,10 +498,10 @@
   if (demoCopy) {
     demoCopy.addEventListener("click", async () => {
       try {
-        await navigator.clipboard.writeText(currentTelegramText);
+        await navigator.clipboard.writeText(currentMsg);
         if (demoFeedback) demoFeedback.textContent = "Текст обращения скопирован";
       } catch {
-        if (demoFeedback) demoFeedback.textContent = "Скопируйте текст вручную выше";
+        if (demoFeedback) demoFeedback.textContent = "Скопируйте текст выше";
       }
     });
   }
