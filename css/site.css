@@ -982,22 +982,13 @@ button {
 }
 
 .audience-num {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.6rem;
+  display: block;
   font-family: var(--serif);
   font-size: 1.95rem;
   font-weight: 500;
   line-height: 1;
   color: var(--sun-ink);
   margin-bottom: 0.25rem;
-}
-
-.audience-num::after {
-  content: "";
-  width: 1.5rem;
-  height: 1.5px;
-  background: var(--sun);
 }
 
 .audience-item h4 {
