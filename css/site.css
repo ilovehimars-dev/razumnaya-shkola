@@ -859,9 +859,9 @@ button {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 1rem 1.5rem;
-  padding-block: 1.15rem;
+  padding-top: 1.25rem;
+  margin-top: 0.25rem;
   border-top: 1px solid var(--line);
-  border-bottom: 1px solid var(--line);
 }
 
 @media (max-width: 36rem) {
