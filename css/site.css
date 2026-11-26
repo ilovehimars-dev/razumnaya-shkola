@@ -368,10 +368,17 @@ button {
   text-decoration: none;
 }
 
-.brand-mark {
-  width: 2.35rem;
-  height: 2.35rem;
+.brand-mark,
+.brand-logo {
+  width: 2.95rem;
+  height: 2.95rem;
+  object-fit: contain;
   flex: none;
+}
+
+.site-footer .brand-logo {
+  width: 2.5rem;
+  height: 2.5rem;
 }
 
 .brand-name {
@@ -494,6 +501,10 @@ button {
 @media (max-width: 34rem) {
   .header-cta {
     display: none;
+  }
+  .brand-logo {
+    width: 2.5rem;
+    height: 2.5rem;
   }
   .brand-name {
     font-size: 1.24rem;
