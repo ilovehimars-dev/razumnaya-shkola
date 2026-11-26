@@ -1,5 +1,5 @@
 /* ==========================================================================
-   «РаЗУМная школа» — интерактивность современной версии (все страницы)
+   «РаЗУМная школа» — интерактивность (строгая 2-цветная авторская система)
    ========================================================================== */
 
 (() => {
@@ -113,16 +113,9 @@
 
   document.documentElement.classList.add("js-ready");
 
-  /* ---------- Шапка и мобильное меню ---------- */
-  const header = document.querySelector(".site-header");
+  /* ---------- Мобильное меню ---------- */
   const menuBtn = document.getElementById("menu-toggle");
   const mobileDrawer = document.getElementById("mobile-drawer");
-
-  const onScroll = () => {
-    if (header) header.classList.toggle("scrolled", window.scrollY > 10);
-  };
-  onScroll();
-  window.addEventListener("scroll", onScroll, { passive: true });
 
   if (menuBtn && mobileDrawer) {
     menuBtn.addEventListener("click", () => {
@@ -178,9 +171,9 @@
     renderNuance(0);
   }
 
-  /* ---------- 7 принципов (Десктоп-табы + мобильный аккордеон) ---------- */
+  /* ---------- 7 принципов (ПК + полные тексты на мобильном) ---------- */
   const pTabs = Array.from(document.querySelectorAll(".p-tab"));
-  const pBadge = document.getElementById("p-stage-badge");
+  const pNum = document.getElementById("p-stage-num");
   const pFr = document.getElementById("p-stage-fr");
   const pTitle = document.getElementById("p-stage-title");
   const pBody = document.getElementById("p-stage-body");
@@ -194,7 +187,7 @@
     activePrinciple = safe;
     const item = PRINCIPLES[safe];
     pTabs.forEach((t, i) => t.setAttribute("aria-selected", String(i === safe)));
-    if (pBadge) pBadge.textContent = `Принцип ${item.num} из 07`;
+    if (pNum) pNum.textContent = item.num;
     if (pFr) pFr.textContent = item.fr;
     if (pTitle) pTitle.textContent = item.title;
     if (pBody) pBody.innerHTML = item.paragraphs.map((p) => `<p>${p}</p>`).join("");
@@ -208,20 +201,19 @@
     renderPrinciple(0);
   }
 
-  /* Мобильный аккордеон 7 принципов: полные тексты Марины + «На практике» из единого источника */
   const mobilePrinciplesWrap = document.getElementById("principles-mobile-list");
   if (mobilePrinciplesWrap) {
     mobilePrinciplesWrap.innerHTML = PRINCIPLES.map(
       (item, idx) => `
         <article class="m-acc-card" data-open="${idx === 0 ? "true" : "false"}">
           <button class="m-acc-btn" type="button" aria-expanded="${idx === 0 ? "true" : "false"}">
-            <span class="p-tab-num">${item.num}</span>
+            <span class="m-acc-num">${item.num}</span>
             <span class="m-acc-title">${item.title}</span>
             <svg class="icon m-acc-chev" viewBox="0 0 24 24" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
           </button>
           <div class="m-acc-body">
             ${item.paragraphs.map((p) => `<p>${p}</p>`).join("")}
-            <div class="p-practice-box" style="margin-top: 0.35rem;">
+            <div class="p-practice" style="margin-top: 0.25rem;">
               <span>На практике</span>
               <p>${item.practice}</p>
             </div>
@@ -297,14 +289,13 @@
     });
   });
 
-  /* ---------- «Копилка»: карточки, фильтрация, живой поиск и ридер ---------- */
+  /* ---------- «Копилка»: строгие карточки, поиск и ридер ---------- */
   const kopilkaData = window.KOPILKA_DATA;
-  const catClass = (folder) => `cat-${folder}`;
 
   const renderNoteCard = (item) => `
     <article class="note-card">
       <div class="note-card-top">
-        <span class="cat-chip ${catClass(item.folder)}">${item.kind}</span>
+        <span class="note-cat">${item.kind}</span>
         <span class="note-time">${item.readTime}</span>
       </div>
       <h3>${item.title}</h3>
@@ -321,13 +312,10 @@
     const item = kopilkaData.items.find((x) => x.id === id);
     if (!item) return;
 
-    const rBadge = document.getElementById("reader-badge");
+    const rCat = document.getElementById("reader-cat");
     const rTitle = document.getElementById("reader-title");
     const rContent = document.getElementById("reader-content");
-    if (rBadge) {
-      rBadge.textContent = `${item.kind} · ${item.readTime}`;
-      rBadge.className = `cat-chip ${catClass(item.folder)}`;
-    }
+    if (rCat) rCat.textContent = `${item.kind} · ${item.readTime}`;
     if (rTitle) rTitle.textContent = item.title;
     if (rContent) {
       const paras = item.body.map((p) => `<p>${p}</p>`).join("");
@@ -340,7 +328,6 @@
     openModal(readerModal);
   };
 
-  /* Витрина на главной (3 карточки) */
   const homeKopilka = document.getElementById("kopilka-home-grid");
   if (homeKopilka && kopilkaData) {
     homeKopilka.innerHTML = kopilkaData.items
@@ -350,7 +337,6 @@
       .join("");
   }
 
-  /* Архив + живой поиск на kopilka.html */
   const archiveGrid = document.getElementById("kopilka-archive");
   const filterPills = Array.from(document.querySelectorAll(".filter-pill"));
   const searchInput = document.getElementById("kopilka-search");
@@ -362,7 +348,6 @@
     if (!archiveGrid || !kopilkaData) return;
     const q = searchQuery.trim().toLowerCase();
     const list = kopilkaData.items.filter((item) => {
-      /* При показе всех папок без поиска не дублируем выделенную статью из верхнего блока */
       if (activeFolder === "all" && !q && item.id === "evening-tea-reading") return false;
       const matchFolder = activeFolder === "all" || item.folder === activeFolder;
       const matchQuery =
