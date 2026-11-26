@@ -205,6 +205,7 @@
   const pBody = document.getElementById("p-stage-body");
   const pPractice = document.getElementById("p-practice-text");
   const pProgress = document.getElementById("p-progress-bar");
+  const pCount = document.getElementById("p-progress-count");
   const pFadeWrap = document.getElementById("p-stage-fade");
   const pPrev = document.getElementById("p-prev");
   const pNext = document.getElementById("p-next");
@@ -219,6 +220,7 @@
     if (pBody) pBody.innerHTML = item.paragraphs.map((p) => `<p>${p}</p>`).join("");
     if (pPractice) pPractice.textContent = item.practice;
     if (pProgress) pProgress.style.width = `${((safe + 1) / PRINCIPLES.length) * 100}%`;
+    if (pCount) pCount.textContent = `Принцип ${safe + 1} из ${PRINCIPLES.length}`;
   };
 
   const renderPrinciple = (idx, animate = false) => {

@@ -370,15 +370,15 @@ button {
 
 .brand-mark,
 .brand-logo {
-  width: 2.95rem;
-  height: 2.95rem;
+  width: 2.85rem;
+  height: 2.85rem;
   object-fit: contain;
   flex: none;
 }
 
 .site-footer .brand-logo {
-  width: 2.5rem;
-  height: 2.5rem;
+  width: 3.4rem;
+  height: 3.4rem;
 }
 
 .brand-name {
@@ -454,12 +454,24 @@ button {
   display: none;
   align-items: center;
   justify-content: center;
-  width: 2.65rem;
-  height: 2.65rem;
+  width: 2.75rem;
+  height: 2.75rem;
   border-radius: 6px;
   border: 1px solid var(--line-strong);
   background: var(--surface);
   color: var(--navy);
+}
+
+.menu-btn .icon-close {
+  display: none;
+}
+
+.menu-btn[aria-expanded="true"] .icon-burger {
+  display: none;
+}
+
+.menu-btn[aria-expanded="true"] .icon-close {
+  display: block;
 }
 
 .mobile-drawer {
@@ -607,126 +619,155 @@ button {
   }
 }
 
-/* Правая сцена в Hero: живой портрет Марины + видео «О моей раЗУМной школе» */
+/* Правая сцена в Hero: цельный живой портрет Марины + чистая панель видео снизу (без градиента поверх лица) */
 .hero-right {
   display: grid;
-  gap: 1rem;
+  justify-items: center;
 }
 
 .hero-portrait-stage {
-  background: var(--bg);
+  width: 100%;
+  max-width: 27.5rem;
+  background: var(--surface);
   color: var(--ink);
   border-radius: var(--r-lg);
   overflow: hidden;
-  border: 1px solid rgba(255, 255, 255, 0.14);
-  box-shadow: 0 28px 60px -24px rgba(7, 16, 33, 0.65);
+  box-shadow: 0 28px 60px -24px rgba(7, 16, 33, 0.55);
 }
 
-.hero-marina-top {
-  display: grid;
-  gap: 0.25rem;
-  padding: 1.15rem 1.45rem;
-  background: var(--tint-sun);
-  border-bottom: 1px solid var(--line-sun);
-}
-
-.hero-marina-copy strong {
-  display: block;
-  font-family: var(--serif);
-  font-size: 1.28rem;
-  font-weight: 600;
-  color: var(--navy);
-  line-height: 1.18;
-}
-
-.hero-marina-copy p {
-  font-size: 0.87rem;
-  color: var(--ink-2);
-  margin-top: 0.2rem;
-  line-height: 1.45;
-}
-
-.hero-video-btn {
+.hero-portrait-photo {
   position: relative;
-  display: block;
-  width: 100%;
-  padding: 0;
-  border: 0;
-  background: var(--navy-deep);
-  aspect-ratio: 16 / 10;
-  overflow: hidden;
-  text-align: left;
+  background: #F4ECE1;
 }
 
-.hero-video-btn img {
+.hero-portrait-photo img {
   width: 100%;
-  height: 100%;
+  height: auto;
+  aspect-ratio: 4 / 4.25;
   object-fit: cover;
-  transition: transform 0.7s var(--ease);
+  object-position: center 14%;
+  display: block;
 }
 
-.hero-video-btn:hover img {
-  transform: scale(1.03);
-}
-
-.hero-video-overlay {
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(
-    to top,
-    rgba(16, 33, 60, 0.95) 0%,
-    rgba(16, 33, 60, 0.72) 45%,
-    rgba(16, 33, 60, 0.14) 100%
-  );
-  display: flex;
-  align-items: flex-end;
-  padding: 1.25rem 1.4rem;
-}
-
-.hero-video-bar {
+.hero-video-bar-btn {
+  width: 100%;
   display: flex;
   align-items: center;
   gap: 0.95rem;
-  color: #fff;
+  padding: 1.05rem 1.3rem;
+  border: 0;
+  border-top: 1px solid var(--line);
+  background: var(--tint-sun);
+  color: var(--navy);
+  text-align: left;
+  transition: background-color 0.22s var(--ease);
+}
+
+.hero-video-bar-btn:hover {
+  background: #F4E9C9;
 }
 
 .play-disc {
-  width: 3.35rem;
-  height: 3.35rem;
+  width: 3rem;
+  height: 3rem;
   flex: none;
   border-radius: 50%;
-  background: var(--sun);
+  background: var(--navy);
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  transition: transform 0.26s var(--ease), background-color 0.26s var(--ease);
+  transition: transform 0.24s var(--ease), background-color 0.24s var(--ease);
 }
 
-.hero-video-btn:hover .play-disc {
-  transform: scale(1.06);
-  background: var(--sun-hover);
+.hero-video-bar-btn:hover .play-disc {
+  transform: scale(1.05);
+  background: var(--navy-deep);
 }
 
 .play-disc svg {
-  width: 1.25rem;
-  height: 1.25rem;
-  margin-left: 3px;
+  width: 1.12rem;
+  height: 1.12rem;
+  margin-left: 2px;
   display: block;
 }
 
 .hero-video-text strong {
   display: block;
   font-family: var(--serif);
-  font-size: 1.22rem;
+  font-size: 1.14rem;
   font-weight: 600;
-  line-height: 1.2;
+  color: var(--navy);
+  line-height: 1.22;
 }
 
 .hero-video-text > span {
   display: block;
-  font-size: 0.84rem;
-  color: rgba(255, 255, 255, 0.82);
-  margin-top: 0.12rem;
+  font-size: 0.83rem;
+  color: var(--ink-2);
+  margin-top: 0.14rem;
+}
+
+@media (max-width: 57.99rem) {
+  .atelier-hero {
+    padding-block: 1.5rem 2.15rem;
+  }
+  .hero-layout {
+    gap: 1.5rem;
+  }
+  .hero-left {
+    gap: 0.95rem;
+  }
+  .hero-h1 {
+    font-size: clamp(2.15rem, 8.8vw, 2.75rem);
+  }
+  .hero-h1 .hero-sub {
+    font-size: clamp(1.22rem, 5vw, 1.5rem);
+    margin-top: 0.35rem;
+  }
+  .hero-lead {
+    font-size: 0.96rem;
+    line-height: 1.56;
+  }
+  .hero-credentials {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 0.75rem;
+    margin-top: 0.35rem;
+    padding-top: 1rem;
+  }
+  .hero-cred strong {
+    font-size: 1.05rem;
+  }
+  .hero-cred span {
+    font-size: 0.74rem;
+    line-height: 1.3;
+  }
+  /* Компактная живая карточка Марины на мобильном: лицо + кнопка видео сразу видны */
+  .hero-portrait-stage {
+    max-width: 100%;
+    display: grid;
+    grid-template-columns: 6.2rem 1fr;
+    align-items: stretch;
+  }
+  .hero-portrait-photo img {
+    height: 100%;
+    aspect-ratio: 1 / 1.05;
+  }
+  .hero-video-bar-btn {
+    border-top: 0;
+    border-left: 1px solid var(--line);
+    padding: 0.85rem 1rem;
+    gap: 0.75rem;
+  }
+  .play-disc {
+    width: 2.65rem;
+    height: 2.65rem;
+  }
+  .hero-video-text strong {
+    font-size: 1.02rem;
+  }
+  .hero-video-text > span {
+    font-size: 0.78rem;
+  }
 }
 
 /* ---------- 2. Ключевой блок «Форматы обучения» — Асимметрия 1 + 2 ---------- */
@@ -922,8 +963,23 @@ button {
   padding: clamp(1.65rem, 3.2vw, 2.5rem);
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  justify-content: center;
   gap: 1.35rem;
+}
+
+.flagship-aside-label {
+  font-size: 0.74rem;
+  font-weight: 700;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+  color: var(--sun-ink);
+}
+
+.flagship-aside-note {
+  font-size: 0.82rem;
+  line-height: 1.48;
+  color: var(--muted);
+  text-align: center;
 }
 
 @media (min-width: 58rem) {
@@ -1234,20 +1290,33 @@ button {
   gap: 1.75rem;
 }
 
+.p-progress-meta {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+}
+
 .p-progress-track {
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 3px;
+  flex: 1;
+  height: 4px;
+  border-radius: 99px;
   background: var(--tint-blue);
+  overflow: hidden;
 }
 
 .p-progress-bar {
   height: 100%;
   width: 14.3%;
+  border-radius: 99px;
   background: var(--sun);
   transition: width 0.35s var(--ease);
+}
+
+.p-progress-count {
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: var(--muted);
+  white-space: nowrap;
 }
 
 .p-stage-fade {
@@ -1329,23 +1398,33 @@ button {
 
 .p-pager {
   display: flex;
+  flex-wrap: wrap;
   justify-content: space-between;
   align-items: center;
+  gap: 0.75rem;
   padding-top: 1rem;
   border-top: 1px solid var(--line);
 }
 
 .p-pager-btn {
-  background: none;
-  border: 0;
-  padding: 0.35rem 0;
-  font-size: 0.92rem;
-  font-weight: 600;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 2.75rem;
+  padding: 0.5rem 1.05rem;
+  background: var(--surface);
+  border: 1px solid var(--line-strong);
+  border-radius: 6px;
+  font-size: 0.9rem;
+  font-weight: 500;
   color: var(--navy);
+  transition: background-color 0.2s var(--ease), color 0.2s var(--ease), border-color 0.2s var(--ease);
 }
 
 .p-pager-btn:hover {
-  color: var(--sun-ink);
+  background: var(--navy);
+  border-color: var(--navy);
+  color: #fff;
 }
 
 /* Мобильный аккордеон принципов */
@@ -1498,6 +1577,7 @@ button {
 }
 
 .filter-pill {
+  min-height: 2.75rem;
   padding: 0.55rem 1rem;
   border-radius: 6px;
   border: 1px solid var(--line-strong);
@@ -1753,7 +1833,8 @@ button {
 }
 
 .compass-btn {
-  padding: 0.46rem 0.9rem;
+  min-height: 2.75rem;
+  padding: 0.5rem 0.95rem;
   border-radius: 6px;
   border: 1px solid var(--line-strong);
   background: var(--surface);
@@ -1813,6 +1894,46 @@ button {
   color: var(--ink);
   padding-block: clamp(2.5rem, 4.6vw, 3.75rem);
   border-bottom: 1px solid var(--line);
+}
+
+.page-banner-warm {
+  background: var(--tint-sun);
+  border-bottom: 1px solid var(--line-sun);
+}
+
+.page-banner-paper {
+  background: var(--bg);
+  padding-block: clamp(2.25rem, 4vw, 3.25rem) clamp(1.5rem, 3vw, 2.25rem);
+  border-bottom: 1px solid var(--line);
+}
+
+.banner-quote {
+  font-family: var(--serif);
+  font-style: italic;
+  font-size: clamp(1.18rem, 1.8vw, 1.42rem);
+  line-height: 1.44;
+  color: var(--navy);
+  padding-left: 1.25rem;
+  border-left: 3px solid var(--sun);
+}
+
+.banner-jump-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem 1.35rem;
+  margin-top: 0.5rem;
+  font-size: 0.88rem;
+}
+
+.banner-jump-row a {
+  color: var(--navy);
+  text-decoration: none;
+  border-bottom: 1px solid var(--line-strong);
+  padding-bottom: 0.1rem;
+}
+
+.banner-jump-row a:hover {
+  border-bottom-color: var(--sun);
 }
 
 .page-banner-grid {
