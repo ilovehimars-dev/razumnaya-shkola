@@ -16,7 +16,7 @@
     {
       num: "01",
       title: "Доступность",
-      fr: "Liberté",
+      fr: "Accessibilité",
       paragraphs: [
         "Онлайн-обучение в Zoom сегодня возможно практически из любой точки мира — достаточно спокойного места, ноутбука или планшета и искреннего желания погрузиться в язык."
       ],
@@ -34,9 +34,9 @@
     {
       num: "03",
       title: "Открытость",
-      fr: "Clarté",
+      fr: "Ouverture",
       paragraphs: [
-        "Сложные темы объясняются простыми словами — через образы, ассоциации и живые примеры. Всё должно быть понятно.",
+        "Сложные темы я объясняю простыми словами — через образы, ассоциации и живые примеры. Всё должно быть понятно.",
         "Спрашивать — не стыдно! Не знать — нормально! Ошибки — это условие роста…"
       ],
       practice: "На уроке можно остановить объяснение и задать любой вопрос — здесь нет школьной строгости, а непонятное правило разбирается до полной ясности."
@@ -64,9 +64,9 @@
     {
       num: "06",
       title: "Безграничность",
-      fr: "Mémoire",
+      fr: "Sans limites",
       paragraphs: [
-        "Все учебные пособия и дидактические материалы высылаются ученику или ученице по электронной почте и/или на телефон. Во время каждого занятия ведётся видеозапись, которая размещается на YouTube в закрытом доступе для участников группы.",
+        "Все учебные пособия и дидактические материалы высылаются каждому участнику на электронную почту или в мессенджер. Во время каждого занятия ведётся видеозапись, которая размещается на YouTube в закрытом доступе для участников группы.",
         "Доступ к видеозаписям безлимитный. Повторение — ключ к знанию: все уроки остаются с вами навсегда. И если вы не можете присутствовать на уроке — это не проблема…"
       ],
       practice: "Командировка, отпуск или плотный рабочий день не ломают обучение — пропущенный урок спокойно смотрится в записи."
@@ -332,7 +332,7 @@
 
         videoStage.innerHTML = `
           <div class="video-stage-fallback">
-            <img src="img/video-preview.jpg" alt="О моей РаЗУМной школе — Марина Шультайс">
+            <img src="img/video-preview.jpg?v=20" alt="О моей РаЗУМной школе — Марина Шультайс">
             <div class="video-stage-fallback-overlay">
               <p id="video-fallback-note">${initialStatus}</p>
               <a class="btn btn-sun" href="${ytLink}" target="_blank" rel="noopener noreferrer">Смотреть видео на YouTube →</a>
@@ -437,18 +437,35 @@
   let activeFolder = "all";
   let searchQuery = "";
 
+  const normalizeRu = (str) => str.toLowerCase().replace(/ё/g, "е");
+
+  const tokenMatches = (haystack, token) => {
+    if (haystack.includes(token)) return true;
+    if (token.length >= 5) {
+      const stripped = token.replace(/[аяоеуюиыьй]+$/, "");
+      if (stripped.length >= 4 && haystack.includes(stripped)) return true;
+    }
+    return false;
+  };
+
   const renderArchive = () => {
     if (!archiveGrid || !kopilkaData) return;
-    const q = searchQuery.trim().toLowerCase();
+    const tokens = normalizeRu(searchQuery.trim()).split(/\s+/).filter(Boolean);
+    const hasQuery = tokens.length > 0;
     const list = kopilkaData.items.filter((item) => {
-      if (activeFolder === "all" && !q && item.id === "evening-tea-reading") return false;
+      if (activeFolder === "all" && !hasQuery && item.id === "evening-tea-reading") return false;
       const matchFolder = activeFolder === "all" || item.folder === activeFolder;
-      const matchQuery =
-        !q ||
-        item.title.toLowerCase().includes(q) ||
-        item.excerpt.toLowerCase().includes(q) ||
-        item.kind.toLowerCase().includes(q);
-      return matchFolder && matchQuery;
+      if (!matchFolder) return false;
+      if (!hasQuery) return true;
+      const hay = normalizeRu([
+        item.title,
+        item.excerpt,
+        item.kind,
+        ...(item.body || []),
+        item.exampleFr || "",
+        item.exampleRu || ""
+      ].join(" "));
+      return tokens.every((t) => tokenMatches(hay, t));
     });
     archiveGrid.innerHTML = list.map(renderNoteCard).join("");
     if (emptyMsg) emptyMsg.hidden = list.length > 0;
@@ -486,29 +503,41 @@
   const compassState = { level: "continue", goal: "system", pace: "group" };
   const levelLabels = {
     zero: "начинаю с нуля",
-    continue: "учил(а) раньше и хочу заговорить увереннее",
-    advanced: "читаю и говорю, хочу тонкости и глубину"
+    continue: "у меня уже есть база, хочется заговорить увереннее",
+    advanced: "читаю и говорю по-французски, хочется тонкости и глубину"
   };
 
   const computeRec = () => {
-    if (compassState.goal === "reading") {
+    if (compassState.pace === "solo") {
+      const readingFocus = compassState.goal === "reading";
       return {
-        title: "Вам особенно подойдёт «Вечерний чай с…»",
-        note: "5 уютных вечеров чтения и живого обсуждения французских текстов между циклами. На 30-минутном знакомстве Марина подскажет ближайшие даты.",
-        msg: `Здравствуйте, Марина! Я ${levelLabels[compassState.level]}. Интересует курс чтения «Вечерний чай с…» — хотел(а) бы записаться на бесплатное 30-минутное знакомство в Zoom.`
+        title: "Вам подойдёт индивидуальный формат Tête-à-tête",
+        note: readingFocus
+          ? "Личные занятия один на один с акцентом на чтение, культуру и живое обсуждение текстов. Всё начинается с бесплатной 30-минутной беседы в Zoom с Мариной."
+          : "«Лаборатория языковой алхимии» в личном темпе и под ваши задачи. Всё начинается с бесплатной 30-минутной беседы в Zoom с Мариной.",
+        msg: readingFocus
+          ? `Здравствуйте, Марина! ${levelLabels[compassState.level][0].toUpperCase() + levelLabels[compassState.level].slice(1)}. Ближе индивидуальный формат Tête-à-tête с акцентом на чтение и культуру — можно записаться на бесплатное 30-минутное знакомство в Zoom?`
+          : `Здравствуйте, Марина! ${levelLabels[compassState.level][0].toUpperCase() + levelLabels[compassState.level].slice(1)}. Ближе индивидуальный формат Tête-à-tête — можно договориться о бесплатном 30-минутном знакомстве в Zoom?`
       };
     }
-    if (compassState.pace === "solo" || compassState.goal === "personal") {
+    if (compassState.goal === "reading") {
       return {
-        title: "Рекомендуем индивидуальный формат Tête-à-tête",
-        note: "«Лаборатория языковой алхимии» в личном темпе и под ваши задачи. Начнём с бесплатной 30-минутной беседы в Zoom.",
-        msg: `Здравствуйте, Марина! Я ${levelLabels[compassState.level]}. Мне ближе индивидуальный формат Tête-à-tête — хотел(а) бы договориться о бесплатном 30-минутном знакомстве в Zoom.`
+        title: "Вам подойдёт «Вечерний чай с…»",
+        note: "5 уютных вечеров чтения и живого обсуждения французских текстов между циклами. На 30-минутном знакомстве Марина подскажет ближайшие даты.",
+        msg: `Здравствуйте, Марина! ${levelLabels[compassState.level][0].toUpperCase() + levelLabels[compassState.level].slice(1)}. Интересует курс чтения «Вечерний чай с…» — можно записаться на бесплатное 30-минутное знакомство в Zoom?`
+      };
+    }
+    if (compassState.goal === "personal") {
+      return {
+        title: "Вам подойдёт индивидуальный формат Tête-à-tête",
+        note: "«Лаборатория языковой алхимии» в личном темпе и под ваши задачи. Всё начинается с бесплатной 30-минутной беседы в Zoom с Мариной.",
+        msg: `Здравствуйте, Марина! ${levelLabels[compassState.level][0].toUpperCase() + levelLabels[compassState.level].slice(1)}. Интересует индивидуальный формат Tête-à-tête под личную задачу — можно договориться о бесплатном 30-минутном знакомстве в Zoom?`
       };
     }
     return {
-      title: "Рекомендуем 10-недельный групповой цикл",
+      title: "Вам подойдёт 10-недельный групповой цикл",
       note: "2 живых занятия в неделю по 60 минут в Zoom, тёплая группа близкого уровня и безлимитные видеозаписи всех уроков на YouTube.",
-      msg: `Здравствуйте, Марина! Я ${levelLabels[compassState.level]}. Хотел(а) бы записаться на бесплатное 30-минутное тестирование-знакомство и подобрать 10-недельный групповой цикл.`
+      msg: `Здравствуйте, Марина! ${levelLabels[compassState.level][0].toUpperCase() + levelLabels[compassState.level].slice(1)}. Интересует 10-недельный групповой цикл — можно записаться на бесплатное 30-минутное тестирование-знакомство в Zoom?`
     };
   };
 
@@ -536,7 +565,7 @@
 
   const applyPreset = (p) => {
     if (p === "tete") { compassState.pace = "solo"; compassState.goal = "personal"; }
-    else if (p === "tea") { compassState.goal = "reading"; }
+    else if (p === "tea") { compassState.pace = "group"; compassState.goal = "reading"; }
     else if (p === "group") { compassState.pace = "group"; compassState.goal = "system"; }
     syncCompass();
   };
