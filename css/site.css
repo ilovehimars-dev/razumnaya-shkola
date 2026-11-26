@@ -155,12 +155,11 @@ button {
 }
 
 .zum-pill {
-  display: inline-block;
-  color: var(--blue);
-  background: var(--sun-tint);
-  padding: 0 0.18em;
-  border-radius: 0.22em;
-  font-weight: 600;
+  display: inline;
+  color: var(--sun-deep);
+  font-weight: 700;
+  background: linear-gradient(transparent 66%, var(--sun-tint) 66%, var(--sun-tint) 94%, transparent 94%);
+  padding: 0;
   letter-spacing: 0.01em;
 }
 

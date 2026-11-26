@@ -208,6 +208,29 @@
     renderPrinciple(0);
   }
 
+  /* Мобильный аккордеон 7 принципов: полные тексты Марины + «На практике» из единого источника */
+  const mobilePrinciplesWrap = document.getElementById("principles-mobile-list");
+  if (mobilePrinciplesWrap) {
+    mobilePrinciplesWrap.innerHTML = PRINCIPLES.map(
+      (item, idx) => `
+        <article class="m-acc-card" data-open="${idx === 0 ? "true" : "false"}">
+          <button class="m-acc-btn" type="button" aria-expanded="${idx === 0 ? "true" : "false"}">
+            <span class="p-tab-num">${item.num}</span>
+            <span class="m-acc-title">${item.title}</span>
+            <svg class="icon m-acc-chev" viewBox="0 0 24 24" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
+          </button>
+          <div class="m-acc-body">
+            ${item.paragraphs.map((p) => `<p>${p}</p>`).join("")}
+            <div class="p-practice-box" style="margin-top: 0.35rem;">
+              <span>На практике</span>
+              <p>${item.practice}</p>
+            </div>
+          </div>
+        </article>
+      `
+    ).join("");
+  }
+
   document.querySelectorAll(".m-acc-card").forEach((card) => {
     const btn = card.querySelector(".m-acc-btn");
     if (!btn) return;
@@ -339,6 +362,8 @@
     if (!archiveGrid || !kopilkaData) return;
     const q = searchQuery.trim().toLowerCase();
     const list = kopilkaData.items.filter((item) => {
+      /* При показе всех папок без поиска не дублируем выделенную статью из верхнего блока */
+      if (activeFolder === "all" && !q && item.id === "evening-tea-reading") return false;
       const matchFolder = activeFolder === "all" || item.folder === activeFolder;
       const matchQuery =
         !q ||
