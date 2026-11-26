@@ -171,20 +171,20 @@
     renderNuance(0);
   }
 
-  /* ---------- 7 принципов (ПК + полные тексты на мобильном) ---------- */
+  /* ---------- 7 принципов (ПК с полосой прогресса + плавной сменой + полные тексты на мобильном) ---------- */
   const pTabs = Array.from(document.querySelectorAll(".p-tab"));
   const pNum = document.getElementById("p-stage-num");
   const pFr = document.getElementById("p-stage-fr");
   const pTitle = document.getElementById("p-stage-title");
   const pBody = document.getElementById("p-stage-body");
   const pPractice = document.getElementById("p-practice-text");
+  const pProgress = document.getElementById("p-progress-bar");
+  const pFadeWrap = document.getElementById("p-stage-fade");
   const pPrev = document.getElementById("p-prev");
   const pNext = document.getElementById("p-next");
   let activePrinciple = 0;
 
-  const renderPrinciple = (idx) => {
-    const safe = (idx + PRINCIPLES.length) % PRINCIPLES.length;
-    activePrinciple = safe;
+  const applyPrinciple = (safe) => {
     const item = PRINCIPLES[safe];
     pTabs.forEach((t, i) => t.setAttribute("aria-selected", String(i === safe)));
     if (pNum) pNum.textContent = item.num;
@@ -192,13 +192,41 @@
     if (pTitle) pTitle.textContent = item.title;
     if (pBody) pBody.innerHTML = item.paragraphs.map((p) => `<p>${p}</p>`).join("");
     if (pPractice) pPractice.textContent = item.practice;
+    if (pProgress) pProgress.style.width = `${((safe + 1) / PRINCIPLES.length) * 100}%`;
+  };
+
+  const renderPrinciple = (idx, animate = false) => {
+    const safe = (idx + PRINCIPLES.length) % PRINCIPLES.length;
+    activePrinciple = safe;
+    if (animate && pFadeWrap) {
+      pFadeWrap.classList.add("is-swapping");
+      setTimeout(() => {
+        applyPrinciple(safe);
+        pFadeWrap.classList.remove("is-swapping");
+      }, 150);
+    } else {
+      applyPrinciple(safe);
+    }
   };
 
   if (pTabs.length) {
-    pTabs.forEach((tab, i) => tab.addEventListener("click", () => renderPrinciple(i)));
-    if (pPrev) pPrev.addEventListener("click", () => renderPrinciple(activePrinciple - 1));
-    if (pNext) pNext.addEventListener("click", () => renderPrinciple(activePrinciple + 1));
-    renderPrinciple(0);
+    pTabs.forEach((tab, i) => tab.addEventListener("click", () => renderPrinciple(i, true)));
+    if (pPrev) pPrev.addEventListener("click", () => renderPrinciple(activePrinciple - 1, true));
+    if (pNext) pNext.addEventListener("click", () => renderPrinciple(activePrinciple + 1, true));
+    renderPrinciple(0, false);
+  }
+
+  /* Деликатная кнопка быстрой связи после прокрутки первого экрана */
+  const quickTg = document.getElementById("quick-tg");
+  if (quickTg) {
+    const toggleQuickTg = () => {
+      const zapis = document.getElementById("zapis");
+      const pastHero = window.scrollY > 480;
+      const inZapis = zapis ? zapis.getBoundingClientRect().top < window.innerHeight * 0.78 : false;
+      quickTg.classList.toggle("is-shown", pastHero && !inZapis);
+    };
+    toggleQuickTg();
+    window.addEventListener("scroll", toggleQuickTg, { passive: true });
   }
 
   const mobilePrinciplesWrap = document.getElementById("principles-mobile-list");
