@@ -880,6 +880,156 @@ button {
   color: var(--ink-2);
 }
 
+.audience-footer {
+  margin-top: 1.5rem;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.85rem 1.5rem;
+}
+
+/* Ясная практическая плашка «График и стоимость» в блоке форматов */
+.format-clarity-bar {
+  margin-top: 1.5rem;
+  padding: 1.15rem 1.45rem;
+  background: var(--tint-blue);
+  border: 1px solid var(--line);
+  border-left: 3.5px solid var(--navy);
+  border-radius: var(--r);
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.85rem 1.5rem;
+}
+
+.format-clarity-bar p {
+  font-size: 0.95rem;
+  line-height: 1.55;
+  color: var(--ink);
+  max-width: 48rem;
+}
+
+.format-clarity-bar strong {
+  color: var(--navy);
+}
+
+/* Блок «Отзывы учеников» (честный макет под реальные цитаты и скриншоты из Telegram) */
+.review-draft-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.42rem 0.85rem;
+  border-radius: 6px;
+  background: var(--tint-sun);
+  border: 1px solid var(--line-sun);
+  color: var(--sun-ink);
+  font-size: 0.8rem;
+  font-weight: 600;
+  line-height: 1.35;
+}
+
+.reviews-grid {
+  display: grid;
+  gap: 1.25rem;
+}
+
+@media (min-width: 56rem) {
+  .reviews-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+.review-slot {
+  background: var(--surface);
+  border: 1px dashed var(--line-strong);
+  border-top: 3px solid var(--sun);
+  border-radius: var(--r);
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 1.15rem;
+}
+
+.review-slot-head {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+}
+
+.review-avatar-placeholder {
+  width: 2.85rem;
+  height: 2.85rem;
+  border-radius: 50%;
+  background: var(--tint-blue);
+  border: 1px dashed var(--line-strong);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.15rem;
+  color: var(--navy-mid);
+  flex: none;
+}
+
+.review-slot-head strong {
+  display: block;
+  font-family: var(--serif);
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--navy);
+  line-height: 1.2;
+}
+
+.review-slot-head > div span {
+  display: block;
+  font-size: 0.8rem;
+  color: var(--muted);
+  margin-top: 0.14rem;
+}
+
+.review-slot-body {
+  padding: 1rem 1.1rem;
+  background: var(--bg);
+  border-radius: 8px;
+  border: 1px solid var(--line);
+  font-size: 0.91rem;
+  line-height: 1.6;
+  color: var(--ink-2);
+}
+
+.review-slot-tg {
+  background: #F4F7FB;
+  border-color: rgba(22, 47, 86, 0.16);
+  display: grid;
+  gap: 0.5rem;
+}
+
+.review-tg-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.74rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--navy-mid);
+}
+
+.review-slot-foot {
+  font-size: 0.8rem;
+  color: var(--sun-ink);
+  font-weight: 500;
+}
+
+.reviews-footnote {
+  margin-top: 1.25rem;
+  font-size: 0.86rem;
+  color: var(--muted);
+  line-height: 1.55;
+}
+
 .flagship-aside {
   background: var(--tint-sun);
   border-top: 1px solid var(--line-sun);
