@@ -539,6 +539,7 @@ button {
 }
 
 .hero-left {
+  container-type: inline-size;
   display: grid;
   gap: 1.3rem;
 }
@@ -581,7 +582,7 @@ button {
 .hero-credentials {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 1.35rem;
+  gap: 1.25rem;
   margin-top: 0.75rem;
   padding-top: 1.4rem;
   border-top: 1px solid var(--line-light);
@@ -590,11 +591,10 @@ button {
 .hero-cred strong {
   display: block;
   font-family: var(--serif);
-  font-size: clamp(1.06rem, 1.32vw, 1.2rem);
+  font-size: clamp(1.06rem, 1.25vw, 1.18rem);
   font-weight: 600;
   color: var(--sun);
-  line-height: 1.18;
-  white-space: nowrap;
+  line-height: 1.2;
 }
 
 .hero-cred span {
@@ -603,6 +603,30 @@ button {
   color: rgba(253, 252, 249, 0.78);
   margin-top: 0.28rem;
   line-height: 1.42;
+}
+
+@container (max-width: 35rem) {
+  .hero-credentials {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 0.55rem;
+    padding-top: 1rem;
+  }
+  .hero-cred {
+    background: rgba(255, 255, 255, 0.055);
+    border: 1px solid rgba(255, 255, 255, 0.11);
+    border-left: 2.5px solid var(--sun);
+    border-radius: 6px;
+    padding: 0.7rem 0.95rem;
+  }
+  .hero-cred strong {
+    font-size: 1.06rem;
+  }
+  .hero-cred span {
+    font-size: 0.88rem;
+    line-height: 1.38;
+    margin-top: 0.16rem;
+    color: rgba(253, 252, 249, 0.84);
+  }
 }
 
 /* Правая сцена в Hero: горизонтальный 16:9 видеоплеер с реальным превью YouTube, центральной кнопкой Play и 3:01 */
@@ -789,28 +813,9 @@ button {
 
 @media (max-width: 40rem) {
   .hero-credentials {
-    grid-template-columns: minmax(0, 1fr);
     gap: 0.55rem;
     margin-top: 0.35rem;
     padding-top: 1rem;
-    border-top: 1px solid var(--line-light);
-  }
-  .hero-cred {
-    background: rgba(255, 255, 255, 0.055);
-    border: 1px solid rgba(255, 255, 255, 0.11);
-    border-left: 2.5px solid var(--sun);
-    border-radius: 6px;
-    padding: 0.72rem 0.95rem;
-  }
-  .hero-cred strong {
-    font-size: 1.08rem;
-    white-space: normal;
-  }
-  .hero-cred span {
-    font-size: 0.88rem;
-    line-height: 1.38;
-    margin-top: 0.16rem;
-    color: rgba(253, 252, 249, 0.84);
   }
 }
 
