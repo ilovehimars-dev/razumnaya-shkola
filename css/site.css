@@ -678,35 +678,23 @@ button {
   pointer-events: none;
 }
 
-/* Бейдж хронометража в правом верхнем углу плеера */
+/* Чистый таймер в правом верхнем углу кадра (как в классическом плеере, без лишних слов и точек) */
 .hero-video-duration {
   position: absolute;
   top: 0.85rem;
   right: 0.85rem;
   z-index: 3;
-  display: inline-flex;
-  align-items: center;
-  gap: 0.42rem;
-  padding: 0.35rem 0.72rem;
-  border-radius: 6px;
-  background: rgba(15, 31, 56, 0.86);
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
+  padding: 0.24rem 0.58rem;
+  border-radius: 4px;
+  background: rgba(15, 31, 56, 0.84);
   color: #fff;
-  font-size: 0.76rem;
+  font-size: 0.78rem;
   font-weight: 600;
-  letter-spacing: 0.03em;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 0.02em;
 }
 
-.hero-video-duration::before {
-  content: "";
-  width: 0.45rem;
-  height: 0.45rem;
-  border-radius: 50%;
-  background: var(--sun);
-}
-
-/* Заметная кнопка Play в левой нижней части кадра — полностью открывает лицо спикера */
+/* Строгая архитектурная кнопка Play в стилистике остальных кнопок сайта (без ИИ-пилюль и ореолов) */
 .hero-center-play {
   position: absolute;
   left: 1.15rem;
@@ -714,40 +702,27 @@ button {
   z-index: 3;
   display: inline-flex;
   align-items: center;
-  gap: 0.7rem;
-  padding: 0.45rem 1.2rem 0.45rem 0.5rem;
-  border-radius: 99px;
-  background: rgba(15, 31, 56, 0.88);
-  border: 1.5px solid rgba(230, 191, 90, 0.75);
-  color: #fff;
+  gap: 0.55rem;
+  padding: 0.65rem 1.1rem;
+  border-radius: 6px;
+  background: var(--sun);
+  color: var(--navy-deep);
   font-size: 0.9rem;
   font-weight: 600;
   white-space: nowrap;
-  box-shadow: 0 0 0 5px rgba(230, 191, 90, 0.2), 0 14px 28px -6px rgba(10, 22, 44, 0.62);
-  transition: transform 0.26s var(--ease), background-color 0.24s var(--ease), box-shadow 0.26s var(--ease);
+  box-shadow: 0 10px 24px -8px rgba(10, 22, 44, 0.55);
+  transition: transform 0.24s var(--ease), background-color 0.22s var(--ease);
 }
 
 .hero-video-card:hover .hero-center-play {
-  transform: scale(1.04);
-  background: var(--navy-deep);
-  box-shadow: 0 0 0 8px rgba(230, 191, 90, 0.3), 0 18px 34px -6px rgba(10, 22, 44, 0.72);
+  transform: translateY(-1px);
+  background: var(--sun-hover);
 }
 
-.hero-play-disc {
-  width: 2.65rem;
-  height: 2.65rem;
+.hero-center-play svg {
+  width: 1rem;
+  height: 1rem;
   flex: none;
-  border-radius: 50%;
-  background: var(--sun);
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.hero-play-disc svg {
-  width: 1.12rem;
-  height: 1.12rem;
-  margin-left: 2px;
   display: block;
 }
 
@@ -820,21 +795,13 @@ button {
     font-size: 0.73rem;
     line-height: 1.28;
   }
-  /* Горизонтальный 16:9 плеер на мобильном: кнопка Play слева снизу, лицо открыто */
+  /* Горизонтальный 16:9 плеер на мобильном: строгая кнопка слева снизу, лицо открыто */
   .hero-center-play {
     left: 0.85rem;
     bottom: 0.85rem;
-    padding: 0.35rem 0.95rem 0.35rem 0.4rem;
-    font-size: 0.82rem;
-    gap: 0.55rem;
-  }
-  .hero-play-disc {
-    width: 2.2rem;
-    height: 2.2rem;
-  }
-  .hero-play-disc svg {
-    width: 0.95rem;
-    height: 0.95rem;
+    padding: 0.52rem 0.9rem;
+    font-size: 0.83rem;
+    gap: 0.45rem;
   }
   .hero-video-caption {
     padding: 0.8rem 1rem;
