@@ -1350,7 +1350,8 @@ button {
 }
 
 .p-list {
-  display: grid;
+  display: flex;
+  flex-direction: column;
   background: var(--tint-blue);
 }
 
@@ -1363,10 +1364,11 @@ button {
 .p-tab {
   display: grid;
   grid-template-columns: 2.3rem 1fr auto;
-  align-items: baseline;
+  align-items: center;
   gap: 0.7rem;
+  flex: 1 0 4.65rem;
   width: 100%;
-  padding: 1.05rem 1.25rem;
+  padding: 0.95rem 1.25rem;
   background: transparent;
   border: 0;
   border-bottom: 1px solid var(--line);
@@ -1422,11 +1424,12 @@ button {
 
 .p-stage {
   position: relative;
-  padding: clamp(1.85rem, 3.8vw, 3rem);
+  padding: clamp(1.85rem, 3.8vw, 2.75rem);
+  min-height: 38.5rem;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
-  gap: 1.75rem;
+  justify-content: flex-start;
+  gap: 1.6rem;
 }
 
 .p-progress-meta {
@@ -1536,12 +1539,13 @@ button {
 }
 
 .p-pager {
+  margin-top: auto;
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
   align-items: center;
   gap: 0.75rem;
-  padding-top: 1rem;
+  padding-top: 1.15rem;
   border-top: 1px solid var(--line);
 }
 

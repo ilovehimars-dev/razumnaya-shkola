@@ -206,10 +206,12 @@
   const pPractice = document.getElementById("p-practice-text");
   const pProgress = document.getElementById("p-progress-bar");
   const pCount = document.getElementById("p-progress-count");
+  const pStage = document.querySelector(".p-stage");
   const pFadeWrap = document.getElementById("p-stage-fade");
   const pPrev = document.getElementById("p-prev");
   const pNext = document.getElementById("p-next");
   let activePrinciple = 0;
+  let swapTimer = null;
 
   const applyPrinciple = (safe) => {
     const item = PRINCIPLES[safe];
@@ -223,15 +225,38 @@
     if (pCount) pCount.textContent = `Принцип ${safe + 1} из ${PRINCIPLES.length}`;
   };
 
+  const lockPrinciplesHeight = () => {
+    if (!pStage || !pFadeWrap || window.innerWidth < 896) {
+      if (pStage) pStage.style.minHeight = "";
+      return;
+    }
+    const savedIdx = activePrinciple;
+    pStage.style.minHeight = "";
+    let maxH = 0;
+    for (let i = 0; i < PRINCIPLES.length; i += 1) {
+      applyPrinciple(i);
+      const h = Math.ceil(pStage.getBoundingClientRect().height);
+      if (h > maxH) maxH = h;
+    }
+    applyPrinciple(savedIdx);
+    if (maxH > 0) pStage.style.minHeight = `${maxH}px`;
+  };
+
   const renderPrinciple = (idx, animate = false) => {
     const safe = (idx + PRINCIPLES.length) % PRINCIPLES.length;
+    if (animate && safe === activePrinciple) return;
     activePrinciple = safe;
+    if (swapTimer) {
+      clearTimeout(swapTimer);
+      swapTimer = null;
+    }
     if (animate && pFadeWrap) {
       pFadeWrap.classList.add("is-swapping");
-      setTimeout(() => {
+      swapTimer = setTimeout(() => {
         applyPrinciple(safe);
         pFadeWrap.classList.remove("is-swapping");
-      }, 150);
+        swapTimer = null;
+      }, 140);
     } else {
       applyPrinciple(safe);
     }
@@ -242,6 +267,15 @@
     if (pPrev) pPrev.addEventListener("click", () => renderPrinciple(activePrinciple - 1, true));
     if (pNext) pNext.addEventListener("click", () => renderPrinciple(activePrinciple + 1, true));
     renderPrinciple(0, false);
+    lockPrinciplesHeight();
+    if (document.fonts && document.fonts.ready) {
+      document.fonts.ready.then(lockPrinciplesHeight);
+    }
+    let resizeTimer = null;
+    window.addEventListener("resize", () => {
+      clearTimeout(resizeTimer);
+      resizeTimer = setTimeout(lockPrinciplesHeight, 120);
+    }, { passive: true });
   }
 
   const mobilePrinciplesWrap = document.getElementById("principles-mobile-list");
