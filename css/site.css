@@ -1790,13 +1790,52 @@ button {
 .page-banner-grid {
   display: grid;
   gap: 1.75rem 3.25rem;
-  align-items: end;
+  align-items: center;
 }
 
 @media (min-width: 56rem) {
   .page-banner-grid {
-    grid-template-columns: minmax(0, 1.24fr) minmax(0, 0.76fr);
+    grid-template-columns: minmax(0, 1.18fr) minmax(0, 0.82fr);
   }
+}
+
+.banner-quote-card {
+  background: var(--surface);
+  border: 1px solid var(--line-strong);
+  border-top: 3px solid var(--navy);
+  border-radius: var(--r-lg);
+  padding: 1.55rem 1.8rem 1.45rem;
+  box-shadow: var(--shadow-card);
+  display: grid;
+  gap: 0.75rem;
+}
+
+.banner-quote-card blockquote {
+  font-family: var(--serif);
+  font-style: italic;
+  font-size: clamp(1.35rem, 1.85vw, 1.62rem);
+  line-height: 1.36;
+  color: var(--navy);
+}
+
+.banner-quote-card blockquote::before {
+  content: "«";
+  display: inline-block;
+  font-style: normal;
+  color: var(--sun);
+  font-size: 1.65rem;
+  line-height: 1;
+  margin-right: 0.25rem;
+}
+
+.banner-quote-card figcaption {
+  padding-top: 0.7rem;
+  border-top: 1px solid var(--line);
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--muted);
 }
 
 .page-banner-inner {
