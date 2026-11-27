@@ -2444,29 +2444,36 @@ button {
 
 .poem-book {
   display: grid;
-  gap: 1.5rem;
-  align-items: center;
-  padding: clamp(1.4rem, 2.8vw, 2rem);
+  grid-template-columns: 6.5rem minmax(0, 1fr);
+  gap: 1.1rem;
+  align-items: start;
+  padding: 1.15rem;
   background: var(--surface);
   border: 1px solid var(--line);
   border-radius: var(--r-lg);
+  box-shadow: var(--shadow-card);
 }
 
 @media (min-width: 34rem) {
   .poem-book {
     grid-template-columns: 10.5rem minmax(0, 1fr);
+    gap: 1.5rem;
+    align-items: center;
+    padding: clamp(1.4rem, 2.8vw, 2rem);
   }
 }
 
 .book-cover {
+  width: 100%;
+  max-width: 10.5rem;
   aspect-ratio: 2 / 3;
   background: #FAF6EC;
   border: 1px solid rgba(22, 43, 73, 0.22);
   border-radius: 2px 4px 4px 2px;
-  padding: 0.75rem;
+  padding: 0.45rem;
   box-shadow:
-    inset 6px 0 12px -8px rgba(15, 30, 52, 0.28),
-    6px 10px 24px -14px rgba(15, 30, 52, 0.32);
+    inset 5px 0 10px -7px rgba(15, 30, 52, 0.28),
+    5px 8px 18px -12px rgba(15, 30, 52, 0.32);
   display: flex;
   flex-direction: column;
 }
@@ -2475,8 +2482,8 @@ button {
   flex: 1;
   border: 1px solid rgba(22, 43, 73, 0.24);
   outline: 1px solid rgba(217, 173, 75, 0.45);
-  outline-offset: -4px;
-  padding: 0.95rem 0.7rem;
+  outline-offset: -3px;
+  padding: 0.62rem 0.42rem;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -2484,19 +2491,48 @@ button {
 }
 
 .book-author {
-  font-size: 0.62rem;
+  font-size: 0.5rem;
   font-weight: 600;
-  letter-spacing: 0.14em;
+  letter-spacing: 0.11em;
   text-transform: uppercase;
   color: var(--muted);
+  line-height: 1.25;
 }
 
 .book-title {
   font-family: var(--serif);
-  font-size: 1.12rem;
+  font-size: 0.86rem;
   font-weight: 600;
-  line-height: 1.22;
+  line-height: 1.2;
   color: var(--navy);
+}
+
+.book-imprint {
+  font-family: var(--serif);
+  font-style: italic;
+  font-size: 0.62rem;
+  color: var(--sun-ink);
+}
+
+@media (min-width: 34rem) {
+  .book-cover {
+    padding: 0.75rem;
+  }
+  .book-cover-inner {
+    outline-offset: -4px;
+    padding: 0.95rem 0.7rem;
+  }
+  .book-author {
+    font-size: 0.62rem;
+    letter-spacing: 0.14em;
+  }
+  .book-title {
+    font-size: 1.12rem;
+    line-height: 1.22;
+  }
+  .book-imprint {
+    font-size: 0.72rem;
+  }
 }
 
 .book-cover-dark {
@@ -2515,13 +2551,6 @@ button {
 
 .book-cover-dark .book-title {
   color: #FCFBF8;
-}
-
-.book-imprint {
-  font-family: var(--serif);
-  font-style: italic;
-  font-size: 0.72rem;
-  color: var(--sun-ink);
 }
 
 .book-cover-dark .book-imprint {
