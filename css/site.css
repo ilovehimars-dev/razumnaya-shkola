@@ -1071,14 +1071,11 @@ button {
   color: var(--navy);
 }
 
-/* Ясная практическая плашка «График и стоимость» в блоке форматов */
+/* Ясная практическая строка «График и стоимость» в блоке форматов (без конкурирующей голубой плашки) */
 .format-clarity-bar {
-  margin-top: 1.5rem;
-  padding: 1.15rem 1.45rem;
-  background: var(--tint-blue);
-  border: 1px solid var(--line);
-  border-left: 3.5px solid var(--navy);
-  border-radius: var(--r);
+  margin-top: 2rem;
+  padding-top: 1.45rem;
+  border-top: 1px solid var(--line);
   display: flex;
   flex-wrap: wrap;
   align-items: center;
@@ -2199,6 +2196,11 @@ button {
   padding: 1.3rem 1.45rem;
   display: grid;
   gap: 0.75rem;
+}
+
+.banner-aside-tinted {
+  background: var(--tint-blue);
+  border-color: var(--line);
 }
 
 .banner-aside-title {
