@@ -1507,9 +1507,41 @@ button {
 }
 
 .kopilka-lead-card > p {
-  font-size: 0.98rem;
+  font-size: 0.96rem;
   line-height: 1.66;
   color: var(--ink-2);
+}
+
+.kopilka-lead-excerpt {
+  font-weight: 500;
+  color: var(--ink) !important;
+}
+
+.kopilka-lead-body {
+  font-size: 0.94rem !important;
+  line-height: 1.66;
+  color: var(--ink-2);
+}
+
+.kopilka-lead-foot {
+  margin-top: auto;
+  padding-top: 1rem;
+  border-top: 1px solid var(--line);
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.65rem 1rem;
+}
+
+.kopilka-lead-foot .note-card-btn {
+  margin-top: 0;
+  padding-top: 0;
+}
+
+.kopilka-lead-tag {
+  font-size: 0.8rem;
+  color: var(--muted);
 }
 
 .kopilka-lead-sample {

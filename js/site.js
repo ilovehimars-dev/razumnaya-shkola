@@ -485,6 +485,7 @@
   const renderHomeEditorial = (items) => {
     if (!items.length) return "";
     const [lead, ...rest] = items;
+    const firstPara = Array.isArray(lead.body) && lead.body.length ? lead.body[0] : "";
     const leadHtml = `
       <article class="kopilka-lead-card">
         <div class="note-card-top">
@@ -492,17 +493,21 @@
           <span class="note-time">${lead.readTime}</span>
         </div>
         <h3>${lead.title}</h3>
-        <p>${lead.excerpt}</p>
+        <p class="kopilka-lead-excerpt">${lead.excerpt}</p>
+        ${firstPara ? `<p class="kopilka-lead-body">${firstPara}</p>` : ""}
         ${lead.exampleFr ? `
           <div class="kopilka-lead-sample">
             ${lead.exampleFr}
             <small>${lead.exampleRu || ""}</small>
           </div>
         ` : ""}
-        <button class="note-card-btn" type="button" data-read-id="${lead.id}">
-          <span>Читать полностью</span>
-          <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14"/><path d="M13 6l6 6-6 6"/></svg>
-        </button>
+        <div class="kopilka-lead-foot">
+          <button class="note-card-btn" type="button" data-read-id="${lead.id}">
+            <span>Читать заметку полностью</span>
+            <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14"/><path d="M13 6l6 6-6 6"/></svg>
+          </button>
+          <span class="kopilka-lead-tag">Читальный зал · «Копилка»</span>
+        </div>
       </article>
     `;
     const sideHtml = `
