@@ -1877,18 +1877,19 @@ button {
   flex: none;
 }
 
-/* Таблица сравнения форматов на programmes.html */
+/* Таблица сравнения форматов на programmes.html — чёткие колонки, вертикальные разделители и иконки */
 .compare-wrap {
   overflow-x: auto;
-  border-top: 2px solid var(--navy);
-  border-bottom: 1px solid var(--line-strong);
+  border: 1px solid var(--line-strong);
+  border-radius: var(--r-lg);
   background: var(--surface);
+  box-shadow: var(--shadow-card);
 }
 
 .compare-table {
   width: 100%;
   border-collapse: collapse;
-  min-width: 44rem;
+  min-width: 48rem;
   text-align: left;
   font-size: 0.93rem;
 }
@@ -1897,16 +1898,29 @@ button {
 .compare-table td {
   padding: 1.15rem 1.35rem;
   border-bottom: 1px solid var(--line);
+  border-left: 1px solid var(--line);
   vertical-align: top;
+}
+
+.compare-table th:first-child,
+.compare-table td:first-child {
+  border-left: 0;
 }
 
 .compare-table thead th {
   font-family: var(--serif);
   font-size: 1.28rem;
-  font-weight: 600;
+  font-weight: 500;
   color: var(--navy);
   background: var(--tint-sun);
   border-bottom: 1px solid var(--line-strong);
+  padding: 1.35rem 1.35rem 1.25rem;
+}
+
+.compare-table thead th.compare-col-featured {
+  background: var(--navy);
+  color: #FFFFFF;
+  border-left-color: rgba(247, 244, 238, 0.14);
 }
 
 .compare-table thead th:first-child {
@@ -1916,8 +1930,61 @@ button {
   letter-spacing: 0.1em;
   text-transform: uppercase;
   color: var(--muted);
-  background: var(--surface);
+  background: #FAF8F3;
   vertical-align: middle;
+}
+
+.compare-head-cell {
+  display: grid;
+  gap: 0.45rem;
+}
+
+.compare-head-top {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+}
+
+.compare-head-icon {
+  width: 1.95rem;
+  height: 1.95rem;
+  border-radius: var(--r);
+  background: var(--surface);
+  border: 1px solid var(--line-sun);
+  color: var(--navy);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: none;
+}
+
+.compare-head-icon svg {
+  width: 1rem;
+  height: 1rem;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.75;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.compare-col-featured .compare-head-icon {
+  background: rgba(223, 175, 70, 0.16);
+  border-color: rgba(223, 175, 70, 0.45);
+  color: var(--sun);
+}
+
+.compare-head-kicker {
+  font-family: var(--sans);
+  font-size: 0.71rem;
+  font-weight: 600;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+  color: var(--sun-ink);
+}
+
+.compare-col-featured .compare-head-kicker {
+  color: var(--sun);
 }
 
 .compare-table tbody th {
@@ -1925,13 +1992,45 @@ button {
   font-weight: 600;
   letter-spacing: 0.06em;
   text-transform: uppercase;
-  color: var(--muted);
-  width: 11rem;
+  color: var(--navy);
+  background: #FAF8F3;
+  border-right: 1px solid var(--line-strong);
+  width: 12.25rem;
+}
+
+.compare-param {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+}
+
+.compare-param svg {
+  width: 0.98rem;
+  height: 0.98rem;
+  color: var(--sun-ink);
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.75;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  flex: none;
 }
 
 .compare-table tbody td {
   color: var(--ink-2);
-  line-height: 1.55;
+  line-height: 1.56;
+}
+
+.compare-table tbody td.compare-col-featured {
+  background: rgba(246, 239, 224, 0.34);
+}
+
+.compare-table tbody tr:hover td {
+  background: rgba(247, 244, 238, 0.65);
+}
+
+.compare-table tbody tr:hover td.compare-col-featured {
+  background: rgba(246, 239, 224, 0.55);
 }
 
 .compare-table tbody td strong {
@@ -1942,6 +2041,7 @@ button {
 .compare-table tbody tr:last-child th,
 .compare-table tbody tr:last-child td {
   border-bottom: 0;
+  vertical-align: middle;
 }
 
 /* Анатомия 10-недельного цикла и структура 60-минутного урока */
