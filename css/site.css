@@ -1331,13 +1331,32 @@ button {
 
 .teacher-spread {
   display: grid;
-  gap: clamp(2rem, 4.5vw, 4rem);
+  gap: clamp(2rem, 4.5vw, 3.75rem);
   align-items: start;
 }
 
 @media (min-width: 58rem) {
   .teacher-spread {
-    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    grid-template-columns: minmax(0, 0.88fr) minmax(0, 1.12fr);
+    align-items: stretch;
+  }
+  .teacher-visual-col {
+    display: flex;
+    flex-direction: column;
+  }
+  .teacher-visual-col .strasbourg-plate {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+  }
+  .teacher-visual-col .strasbourg-plate-img-wrap {
+    flex: 1 1 auto;
+    min-height: 28rem;
+  }
+  .teacher-visual-col .strasbourg-plate img {
+    height: 100%;
+    aspect-ratio: auto;
+    object-position: center 35%;
   }
 }
 
@@ -1348,10 +1367,10 @@ button {
 
 .strasbourg-plate {
   background: var(--surface);
-  border: 1px solid var(--line);
+  border: 1px solid var(--line-strong);
   border-radius: var(--r-lg);
   padding: 0.75rem;
-  box-shadow: 0 20px 44px -32px rgba(15, 30, 52, 0.2);
+  box-shadow: var(--shadow-plate);
 }
 
 .strasbourg-plate img {
@@ -1361,6 +1380,10 @@ button {
   border-radius: var(--r);
   display: block;
   transition: transform 0.7s var(--ease);
+}
+
+.strasbourg-plate-vertical img {
+  aspect-ratio: 3 / 4;
 }
 
 .strasbourg-plate-img-wrap {
