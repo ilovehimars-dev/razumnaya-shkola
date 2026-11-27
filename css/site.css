@@ -8,36 +8,39 @@
 :root {
   color-scheme: light;
 
-  /* Тактильная палитра: книжная бумага, чернильный французский синий и тёплая охра */
-  --bg: #F6F2EA;              /* Тёплая книжная бумага */
-  --surface: #FCFBF8;         /* Светлый лист слоновой кости */
-  --tint-warm: #EDE5D5;       /* Приглушённый пергамент для чередования полос */
-  --tint-blue: #EAEFF5;       /* Тихий серо-голубой лён */
-  --tint-sun: #F3EAD7;        /* Мягкий тёплый акцентный тон */
+  /* Тактильная палитра: чистая книжная бумага, глубокий чернильный синий и благородная охра */
+  --bg: #F7F4EE;              /* Светлая тёплая книжная бумага */
+  --surface: #FFFFFF;         /* Чёткие светлые пластины и карточки с заметным контрастом к фону */
+  --tint-warm: #EDE5D5;       /* Выразительный тёплый пергамент для контрастного чередования полос */
+  --tint-blue: #EAF0F6;       /* Тихий серо-голубой лён */
+  --tint-sun: #F6EFE0;        /* Мягкий тёплый акцентный тон */
 
-  --navy: #162B49;            /* Глубокий чернильный французский синий */
-  --navy-deep: #0F1E34;       /* Насыщенный синий (hover и глубокие контрасты) */
-  --navy-mid: #38567E;        /* Спокойный индиго для курсива и подписей */
+  --navy: #152A47;            /* Глубокий бархатный французский синий */
+  --navy-deep: #0E1D33;       /* Насыщенный синий (hover и глубокие контрасты) */
+  --navy-mid: #35547E;        /* Спокойный индиго для курсива и подписей */
 
-  --sun: #D9AD4B;             /* Благородная приглушённая охра / античный мёд */
-  --sun-hover: #E3B95A;
+  --sun: #DFAF46;             /* Благородная тёплая охра / медовое золото */
+  --sun-hover: #E9BC56;
   --sun-ink: #845810;         /* Контрастная тёплая охра для текста на светлом */
 
-  --ink: #1A2433;             /* Основной чернильный текст */
-  --ink-2: #445163;           /* Вторичный текст */
-  --muted: #697485;           /* Подписи и метаданные */
+  --ink: #182334;             /* Основной чернильный текст */
+  --ink-2: #414F63;           /* Вторичный текст */
+  --muted: #667284;           /* Подписи и метаданные */
 
-  --line: rgba(22, 43, 73, 0.13);
-  --line-strong: rgba(22, 43, 73, 0.26);
-  --line-sun: rgba(217, 173, 75, 0.48);
-  --line-light: rgba(246, 242, 234, 0.18);
+  --line: rgba(21, 42, 71, 0.12);
+  --line-strong: rgba(21, 42, 71, 0.24);
+  --line-sun: rgba(223, 175, 70, 0.48);
+  --line-light: rgba(247, 244, 238, 0.18);
+
+  --shadow-card: 0 14px 34px -24px rgba(14, 29, 51, 0.28), 0 2px 6px -2px rgba(14, 29, 51, 0.06);
+  --shadow-plate: 0 24px 52px -28px rgba(14, 29, 51, 0.34);
 
   --serif: "Spectral", Georgia, "Times New Roman", serif;
   --sans: "Onest", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
 
   --ease: cubic-bezier(0.22, 1, 0.36, 1);
-  --r: 4px;
-  --r-lg: 8px;
+  --r: 6px;
+  --r-lg: 10px;
   --wrap: min(100% - 2.5rem, 76rem);
 }
 
@@ -626,26 +629,26 @@ button {
   .brand-name { font-size: 1.22rem; }
 }
 
-/* ---------- 1. Светлый журнальный Hero (книжная бумага + портретная пластина Марины) ---------- */
+/* ---------- 1. Контрастный бархатный Hero (глубокий французский синий + студийный портрет Марины) ---------- */
 
 .atelier-hero {
   background:
-    radial-gradient(circle at 82% 24%, rgba(217, 173, 75, 0.11) 0%, transparent 46%),
-    var(--bg);
-  color: var(--ink);
-  padding-block: clamp(2.4rem, 5vw, 4.4rem) clamp(2.8rem, 5.2vw, 4.6rem);
-  border-bottom: 1px solid var(--line);
+    radial-gradient(circle at 78% 36%, rgba(223, 175, 70, 0.15) 0%, transparent 48%),
+    linear-gradient(162deg, #162C4B 0%, #102038 100%);
+  color: #F7F4EE;
+  padding-block: clamp(2.5rem, 4.8vw, 4.25rem) clamp(2.9rem, 5.2vw, 4.5rem);
+  border-bottom: 1px solid rgba(247, 244, 238, 0.12);
 }
 
 .hero-layout {
   display: grid;
-  gap: clamp(2.25rem, 5vw, 4.5rem);
+  gap: clamp(2.25rem, 5vw, 4.25rem);
   align-items: center;
 }
 
 @media (min-width: 58rem) {
   .hero-layout {
-    grid-template-columns: minmax(0, 1.12fr) minmax(0, 0.88fr);
+    grid-template-columns: minmax(0, 1.14fr) minmax(0, 0.86fr);
   }
 }
 
@@ -658,27 +661,28 @@ button {
   display: inline-flex;
   align-items: center;
   gap: 0.7rem;
-  font-size: 0.8rem;
-  letter-spacing: 0.08em;
+  font-size: 0.79rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
   text-transform: uppercase;
-  color: var(--muted);
+  color: var(--sun);
 }
 
 .hero-provenance::before {
   content: "";
   width: 2rem;
-  height: 1px;
-  background: var(--sun-ink);
+  height: 1.5px;
+  background: var(--sun);
   flex: none;
 }
 
 .hero-h1 {
   font-family: var(--serif);
   font-weight: 500;
-  font-size: clamp(2.75rem, 5.4vw, 4.5rem);
-  line-height: 1.01;
-  letter-spacing: -0.024em;
-  color: var(--navy);
+  font-size: clamp(2.8rem, 5.4vw, 4.5rem);
+  line-height: 1.02;
+  letter-spacing: -0.022em;
+  color: #FFFFFF;
 }
 
 .hero-h1 .hero-sub {
@@ -688,15 +692,15 @@ button {
   font-weight: 400;
   font-size: clamp(1.42rem, 2.4vw, 2.02rem);
   line-height: 1.24;
-  color: var(--navy-mid);
+  color: rgba(247, 244, 238, 0.9);
   max-width: 30rem;
 }
 
 .hero-lead {
   font-size: clamp(1.03rem, 1.25vw, 1.12rem);
-  line-height: 1.68;
-  color: var(--ink-2);
-  max-width: 34rem;
+  line-height: 1.66;
+  color: rgba(247, 244, 238, 0.8);
+  max-width: 33.5rem;
 }
 
 .hero-cta-row {
@@ -711,22 +715,22 @@ button {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 1.15rem 1.5rem;
-  margin-top: 1.1rem;
+  margin-top: 1rem;
   padding-top: 1.35rem;
-  border-top: 1px solid var(--line-strong);
+  border-top: 1px solid var(--line-light);
 }
 
 .hero-fact dt {
   font-family: var(--serif);
-  font-size: clamp(1.08rem, 1.3vw, 1.22rem);
+  font-size: clamp(1.08rem, 1.3vw, 1.2rem);
   font-weight: 600;
-  color: var(--navy);
-  line-height: 1.18;
+  color: var(--sun);
+  line-height: 1.2;
 }
 
 .hero-fact dd {
   font-size: 0.84rem;
-  color: var(--muted);
+  color: rgba(247, 244, 238, 0.76);
   margin-top: 0.26rem;
   line-height: 1.42;
 }
@@ -734,7 +738,7 @@ button {
 @media (max-width: 40rem) {
   .hero-facts {
     grid-template-columns: minmax(0, 1fr);
-    gap: 0.75rem;
+    gap: 0.7rem;
   }
   .hero-fact {
     display: flex;
@@ -742,7 +746,7 @@ button {
     align-items: baseline;
     gap: 0.2rem 0.65rem;
     padding-bottom: 0.65rem;
-    border-bottom: 1px solid var(--line);
+    border-bottom: 1px solid var(--line-light);
   }
   .hero-fact:last-child {
     padding-bottom: 0;
@@ -750,7 +754,7 @@ button {
   }
 }
 
-/* Правая часть Hero: журнальная портретная пластина Марины + кнопка видео-приветствия */
+/* Правая часть Hero: светлая музейная пластина с портретом Марины — «горит» на глубоком синем */
 .hero-right {
   display: grid;
   justify-items: center;
@@ -758,12 +762,13 @@ button {
 
 .hero-plate {
   width: 100%;
-  max-width: 26.5rem;
+  max-width: 26.25rem;
   background: var(--surface);
-  border: 1px solid var(--line-strong);
+  color: var(--ink);
+  border: 1px solid rgba(247, 244, 238, 0.22);
   border-radius: var(--r-lg);
   padding: 0.85rem;
-  box-shadow: 0 26px 56px -34px rgba(15, 30, 52, 0.26);
+  box-shadow: 0 34px 72px -22px rgba(4, 11, 24, 0.72);
 }
 
 .hero-plate-frame {
@@ -775,7 +780,7 @@ button {
 
 .hero-plate-frame img {
   width: 100%;
-  aspect-ratio: 4 / 4.45;
+  aspect-ratio: 4 / 4.35;
   object-fit: cover;
   object-position: center 14%;
   display: block;
@@ -810,16 +815,16 @@ button {
   gap: 0.85rem;
   padding: 0.78rem 1rem;
   border-radius: var(--r);
-  border: 1px solid var(--line);
-  background: var(--bg);
+  border: 1px solid var(--line-sun);
+  background: var(--tint-sun);
   color: var(--navy);
   text-align: left;
   transition: background-color 0.22s var(--ease), border-color 0.22s var(--ease), transform 0.22s var(--ease);
 }
 
 .hero-video-trigger:hover {
-  background: var(--tint-sun);
-  border-color: var(--line-sun);
+  background: #EFE3C8;
+  border-color: var(--sun);
   transform: translateY(-1px);
 }
 
@@ -895,13 +900,16 @@ button {
 
 /* ---------- 2. Форматы обучения — открытая журнальная вёрстка (без «стены коробок») ---------- */
 
-/* Ведущий формат: 10-недельный цикл, оформленный как редакционная полоса с чернильными линейками */
+/* Ведущий формат: 10-недельный цикл с чёткой глубиной и контрастом */
 .flagship-spread {
   display: grid;
-  border-top: 2px solid var(--navy);
-  border-bottom: 1px solid var(--line-strong);
+  border: 1px solid var(--line-strong);
+  border-top: 3px solid var(--navy);
+  border-radius: var(--r-lg);
+  overflow: hidden;
   background: var(--surface);
-  margin-bottom: 2.25rem;
+  box-shadow: var(--shadow-card);
+  margin-bottom: 1.85rem;
 }
 
 @media (min-width: 58rem) {
@@ -1072,9 +1080,10 @@ button {
 
 .format-tea {
   background: var(--surface);
-  border: 1px solid var(--line);
+  border: 1px solid var(--line-strong);
   border-radius: var(--r-lg);
   overflow: hidden;
+  box-shadow: var(--shadow-card);
   display: flex;
   flex-direction: column;
 }
@@ -1117,11 +1126,14 @@ button {
   line-height: 1.66;
 }
 
-/* Открытая редакционная полоса «Как устроены занятия» (без синей коробки и без цифр 01–04) */
+/* Собранная структурированная панель «Как устроены занятия» с лаконичными иконками-якорями */
 .atelier-principles-strip {
-  margin-top: clamp(2.75rem, 5vw, 4rem);
-  padding-top: 2rem;
-  border-top: 1px solid var(--line-strong);
+  margin-top: clamp(2.1rem, 4vw, 3rem);
+  padding: clamp(1.75rem, 3.4vw, 2.5rem);
+  background: var(--surface);
+  border: 1px solid var(--line-strong);
+  border-radius: var(--r-lg);
+  box-shadow: var(--shadow-card);
 }
 
 .strip-head {
@@ -1130,19 +1142,21 @@ button {
   align-items: baseline;
   justify-content: space-between;
   gap: 0.75rem 1.5rem;
-  margin-bottom: 1.75rem;
+  padding-bottom: 1.35rem;
+  margin-bottom: 1.65rem;
+  border-bottom: 1px solid var(--line);
 }
 
 .strip-head h3 {
   font-family: var(--serif);
-  font-size: clamp(1.42rem, 2.2vw, 1.75rem);
+  font-size: clamp(1.42rem, 2.2vw, 1.72rem);
   font-weight: 500;
   color: var(--navy);
 }
 
 .editorial-pillars {
   display: grid;
-  gap: 1.5rem 2.25rem;
+  gap: 1.5rem 2rem;
 }
 
 @media (min-width: 56rem) {
@@ -1153,10 +1167,31 @@ button {
 
 .editorial-pillar {
   display: grid;
-  gap: 0.5rem;
+  gap: 0.55rem;
   align-content: start;
-  padding-top: 1rem;
-  border-top: 1px solid var(--line);
+}
+
+.pillar-icon {
+  width: 2.35rem;
+  height: 2.35rem;
+  border-radius: var(--r);
+  background: var(--tint-sun);
+  border: 1px solid var(--line-sun);
+  color: var(--navy);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 0.2rem;
+}
+
+.pillar-icon svg {
+  width: 1.15rem;
+  height: 1.15rem;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.7;
+  stroke-linecap: round;
+  stroke-linejoin: round;
 }
 
 .editorial-pillar h4 {
@@ -1174,7 +1209,7 @@ button {
 }
 
 .format-clarity-bar {
-  margin-top: 2.25rem;
+  margin-top: 1.85rem;
   padding-top: 1.35rem;
   border-top: 1px solid var(--line);
   display: flex;
@@ -1363,18 +1398,21 @@ button {
 .milestones-ledger {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 1.25rem 2rem;
+  gap: 0.9rem;
 }
 
 .milestone-row {
-  padding-top: 0.95rem;
-  border-top: 1px solid var(--line);
+  padding: 1rem 1.15rem;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--r);
+  box-shadow: 0 6px 18px -14px rgba(14, 29, 51, 0.22);
 }
 
 .milestone-row strong {
   display: block;
   font-family: var(--serif);
-  font-size: 1.32rem;
+  font-size: 1.26rem;
   font-weight: 600;
   color: var(--navy);
   line-height: 1.18;
@@ -1382,21 +1420,21 @@ button {
 
 .milestone-row span {
   display: block;
-  font-size: 0.87rem;
+  font-size: 0.85rem;
   color: var(--ink-2);
-  margin-top: 0.25rem;
-  line-height: 1.45;
+  margin-top: 0.24rem;
+  line-height: 1.42;
 }
 
 @media (max-width: 38rem) {
   .milestones-ledger {
     grid-template-columns: minmax(0, 1fr);
-    gap: 1rem;
+    gap: 0.75rem;
   }
 }
 
 .marina-foot {
-  padding-top: 1.2rem;
+  padding-top: 1.15rem;
   border-top: 1px solid var(--line-strong);
   display: flex;
   flex-wrap: wrap;
@@ -1408,36 +1446,38 @@ button {
 .marina-foot-note {
   font-size: 0.91rem;
   line-height: 1.5;
-  color: var(--muted);
+  color: var(--ink-2);
 }
 
-/* ---------- 5. «Копилка» на главной — асимметричный журнальный разворот ---------- */
+/* ---------- 5. «Копилка» на главной — цельный асимметричный разворот из карточек единого веса ---------- */
 
 .kopilka-editorial {
   display: grid;
-  gap: 2rem 3rem;
+  gap: 1.5rem;
   align-items: stretch;
 }
 
 @media (min-width: 56rem) {
   .kopilka-editorial {
-    grid-template-columns: minmax(0, 1.12fr) minmax(0, 0.88fr);
+    grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr);
   }
 }
 
 .kopilka-lead-card {
   background: var(--surface);
   border: 1px solid var(--line-strong);
+  border-top: 3px solid var(--navy);
   border-radius: var(--r-lg);
-  padding: clamp(1.75rem, 3.4vw, 2.5rem);
+  padding: clamp(1.75rem, 3.2vw, 2.45rem);
+  box-shadow: var(--shadow-card);
   display: flex;
   flex-direction: column;
-  gap: 1rem;
+  gap: 1.05rem;
 }
 
 .kopilka-lead-card h3 {
   font-family: var(--serif);
-  font-size: clamp(1.55rem, 2.5vw, 2rem);
+  font-size: clamp(1.58rem, 2.5vw, 2rem);
   font-weight: 500;
   line-height: 1.2;
   color: var(--navy);
@@ -1450,10 +1490,10 @@ button {
 }
 
 .kopilka-lead-sample {
-  padding: 1rem 1.2rem;
-  background: var(--bg);
-  border-top: 1px solid var(--line);
-  border-bottom: 1px solid var(--line);
+  padding: 1.05rem 1.25rem;
+  background: var(--tint-sun);
+  border: 1px solid var(--line-sun);
+  border-radius: var(--r);
   font-family: var(--serif);
   font-style: italic;
   font-size: 1.12rem;
@@ -1467,28 +1507,34 @@ button {
   font-family: var(--sans);
   font-style: normal;
   font-size: 0.82rem;
-  color: var(--muted);
+  color: var(--ink-2);
 }
 
 .kopilka-side-list {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  border-top: 1.5px solid var(--navy);
+  display: grid;
+  gap: 1.25rem;
 }
 
 .kopilka-side-item {
-  padding-block: 1.55rem;
-  border-bottom: 1px solid var(--line);
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--r-lg);
+  padding: 1.55rem 1.7rem;
+  box-shadow: var(--shadow-card);
   display: flex;
   flex-direction: column;
   gap: 0.65rem;
-  flex: 1;
+  transition: border-color 0.22s var(--ease), transform 0.22s var(--ease);
+}
+
+.kopilka-side-item:hover {
+  border-color: var(--line-strong);
+  transform: translateY(-2px);
 }
 
 .kopilka-side-item h3 {
   font-family: var(--serif);
-  font-size: 1.38rem;
+  font-size: 1.34rem;
   font-weight: 500;
   line-height: 1.24;
   color: var(--navy);
@@ -1496,7 +1542,7 @@ button {
 
 .kopilka-side-item p {
   font-size: 0.93rem;
-  line-height: 1.62;
+  line-height: 1.6;
   color: var(--ink-2);
 }
 
