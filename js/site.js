@@ -1,5 +1,5 @@
 /* ==========================================================================
-   «РаЗУМная школа» — интерактивность (строгая 2-цветная авторская система)
+   «РаЗУМная школа» — интерактивность (журнальная редакционная система)
    ========================================================================== */
 
 (() => {
@@ -90,14 +90,19 @@
       note: "Тот самый момент в изучении языка, когда разрозненные правила вдруг складываются в ясную картину — и фраза рождается легко."
     },
     {
-      phrase: "Tête-à-tête",
-      lit: "дословно: «голова к голове», наедине",
-      note: "Во французском это не про сухой формат, а про доверительный разговор двух людей, где всё внимание — смыслу."
-    },
-    {
       phrase: "Prendre le temps",
       lit: "дословно: «взять себе время»",
       note: "Не «потратить время», а позволить себе не спешить. Именно в таком спокойном ритме французский усваивается глубже всего."
+    },
+    {
+      phrase: "Tête-à-tête",
+      lit: "дословно: «голова к голове», наедине",
+      note: "Во французском это не про сухой учебный формат, а про доверительный разговор двух людей, где всё внимание — смыслу."
+    },
+    {
+      phrase: "Flâner",
+      lit: "дословно: «неспешно бродить, созерцая»",
+      note: "Особое французское искусство гулять без маршрута и спешки — так же, как мы знакомимся с языком на вечерах чтения."
     },
     {
       phrase: "Un coup de cœur",
@@ -113,7 +118,7 @@
 
   document.documentElement.classList.add("js-ready");
 
-  /* ---------- Лёгкая тень липкой шапки при прокрутке ---------- */
+  /* ---------- Тень липкой шапки при прокрутке ---------- */
   const siteHeader = document.querySelector(".site-header");
   if (siteHeader) {
     const syncHeaderShadow = () => {
@@ -123,14 +128,26 @@
     window.addEventListener("scroll", syncHeaderShadow, { passive: true });
   }
 
-  /* ---------- Мобильное меню (автозакрытие при расширении окна до ПК) ---------- */
+  /* ---------- Мобильное меню с мягким затемнением фона ---------- */
   const menuBtn = document.getElementById("menu-toggle");
   const mobileDrawer = document.getElementById("mobile-drawer");
+  let drawerScrim = null;
+
+  const ensureScrim = () => {
+    if (drawerScrim) return drawerScrim;
+    drawerScrim = document.createElement("div");
+    drawerScrim.className = "drawer-scrim";
+    drawerScrim.hidden = true;
+    drawerScrim.addEventListener("click", closeMobileMenu);
+    document.body.appendChild(drawerScrim);
+    return drawerScrim;
+  };
 
   const closeMobileMenu = () => {
     if (!menuBtn || !mobileDrawer) return;
     menuBtn.setAttribute("aria-expanded", "false");
     mobileDrawer.hidden = true;
+    if (drawerScrim) drawerScrim.hidden = true;
   };
 
   if (menuBtn && mobileDrawer) {
@@ -138,6 +155,7 @@
       const open = menuBtn.getAttribute("aria-expanded") === "true";
       menuBtn.setAttribute("aria-expanded", String(!open));
       mobileDrawer.hidden = open;
+      ensureScrim().hidden = open;
     });
     mobileDrawer.querySelectorAll("a").forEach((a) => {
       a.addEventListener("click", closeMobileMenu);
@@ -150,7 +168,7 @@
     }
   }
 
-  /* ---------- Плавное появление (надёжно при якорных переходах) ---------- */
+  /* ---------- Плавное появление секций ниже сгиба ---------- */
   const revealEls = Array.from(document.querySelectorAll("[data-reveal]"));
   const revealAboveOrInView = () => {
     const limit = window.innerHeight * 1.15;
@@ -185,7 +203,7 @@
     revealEls.forEach((el) => el.classList.add("is-visible"));
   }
 
-  /* ---------- Французский нюанс ---------- */
+  /* ---------- Французский нюанс (работает и на главной, и на marina.html) ---------- */
   const nuanceBtn = document.getElementById("nuance-next-btn");
   const nuancePanel = nuanceBtn ? nuanceBtn.closest(".nuance-panel") : null;
   const nuancePhrase = document.getElementById("nuance-phrase");
@@ -226,7 +244,7 @@
     renderNuance(0, false);
   }
 
-  /* ---------- 7 принципов (ПК с полосой прогресса + плавной сменой + полные тексты на мобильном) ---------- */
+  /* ---------- 7 принципов (ПК табы + мобильный аккордеон) ---------- */
   const pTabs = Array.from(document.querySelectorAll(".p-tab"));
   const pNum = document.getElementById("p-stage-num");
   const pFr = document.getElementById("p-stage-fr");
@@ -377,12 +395,13 @@
 
   document.addEventListener("keydown", (e) => {
     if (e.key !== "Escape") return;
+    closeMobileMenu();
     closeModal(videoModal);
     closeModal(readerModal);
     closeModal(demoModal);
   });
 
-  /* ---------- Видео Марины (постер сразу + проверка доступности YouTube без чёрного экрана) ---------- */
+  /* ---------- Видео Марины (ленивая загрузка YouTube по клику + fallback) ---------- */
   document.querySelectorAll("[data-open-video]").forEach((btn) => {
     btn.addEventListener("click", () => {
       if (SITE_CONFIG.welcomeVideoYouTubeId && videoStage) {
@@ -395,7 +414,7 @@
 
         videoStage.innerHTML = `
           <div class="video-stage-fallback">
-            <img src="img/video-preview.jpg?v=20" alt="О моей РаЗУМной школе — Марина Шультайс">
+            <img src="img/marina-editorial.jpg?v=41" alt="О моей РаЗУМной школе — Марина Шультайс">
             <div class="video-stage-fallback-overlay">
               <p id="video-fallback-note">${initialStatus}</p>
               <a class="btn btn-sun" href="${ytLink}" target="_blank" rel="noopener noreferrer">Смотреть видео на YouTube →</a>
@@ -445,7 +464,7 @@
     });
   });
 
-  /* ---------- «Копилка»: строгие карточки, поиск и ридер ---------- */
+  /* ---------- «Копилка»: журнальный разворот на главной + симметричный архив 3×3 ---------- */
   const kopilkaData = window.KOPILKA_DATA;
 
   const renderNoteCard = (item) => `
@@ -462,6 +481,50 @@
       </button>
     </article>
   `;
+
+  const renderHomeEditorial = (items) => {
+    if (!items.length) return "";
+    const [lead, ...rest] = items;
+    const leadHtml = `
+      <article class="kopilka-lead-card">
+        <div class="note-card-top">
+          <span class="note-cat">${lead.kind}</span>
+          <span class="note-time">${lead.readTime}</span>
+        </div>
+        <h3>${lead.title}</h3>
+        <p>${lead.excerpt}</p>
+        ${lead.exampleFr ? `
+          <div class="kopilka-lead-sample">
+            ${lead.exampleFr}
+            <small>${lead.exampleRu || ""}</small>
+          </div>
+        ` : ""}
+        <button class="note-card-btn" type="button" data-read-id="${lead.id}">
+          <span>Читать полностью</span>
+          <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14"/><path d="M13 6l6 6-6 6"/></svg>
+        </button>
+      </article>
+    `;
+    const sideHtml = `
+      <div class="kopilka-side-list">
+        ${rest.map((item) => `
+          <article class="kopilka-side-item">
+            <div class="note-card-top">
+              <span class="note-cat">${item.kind}</span>
+              <span class="note-time">${item.readTime}</span>
+            </div>
+            <h3>${item.title}</h3>
+            <p>${item.excerpt}</p>
+            <button class="note-card-btn" type="button" data-read-id="${item.id}">
+              <span>Открыть заметку</span>
+              <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14"/><path d="M13 6l6 6-6 6"/></svg>
+            </button>
+          </article>
+        `).join("")}
+      </div>
+    `;
+    return leadHtml + sideHtml;
+  };
 
   const openReaderById = (id) => {
     if (!kopilkaData || !readerModal) return;
@@ -486,11 +549,8 @@
 
   const homeKopilka = document.getElementById("kopilka-home-grid");
   if (homeKopilka && kopilkaData) {
-    homeKopilka.innerHTML = kopilkaData.items
-      .filter((x) => x.featured)
-      .slice(0, 3)
-      .map(renderNoteCard)
-      .join("");
+    const featured = kopilkaData.items.filter((x) => x.featured).slice(0, 3);
+    homeKopilka.innerHTML = renderHomeEditorial(featured);
   }
 
   const archiveGrid = document.getElementById("kopilka-archive");
@@ -516,7 +576,7 @@
     const tokens = normalizeRu(searchQuery.trim()).split(/\s+/).filter(Boolean);
     const hasQuery = tokens.length > 0;
     const list = kopilkaData.items.filter((item) => {
-      if (activeFolder === "all" && !hasQuery && item.id === "evening-tea-reading") return false;
+      if (activeFolder === "all" && !hasQuery && item.spotlight) return false;
       const matchFolder = activeFolder === "all" || item.folder === activeFolder;
       if (!matchFolder) return false;
       if (!hasQuery) return true;
@@ -562,7 +622,7 @@
     if (btn) openReaderById(btn.getAttribute("data-read-id"));
   });
 
-  /* ---------- Компас формата + Telegram ---------- */
+  /* ---------- Компас формата + живой предпросмотр письма + Telegram ---------- */
   const compassState = { level: "continue", goal: "system", pace: "group" };
   const levelLabels = {
     zero: "начинаю с нуля",
@@ -576,36 +636,37 @@
       return {
         title: "Вам подойдёт индивидуальный формат Tête-à-tête",
         note: readingFocus
-          ? "Личные занятия один на один с акцентом на чтение, культуру и живое обсуждение текстов. Всё начинается с бесплатной 30-минутной беседы в Zoom с Мариной."
-          : "«Лаборатория языковой алхимии» в личном темпе и под ваши задачи. Всё начинается с бесплатной 30-минутной беседы в Zoom с Мариной.",
+          ? "Личные занятия один на один с акцентом на чтение, культуру и живое обсуждение текстов. Начнём с бесплатной 30-минутной беседы в Zoom."
+          : "«Лаборатория языковой алхимии» в личном темпе и под ваши задачи. Начнём с бесплатной 30-минутной беседы в Zoom.",
         msg: readingFocus
-          ? `Здравствуйте, Марина! ${levelLabels[compassState.level][0].toUpperCase() + levelLabels[compassState.level].slice(1)}. Ближе индивидуальный формат Tête-à-tête с акцентом на чтение и культуру — можно записаться на бесплатное 30-минутное знакомство в Zoom?`
-          : `Здравствуйте, Марина! ${levelLabels[compassState.level][0].toUpperCase() + levelLabels[compassState.level].slice(1)}. Ближе индивидуальный формат Tête-à-tête — можно договориться о бесплатном 30-минутном знакомстве в Zoom?`
+          ? `Здравствуйте, Марина! ${levelLabels[compassState.level][0].toUpperCase() + levelLabels[compassState.level].slice(1)}. Ближе индивидуальный формат Tête-à-tête с акцентом на чтение и культуру — можно записаться на 30-минутное знакомство в Zoom?`
+          : `Здравствуйте, Марина! ${levelLabels[compassState.level][0].toUpperCase() + levelLabels[compassState.level].slice(1)}. Ближе индивидуальный формат Tête-à-tête — можно договориться о 30-минутном знакомстве в Zoom?`
       };
     }
     if (compassState.goal === "reading") {
       return {
-        title: "Вам подойдёт «Вечерний чай с…»",
-        note: "5 уютных вечеров чтения и живого обсуждения французских текстов между циклами. На 30-минутном знакомстве Марина подскажет ближайшие даты.",
-        msg: `Здравствуйте, Марина! ${levelLabels[compassState.level][0].toUpperCase() + levelLabels[compassState.level].slice(1)}. Интересует курс чтения «Вечерний чай с…» — можно записаться на бесплатное 30-минутное знакомство в Zoom?`
+        title: "Вам подойдёт клуб чтения «Вечерний чай с…»",
+        note: "Пять неформальных вечеров чтения и обсуждения французских текстов между циклами. На знакомстве Марина подскажет ближайшие даты.",
+        msg: `Здравствуйте, Марина! ${levelLabels[compassState.level][0].toUpperCase() + levelLabels[compassState.level].slice(1)}. Интересует курс чтения «Вечерний чай с…» — можно записаться на 30-минутное знакомство в Zoom?`
       };
     }
     if (compassState.goal === "personal") {
       return {
         title: "Вам подойдёт индивидуальный формат Tête-à-tête",
-        note: "«Лаборатория языковой алхимии» в личном темпе и под ваши задачи. Всё начинается с бесплатной 30-минутной беседы в Zoom с Мариной.",
-        msg: `Здравствуйте, Марина! ${levelLabels[compassState.level][0].toUpperCase() + levelLabels[compassState.level].slice(1)}. Интересует индивидуальный формат Tête-à-tête под личную задачу — можно договориться о бесплатном 30-минутном знакомстве в Zoom?`
+        note: "Личный график и программа под конкретную рабочую, учебную или культурную задачу. Начнём с 30-минутной беседы в Zoom.",
+        msg: `Здравствуйте, Марина! ${levelLabels[compassState.level][0].toUpperCase() + levelLabels[compassState.level].slice(1)}. Интересует индивидуальный формат Tête-à-tête под личную задачу — можно договориться о 30-минутном знакомстве в Zoom?`
       };
     }
     return {
       title: "Вам подойдёт 10-недельный групповой цикл",
-      note: "2 живых занятия в неделю по 60 минут в Zoom, тёплая группа близкого уровня и безлимитные видеозаписи всех уроков на YouTube.",
-      msg: `Здравствуйте, Марина! ${levelLabels[compassState.level][0].toUpperCase() + levelLabels[compassState.level].slice(1)}. Интересует 10-недельный групповой цикл — можно записаться на бесплатное 30-минутное тестирование-знакомство в Zoom?`
+      note: "Два живых урока в неделю по 60 минут в Zoom, небольшая группа близкого уровня и бессрочный архив всех записей на YouTube.",
+      msg: `Здравствуйте, Марина! ${levelLabels[compassState.level][0].toUpperCase() + levelLabels[compassState.level].slice(1)}. Интересует 10-недельный групповой цикл — можно записаться на бесплатное 30-минутное знакомство в Zoom?`
     };
   };
 
   const recTitle = document.getElementById("compass-rec-title");
   const recText = document.getElementById("compass-rec-text");
+  const draftPreview = document.getElementById("compass-msg-preview");
   const telegramBtn = document.getElementById("telegram-direct-btn");
   let currentMsg = computeRec().msg;
 
@@ -619,6 +680,7 @@
     currentMsg = r.msg;
     if (recTitle) recTitle.textContent = r.title;
     if (recText) recText.textContent = r.note;
+    if (draftPreview) draftPreview.textContent = `«${r.msg}»`;
     if (telegramBtn && SITE_CONFIG.telegramHandle) {
       telegramBtn.href = `https://t.me/${SITE_CONFIG.telegramHandle}?text=${encodeURIComponent(r.msg)}`;
       telegramBtn.target = "_blank";
