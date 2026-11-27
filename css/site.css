@@ -3401,6 +3401,209 @@ button {
   }
 }
 
+/* ---------- Мобильное раскрытие длинных блоков по желанию (на ПК всё открыто целиком) ---------- */
+
+.mobile-more-btn {
+  display: none;
+}
+
+.mobile-step-btn {
+  display: none;
+}
+
+.mobile-acc-toggle {
+  display: none;
+}
+
+@media (max-width: 55.99rem) {
+  /* 1. Мягкое сворачивание длинных текстовых блоков (биография, философия) */
+  [data-mobile-more][data-expanded="false"] [data-mobile-more-body] {
+    display: none;
+  }
+
+  [data-mobile-more][data-expanded="false"] [data-mobile-more-preview] {
+    position: relative;
+  }
+
+  [data-mobile-more][data-expanded="false"] [data-mobile-more-preview]::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 2.2rem;
+    background: linear-gradient(to bottom, rgba(247, 244, 238, 0), var(--bg));
+    pointer-events: none;
+  }
+
+  .section-warm [data-mobile-more][data-expanded="false"] [data-mobile-more-preview]::after {
+    background: linear-gradient(to bottom, rgba(237, 229, 213, 0), var(--tint-warm));
+  }
+
+  .mobile-more-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    margin-top: 0.35rem;
+    min-height: 2.85rem;
+    padding: 0.58rem 1.15rem;
+    border-radius: var(--r);
+    border: 1px solid var(--line-strong);
+    background: var(--surface);
+    color: var(--navy);
+    font-size: 0.9rem;
+    font-weight: 500;
+    justify-self: start;
+    transition: background-color 0.2s var(--ease), border-color 0.2s var(--ease);
+  }
+
+  .mobile-more-btn:hover {
+    border-color: var(--navy);
+  }
+
+  .mobile-more-btn .icon {
+    transition: transform 0.24s var(--ease);
+  }
+
+  [data-mobile-more][data-expanded="true"] .mobile-more-btn .icon {
+    transform: rotate(180deg);
+  }
+
+  /* 2. Мобильный аккордеон для списков шагов и «Как устроены занятия» */
+  .editorial-pillars {
+    gap: 0;
+  }
+
+  .editorial-pillar[data-m-acc] {
+    border-bottom: 1px solid var(--line);
+    padding-block: 0;
+    gap: 0;
+  }
+
+  .editorial-pillar[data-m-acc]:last-child {
+    border-bottom: 0;
+  }
+
+  .editorial-pillar[data-m-acc] > .pillar-icon,
+  .editorial-pillar[data-m-acc] > h4 {
+    display: none;
+  }
+
+  .editorial-pillar[data-m-acc] .mobile-acc-toggle {
+    display: flex;
+    align-items: center;
+    gap: 0.85rem;
+    width: 100%;
+    padding: 0.95rem 0;
+    background: none;
+    border: 0;
+    text-align: left;
+    color: var(--navy);
+  }
+
+  .editorial-pillar[data-m-acc] .mobile-acc-toggle .pillar-icon {
+    margin-bottom: 0;
+    width: 2.15rem;
+    height: 2.15rem;
+    flex: none;
+  }
+
+  .editorial-pillar[data-m-acc] .mobile-acc-title {
+    font-family: var(--serif);
+    font-size: 1.14rem;
+    font-weight: 600;
+    color: var(--navy);
+    line-height: 1.25;
+  }
+
+  .mobile-acc-chev {
+    margin-left: auto;
+    color: var(--muted);
+    flex: none;
+    transition: transform 0.24s var(--ease);
+  }
+
+  [data-m-acc][data-open="true"] .mobile-acc-chev {
+    transform: rotate(180deg);
+    color: var(--navy);
+  }
+
+  .editorial-pillar[data-m-acc] > p {
+    padding: 0 0 1.05rem 3rem;
+  }
+
+  [data-m-acc][data-open="false"] > p,
+  [data-m-acc][data-open="false"] .m-acc-content {
+    display: none;
+  }
+
+  /* Аккордеон этапов цикла и шагов 60-минутного урока на programmes.html */
+  .cycle-phases {
+    gap: 0;
+    border-top: 1.5px solid var(--navy);
+  }
+
+  .phase-item[data-m-acc],
+  .lesson-step[data-m-acc] {
+    border-top: 0;
+    border-bottom: 1px solid var(--line);
+    padding-block: 0;
+    gap: 0;
+  }
+
+  .phase-item[data-m-acc] > .phase-tag,
+  .phase-item[data-m-acc] > h3,
+  .lesson-step[data-m-acc] > .lesson-time,
+  .lesson-step[data-m-acc] > h3 {
+    display: none;
+  }
+
+  .phase-item[data-m-acc] .mobile-acc-toggle,
+  .lesson-step[data-m-acc] .mobile-acc-toggle {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    width: 100%;
+    padding: 1rem 0;
+    background: none;
+    border: 0;
+    text-align: left;
+  }
+
+  .mobile-acc-meta {
+    display: grid;
+    gap: 0.14rem;
+  }
+
+  .mobile-acc-kicker {
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: 0.92rem;
+    color: var(--sun-ink);
+  }
+
+  .phase-item[data-m-acc] > p,
+  .lesson-step[data-m-acc] > p {
+    padding: 0 0 1.1rem;
+  }
+
+  /* Свёрнутый блок хронологии пути на marina.html */
+  [data-mobile-more][data-expanded="false"] .career-ledger {
+    display: none;
+  }
+
+  .kopilka-more-wrap {
+    display: flex;
+    justify-content: center;
+    margin-top: 1.35rem;
+  }
+
+  .kopilka-more-wrap .mobile-more-btn {
+    width: 100%;
+  }
+}
+
 @media (max-width: 34rem) {
   :root {
     --wrap: min(100% - 2rem, 76rem);

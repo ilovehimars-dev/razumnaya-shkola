@@ -357,6 +357,31 @@
     });
   });
 
+  /* ---------- Мобильное раскрытие длинных текстов и аккордеонов (на ПК всегда открыто) ---------- */
+  document.querySelectorAll("[data-mobile-more]").forEach((wrap) => {
+    const btn = wrap.querySelector("[data-mobile-more-btn]");
+    if (!btn) return;
+    const labelClosed = btn.getAttribute("data-label-closed") || "Читать полностью";
+    const labelOpen = btn.getAttribute("data-label-open") || "Свернуть";
+    const textEl = btn.querySelector("span");
+    btn.addEventListener("click", () => {
+      const expanded = wrap.getAttribute("data-expanded") === "true";
+      wrap.setAttribute("data-expanded", String(!expanded));
+      btn.setAttribute("aria-expanded", String(!expanded));
+      if (textEl) textEl.textContent = expanded ? labelClosed : labelOpen;
+    });
+  });
+
+  document.querySelectorAll("[data-m-acc]").forEach((item) => {
+    const btn = item.querySelector(".mobile-acc-toggle");
+    if (!btn) return;
+    btn.addEventListener("click", () => {
+      const open = item.getAttribute("data-open") === "true";
+      item.setAttribute("data-open", String(!open));
+      btn.setAttribute("aria-expanded", String(!open));
+    });
+  });
+
   /* ---------- Модальные окна ---------- */
   const videoModal = document.getElementById("video-modal");
   const videoStage = document.getElementById("video-modal-stage");
@@ -562,8 +587,13 @@
   const filterPills = Array.from(document.querySelectorAll(".filter-pill"));
   const searchInput = document.getElementById("kopilka-search");
   const emptyMsg = document.getElementById("kopilka-empty");
+  const kopilkaMoreWrap = document.getElementById("kopilka-more-wrap");
+  const kopilkaMoreBtn = document.getElementById("kopilka-more-btn");
   let activeFolder = "all";
   let searchQuery = "";
+  let kopilkaMobileExpanded = false;
+
+  const isMobileKopilka = () => window.matchMedia("(max-width: 55.99rem)").matches;
 
   const normalizeRu = (str) => str.toLowerCase().replace(/ё/g, "е");
 
@@ -595,8 +625,20 @@
       ].join(" "));
       return tokens.every((t) => tokenMatches(hay, t));
     });
-    archiveGrid.innerHTML = list.map(renderNoteCard).join("");
+    const shouldClamp = isMobileKopilka() && activeFolder === "all" && !hasQuery && !kopilkaMobileExpanded && list.length > 4;
+    const visible = shouldClamp ? list.slice(0, 4) : list;
+    archiveGrid.innerHTML = visible.map(renderNoteCard).join("");
     if (emptyMsg) emptyMsg.hidden = list.length > 0;
+    if (kopilkaMoreWrap && kopilkaMoreBtn) {
+      const showBtn = isMobileKopilka() && activeFolder === "all" && !hasQuery && list.length > 4;
+      kopilkaMoreWrap.hidden = !showBtn;
+      if (showBtn) {
+        const restCount = list.length - 4;
+        const span = kopilkaMoreBtn.querySelector("span");
+        kopilkaMoreBtn.setAttribute("aria-expanded", String(kopilkaMobileExpanded));
+        if (span) span.textContent = kopilkaMobileExpanded ? "Свернуть список заметок" : `Показать ещё ${restCount} заметок`;
+      }
+    }
   };
 
   if (archiveGrid && kopilkaData) {
@@ -618,6 +660,16 @@
         searchQuery = searchInput.value;
         renderArchive();
       });
+    }
+    if (kopilkaMoreBtn) {
+      kopilkaMoreBtn.addEventListener("click", () => {
+        kopilkaMobileExpanded = !kopilkaMobileExpanded;
+        renderArchive();
+      });
+    }
+    const kopilkaMq = window.matchMedia("(max-width: 55.99rem)");
+    if (kopilkaMq.addEventListener) {
+      kopilkaMq.addEventListener("change", renderArchive);
     }
     renderArchive();
   }
